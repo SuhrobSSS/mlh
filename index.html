@@ -1291,6 +1291,113 @@
       line-height: 1.4;
       color: rgba(255, 255, 255, 0.9);
     }
+   /* Slide 11 – Content → Membership path */
+.slide-path-layout {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+.path-steps {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.path-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: linear-gradient(135deg, rgba(10, 59, 92, 0.6) 0%, rgba(4, 28, 47, 0.8) 100%);
+  border-radius: 14px;
+  padding: 14px 18px;
+  border-left: 4px solid #e9c46a;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.path-step:hover {
+  transform: translateX(6px);
+  box-shadow: 0 10px 32px rgba(233, 196, 106, 0.4);
+  border-left-color: #f4d58d;
+}
+
+.path-step-number {
+  font-size: 30px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.path-step-text {
+  font-size: 24px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.path-step-text strong {
+  color: #e9c46a;
+  font-weight: 700;
+}
+
+.path-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* трохи дрібніші карти для ефектів на цьому слайді */
+.path-effects-grid.psychology-grid {
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.path-effects-grid .psychology-card h3 {
+  font-size: 24px;
+}
+
+.path-effects-grid .psychology-card p {
+  font-size: 20px;
+}
+
+/* підсумковий бокс унизу слайду */
+.path-summary-box {
+  margin-top: 22px;
+  border-width: 3px;
+  border-color: rgba(233, 196, 106, 0.8);
+  background: linear-gradient(135deg, rgba(233, 196, 106, 0.22) 0%, rgba(233, 196, 106, 0.12) 100%);
+}
+
+.path-summary-box .content-text {
+  font-size: 22px;
+  text-align: center;
+}
+
+/* адаптація для більш вузьких екранів */
+@media (max-width: 1400px) {
+  .path-step-text {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .slide-path-layout {
+    flex-direction: column;
+  }
+
+  .path-visual {
+    order: -1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .path-step-text {
+    font-size: 16px;
+  }
+}
+
 
     /* Final Slide */
     .final-message {
@@ -1963,85 +2070,172 @@
       <p style="font-size: 26px; color: #e9c46a; font-style: italic; text-shadow: 0 0 15px rgba(233, 196, 106, 0.4);">Ми створили потужну платформу підтримки для всіх членів ПРМТУ</p>
      </div>
     </div>
-   </div><!-- Slide 11: NEW MEMBER FUNNEL -->
-   <div class="slide">
-    <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
+     <!-- Slide 11: Content → Membership Path -->
+  <div class="slide">
+    <div class="logo-watermark">
+      <span class="logo-watermark-main">MTWTU</span>
+      <span class="logo-watermark-sub">LAW HUB</span>
     </div>
+
     <div class="lighthouse-scene">
-     <div class="lighthouse">
-      <div class="lighthouse-base"></div>
-      <div class="lighthouse-tower">
-       <div class="lighthouse-stripe stripe-1"></div>
-       <div class="lighthouse-stripe stripe-2"></div>
+      <div class="lighthouse">
+        <div class="lighthouse-base"></div>
+        <div class="lighthouse-tower">
+          <div class="lighthouse-stripe stripe-1"></div>
+          <div class="lighthouse-stripe stripe-2"></div>
+        </div>
+        <div class="lighthouse-window window-1"></div>
+        <div class="lighthouse-window window-2"></div>
+        <div class="lighthouse-window window-3"></div>
+        <div class="lighthouse-top-section"></div>
+        <div class="lighthouse-dome">
+          <div class="lighthouse-light-source"></div>
+        </div>
+        <div class="lighthouse-beam"></div>
       </div>
-      <div class="lighthouse-window window-1"></div>
-      <div class="lighthouse-window window-2"></div>
-      <div class="lighthouse-window window-3"></div>
-      <div class="lighthouse-top-section"></div>
-      <div class="lighthouse-dome">
-       <div class="lighthouse-light-source"></div>
-      </div>
-      <div class="lighthouse-beam"></div>
-     </div>
     </div>
+
     <div class="slide-header">
-     <h1 class="slide-title">🎯 Шлях до нового члена ПРМТУ</h1>
-     <p class="slide-subtitle" style="font-size: 36px;">Психологія прийняття рішення: від випадкового перегляду до вступу</p>
+      <h1 class="slide-title">🎯 Як контент приводить до членства</h1>
+      <p class="slide-subtitle" style="font-size: 36px;">
+        Шлях від першого перегляду до рішення приєднатись до ПРМТУ
+      </p>
     </div>
-    <div class="content-section" style="padding-top: 5px;"><!-- Visual Funnel -->
-     <div style="display: flex; align-items: center; justify-content: center; margin: 20px 0 30px 0; position: relative;">
-      <svg width="900" height="320" viewbox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 30px rgba(233, 196, 106, 0.3));"><!-- Funnel shape with gradient --> <defs>
-        <lineargradient id="funnelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-         <stop offset="0%" style="stop-color:rgba(233, 196, 106, 0.3);stop-opacity:1" />
-         <stop offset="100%" style="stop-color:rgba(233, 196, 106, 0.7);stop-opacity:1" />
-        </lineargradient>
-       </defs> <!-- Main funnel shape --> <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="url(#funnelGrad)" stroke="#e9c46a" stroke-width="3" opacity="0.9" /> <!-- Glow effect --> <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="none" stroke="#e9c46a" stroke-width="2" opacity="0.5" style="filter: blur(8px);" /> <!-- Stage 1: Wide top --> <text x="450" y="55" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="700" font-family="Cormorant Garamond, serif">
-        3 000 000+ переглядів
-       </text> <text x="450" y="85" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="20" font-family="Cormorant Garamond, serif">
-        👀 Випадково побачили в стрічці
-       </text> <!-- Stage 2 --> <text x="450" y="135" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="700" font-family="Cormorant Garamond, serif">
-        Сотні тисяч охоплень
-       </text> <text x="450" y="162" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="19" font-family="Cormorant Garamond, serif">
-        ❤️ Зацікавились, підписались, зберегли
-       </text> <!-- Stage 3 --> <text x="450" y="210" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700" font-family="Cormorant Garamond, serif">
-        Десятки тисяч звернень
-       </text> <text x="450" y="235" text-anchor="middle" fill="rgba(255, 255, 255, 0.85)" font-size="18" font-family="Cormorant Garamond, serif">
-        💬 Написали з проблемою, отримали допомогу
-       </text> <!-- Stage 4: Narrow bottom --> <text x="450" y="275" text-anchor="middle" fill="#e9c46a" font-size="30" font-weight="900" font-family="Cormorant Garamond, serif">
-        ⚓ НОВІ ЧЛЕНИ ПРМТУ
-       </text>
-      </svg>
-     </div><!-- Psychology Cards -->
-     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 25px 0;">
-      <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-       <div style="font-size: 42px; text-align: center; margin-bottom: 10px;">
-        🧠
-       </div>
-       <h3 style="color: #e9c46a; font-size: 26px; margin-bottom: 10px; font-weight: 700; text-align: center;">Ефект «знайомості»</h3>
-       <p style="font-size: 20px; line-height: 1.4; color: rgba(255, 255, 255, 0.9); margin: 0; text-align: center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
+
+    <div class="content-section" style="padding-top: 5px;">
+      <!-- Основний макет: зліва кроки, справа візуальний шлях -->
+      <div class="slide-path-layout">
+        <!-- Ліва колонка: 5 кроків -->
+        <div class="path-steps">
+          <div class="path-step">
+            <div class="path-step-number">1️⃣</div>
+            <div class="path-step-text">
+              <strong>Перше знайомство.</strong> Людина випадково або за рекомендацією
+              бачить відео чи пост MTWTU LAW HUB, зберігає або переглядає до кінця.
+            </div>
+          </div>
+          <div class="path-step">
+            <div class="path-step-number">2️⃣</div>
+            <div class="path-step-text">
+              <strong>Повернення до контенту.</strong> Підписується, дивиться ще кілька матеріалів
+              і бачить, що тут системно пояснюють складні питання простою мовою.
+            </div>
+          </div>
+          <div class="path-step">
+            <div class="path-step-number">3️⃣</div>
+            <div class="path-step-text">
+              <strong>Довіра і впізнавання себе.</strong> У кейсах і прикладах впізнає свої ситуації
+              та розуміє, що подібні проблеми вже супроводжували юристи MTWTU LAW HUB.
+            </div>
+          </div>
+          <div class="path-step">
+            <div class="path-step-number">4️⃣</div>
+            <div class="path-step-text">
+              <strong>Розуміння правил гри.</strong> Із текстів і відео чітко видно:
+              юридичний супровід і представництво надаються тільки членам ПРМТУ.
+            </div>
+          </div>
+          <div class="path-step">
+            <div class="path-step-number">5️⃣</div>
+            <div class="path-step-text">
+              <strong>Рішення оформити членство.</strong> Людина робить наступний логічний крок —
+              оформлює або поновлює членство в ПРМТУ, щоб мати гарантовану підтримку і захист.
+            </div>
+          </div>
+        </div>
+
+        <!-- Права колонка: вертикальний шлях аудиторії -->
+        <div class="path-visual">
+          <svg width="260" height="320" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="pathGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#0a3b5c; stop-opacity:1" />
+                <stop offset="45%" style="stop-color:#145d7c; stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#e9c46a; stop-opacity:1" />
+              </linearGradient>
+            </defs>
+
+            <!-- Світловий промінь / трапеція -->
+            <path
+              d="M20 20 L240 20 L200 220 L130 300 L60 220 Z"
+              fill="url(#pathGrad)"
+              stroke="#e9c46a"
+              stroke-width="3"
+              opacity="0.95"
+            />
+
+            <!-- Сегмент 1 – аудиторія соцмереж -->
+            <text x="130" y="60" text-anchor="middle"
+                  fill="#ffffff" font-size="18" font-family="Cormorant Garamond, serif" font-weight="700">
+              Аудиторія соцмереж
+            </text>
+            <text x="130" y="83" text-anchor="middle"
+                  fill="rgba(255,255,255,0.9)" font-size="14" font-family="Cormorant Garamond, serif">
+              Instagram • Facebook • TikTok
+            </text>
+
+            <!-- Сегмент 2 – ті, хто повертаються -->
+            <text x="130" y="130" text-anchor="middle"
+                  fill="#ffffff" font-size="16" font-family="Cormorant Garamond, serif" font-weight="700">
+              Ті, хто повертаються
+            </text>
+            <text x="130" y="152" text-anchor="middle"
+                  fill="rgba(255,255,255,0.9)" font-size="13" font-family="Cormorant Garamond, serif">
+              Підписки, збереження, перегляди серій
+            </text>
+
+            <!-- Сегмент 3 – ті, хто серйозно цікавляться -->
+            <text x="130" y="195" text-anchor="middle"
+                  fill="#ffffff" font-size="16" font-family="Cormorant Garamond, serif" font-weight="700">
+              Ті, хто серйозно
+            </text>
+            <text x="130" y="217" text-anchor="middle"
+                  fill="#ffffff" font-size="16" font-family="Cormorant Garamond, serif" font-weight="700">
+              цікавляться членством
+            </text>
+
+            <!-- Нижній сегмент – нові члени ПРМТУ -->
+            <circle cx="130" cy="265" r="30"
+                    fill="rgba(0,0,0,0.6)" stroke="#e9c46a" stroke-width="3" />
+            <text x="130" y="270" text-anchor="middle"
+                  fill="#e9c46a" font-size="26" font-family="Cormorant Garamond, serif">
+              ⚓
+            </text>
+            <text x="130" y="300" text-anchor="middle"
+                  fill="#e9c46a" font-size="18" font-family="Cormorant Garamond, serif" font-weight="800">
+              Нові члени ПРМТУ
+            </text>
+          </svg>
+        </div>
       </div>
-      <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-       <div style="font-size: 42px; text-align: center; margin-bottom: 10px;">
-        💡
-       </div>
-       <h3 style="color: #e9c46a; font-size: 26px; margin-bottom: 10px; font-weight: 700; text-align: center;">Соціальний доказ</h3>
-       <p style="font-size: 20px; line-height: 1.4; color: rgba(255, 255, 255, 0.9); margin: 0; text-align: center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
+
+      <!-- Психологічні ефекти: знайомість, соціальний доказ, тригер дії -->
+      <div class="psychology-grid path-effects-grid">
+        <div class="psychology-card">
+          <h3>🧠 Ефект «знайомості»</h3>
+          <p>Після 3–5 переглядів люди сприймають профспілку як «свою» і більш охоче довіряють контенту та рекомендаціям.</p>
+        </div>
+        <div class="psychology-card">
+          <h3>💡 Соціальний доказ</h3>
+          <p>Бачать коментарі з подяками та історії успіху — думають: «Якщо їм допомогли, то й мені допоможуть».</p>
+        </div>
+        <div class="psychology-card">
+          <h3>⚡ Тригер дії</h3>
+          <p>Виникає проблема → згадали відео MTWTU LAW HUB → написали → після вирішення питання оформлюють членство в ПРМТУ.</p>
+        </div>
       </div>
-      <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-       <div style="font-size: 42px; text-align: center; margin-bottom: 10px;">
-        ⚡
-       </div>
-       <h3 style="color: #e9c46a; font-size: 26px; margin-bottom: 10px; font-weight: 700; text-align: center;">Тригер дії</h3>
-       <p style="font-size: 20px; line-height: 1.4; color: rgba(255, 255, 255, 0.9); margin: 0; text-align: center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
+
+      <!-- Підсумковий акцент унизу слайду -->
+      <div class="highlight-box path-summary-box">
+        <p class="content-text">
+          Наші сторінки в соцмережах — це не просто інформація. Частина глядачів проходить шлях
+          від «подивився відео» до «оформив членство в ПРМТУ», розуміючи, що реальний юридичний
+          супровід можливий лише для членів профспілки.
+        </p>
       </div>
-     </div><!-- Final Strong Message -->
-     <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.3) 0%, rgba(233, 196, 106, 0.15) 100%); border: 4px solid #e9c46a; border-radius: 16px; padding: 25px; margin-top: 25px; text-align: center; box-shadow: 0 0 40px rgba(233, 196, 106, 0.4);">
-      <p style="font-size: 32px; line-height: 1.5; color: #e9c46a; margin: 0 0 12px 0; font-weight: 900;">Не кожен перегляд стає членством.<br>
-       Але кожне нове членство починається з перегляду.</p>
-      <p style="font-size: 24px; color: rgba(255, 255, 255, 0.95); margin: 0; font-weight: 600;">Соцмережі MTWTU LAW HUB — це не розвага.<br>
-        Це <strong style="color: #e9c46a;">перший крок до членства</strong> для тисяч моряків та їхніх родин.</p>
-     </div>
     </div>
+  </div>
+
    </div><!-- Slide 12: How You Can Help -->
    <div class="slide">
     <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
