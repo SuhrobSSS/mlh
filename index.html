@@ -36,30 +36,21 @@
     }
 
     .slide {
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 30px 50px 90px;
-  position: relative;
-  background: radial-gradient(ellipse at top, #0a3b5c 0%, #041c2f 50%, #000000 100%);
-  /* було overflow: hidden; — через це обрізався контент */
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+      width: 100%;
+      height: 100%;
+      display: none;
+      padding: 30px 50px 90px;
+      position: relative;
+      background: radial-gradient(ellipse at top, #0a3b5c 0%, #041c2f 50%, #000000 100%);
+      overflow: hidden;
+    }
 
-.slide.active {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* контент зверху, як у нормальних слайдах */
-  animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* тільки для тих слайдів, де потрібно ідеальне центрування (наприклад, титульний) */
-.slide--center.active {
-  justify-content: center;
-}
-
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
     @keyframes slideIn {
       from {
@@ -773,7 +764,7 @@
     }
 
     .slide:nth-child(7) .bullet-list li:before {
-      content: "🎵";
+      content: "🎬";
     }
 
     .slide:nth-child(8) .bullet-list li:before {
@@ -1212,12 +1203,13 @@
 
     .psychology-card h3 {
       color: #e9c46a;
-      font-size: 32px;
+      font-size: 28px;
       margin-bottom: 10px;
+      font-weight: 700;
     }
 
     .psychology-card p {
-      font-size: 26px;
+      font-size: 22px;
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.9);
     }
@@ -1377,15 +1369,11 @@
     }
 
     .slide-counter {
-      background: linear-gradient(135deg, rgba(10, 59, 92, 0.95) 0%, rgba(4, 28, 47, 0.95) 100%);
-      border: 2px solid #e9c46a;
       color: #e9c46a;
-      padding: 12px 28px;
-      border-radius: 40px;
       font-size: 16px;
       font-weight: 700;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(233, 196, 106, 0.3);
     }
 
     @media (max-width: 1400px) {
@@ -1414,99 +1402,15 @@
       .lighthouse-scene {
         transform: scale(0.5);
       }
-     @media (max-width: 768px) {
-  .slide {
-    padding: 16px 18px 70px;
-  }
-
-  .cover-logo {
-    font-size: 52px;
-  }
-
-  .cover-subtitle {
-    font-size: 24px;
-  }
-
-  .cover-tagline {
-    font-size: 22px;
-  }
-
-  .slide-title {
-    font-size: 32px;
-  }
-
-  .slide-subtitle {
-    font-size: 20px;
-  }
-
-  .content-text {
-    font-size: 18px;
-  }
-
-  .bullet-list li {
-    font-size: 18px;
-    padding: 12px 0 12px 40px;
-  }
-
-  .logo-watermark-main {
-    font-size: 24px;
-  }
-
-  .logo-watermark-sub {
-    font-size: 22px;
-  }
-
-  .stats-grid,
-  .qr-grid,
-  .psychology-grid,
-  .data-showcase {
-    grid-template-columns: 1fr;
-  }
-
-  .qr-code {
-    width: 200px;
-    height: 200px;
-  }
-
-  .qr-label {
-    font-size: 24px;
-  }
-
-  .final-message {
-    font-size: 26px;
-  }
-}
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
-  <style>
-
-   <style>
-  /* Слайд без скролу */
-  .slide {
-    overflow: hidden !important;
-  }
-
-  /* Замість flex робимо block, а текст всередині будемо масштабувати */
-  .slide.active {
-    display: block;
-  }
-
-  /* Обгортка для текстового контенту, який масштабуємо */
-  .slide-inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    transform-origin: top left;
-  }
-</style>
-
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
   <div class="presentation-container"><!-- Slide 1: Cover -->
-   <div class="slide slide--center active">
+   <div class="slide active">
     <div class="particles" id="particles"></div>
     <div class="animated-lines" id="animatedLines"></div>
     <div class="orb orb-1"></div>
@@ -1539,7 +1443,7 @@
       Instagram • Facebook • TikTok
      </div>
      <div class="cover-tagline">
-      Юридична допомога, освіта, підтримка членів ПРМТУ в умовах викликів
+      Юридична допомога, підтримка членів ПРМТУ в умовах викликів
      </div>
     </div>
    </div><!-- Slide 2: Who We Are -->
@@ -1569,12 +1473,12 @@
     <div class="content-section">
      <div class="highlight-box">
       <p class="content-text"><strong>MTWTU LAW (Legal Aid and Welfare) HUB</strong> — правозахист членів ПРМТУ</p>
-      <p class="content-text" style="margin-top: 10px; font-size: 16px;">Реалізується в межах проєкту ПРМТУ та МОП, що фінансується урядом Бельгії</p>
+      <p class="content-text" style="margin-top: 10px;">Реалізується в межах проєкту ПРМТУ та МОП, що фінансується урядом Бельгії</p>
      </div>
      <ul class="bullet-list">
       <li>Консультації з трудового законодавства, отримання кваліфікаційних документів, ТЦК та СП</li>
       <li>Роз'яснення складних юридичних питань</li>
-      <li>Захист прав членів ПРМТУ в судах України очно та дистанційно</li>
+      <li>Захист прав членів ПРМТУ у судах України очно та дистанційно</li>
       <li>Навчальні відео, семінари, тренінги, інструкції, консультації</li>
       <li>Зручна та комфортна комунікація</li>
      </ul>
@@ -1618,7 +1522,7 @@
         🌍
        </div>
        <div class="stat-label">
-        Доступ до правничої допомоги у будь-якій точці світу
+        Доступ до правничої допомоги з будь-якої точки світу
        </div>
       </div>
       <div class="stat-card">
@@ -1708,7 +1612,7 @@
     <div class="content-section">
      <div class="stats-grid">
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="1600000">
+       <div class="stat-number js-counter" data-target="1603370" data-suffix="+">
         0
        </div>
        <div class="stat-label">
@@ -1716,7 +1620,7 @@
        </div>
       </div>
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="541000">
+       <div class="stat-number js-counter" data-target="542111" data-suffix="+">
         0
        </div>
        <div class="stat-label">
@@ -1724,20 +1628,19 @@
        </div>
       </div>
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="6000">
+       <div class="stat-number js-counter" data-target="6250" data-suffix="+">
         0
        </div>
        <div class="stat-label">
-        Взаємодій
+        Взаємодії
        </div>
       </div>
      </div>
      <ul class="bullet-list">
-      <li>Понад 600+ підписників</li>
-      <li>Відео про трудові права та дипломування</li>
-      <li>Реальні судові кейси з детальним розбором</li>
-      <li>Історії членів ПРМТУ та успішні випадки захисту</li>
-      <li>Корисний контент в інтерактивній та ігровій формі</li>
+      <li>Понад 600+ підписників у спільноті</li>
+      <li>Stories з опитуваннями та правовими вікторинами</li>
+      <li>Highlights з найважливішими темами для швидкого доступу</li>
+      <li>Direct-консультації: швидка відповідь у повідомленнях</li>
      </ul>
     </div>
    </div><!-- Slide 6: Facebook Stats -->
@@ -1765,12 +1668,12 @@
      <h1 class="slide-title">
       <svg width="40" height="40" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 10px;"><circle cx="12" cy="12" r="12" fill="#1877F2" /> <path d="M13.5 20.5V13H16L16.5 10H13.5V8.5C13.5 7.67 13.67 7 14.83 7H16.5V4.14C16.17 4.1 15.17 4 14 4C11.58 4 10 5.5 10 8.17V10H7.5V13H10V20.5H13.5Z" fill="white" />
       </svg> Facebook</h1>
-     <p class="slide-subtitle">Платформа для детальних публікацій та обговорень</p>
+     <p class="slide-subtitle">Юридичний контент для тих, хто обирає Facebook, а не Instagram</p>
     </div>
     <div class="content-section">
      <div class="stats-grid">
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="1400000" data-suffix="+">
+       <div class="stat-number js-counter" data-target="1387228" data-suffix="+">
         0
        </div>
        <div class="stat-label">
@@ -1778,7 +1681,7 @@
        </div>
       </div>
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="13900" data-suffix="+">
+       <div class="stat-number js-counter" data-target="13903" data-suffix="+">
         0
        </div>
        <div class="stat-label">
@@ -1786,7 +1689,7 @@
        </div>
       </div>
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="2000" data-suffix="+">
+       <div class="stat-number js-counter" data-target="2950" data-suffix="+">
         0
        </div>
        <div class="stat-label">
@@ -1795,11 +1698,11 @@
       </div>
      </div>
      <ul class="bullet-list">
-      <li>Цільова аудиторія 35–60 років</li>
-      <li>Аналітичні пости з детальними роз'ясненнями</li>
-      <li>Новини законодавства та судової практики</li>
-      <li>Профспілкові активісти та юристи</li>
-      <li>Міжнародні партнери та спостерігачі</li>
+      <li>Сфокусована спільнота моряків, їхніх родин та профспілкових активістів</li>
+      <li>Ті самі ключові юридичні теми, адаптовані у доступний формат для Facebook</li>
+      <li>Репости в профспілкові групи та на сторінки активістів, що розширює охоплення</li>
+      <li>Коментарі та обговорення, з яких часто починаються індивідуальні звернення</li>
+      <li>Messenger-консультації: можливість швидко поставити запитання юристам MTWTU LAW HUB</li>
      </ul>
     </div>
    </div><!-- Slide 7: TikTok Stats -->
@@ -1827,28 +1730,28 @@
      <h1 class="slide-title">
       <svg width="40" height="40" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 10px;"><path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#000000" /> <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#EE1D52" /> <path d="M34.3 9c2.6 2.8 6.1 4.7 10.1 4.8v7.4c-3.9 0-7.6-1.2-10.6-3.3v13.4c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c.7 0 1.3 0 2 .1v7.6c-.6-.2-1.3-.3-2-.3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V-.5h7.4c0 3.3.9 6.5 2.6 9.2 0 .1 0 .2 0 .3z" fill="#69C9D0" />
       </svg> TikTok</h1>
-     <p class="slide-subtitle">Молодіжна платформа для швидкого контенту</p>
+     <p class="slide-subtitle">Готуємо молодь до того, щоб упевнено захищати свої права</p>
     </div>
     <div class="content-section">
      <div class="stats-grid">
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="31000">
+       <div class="stat-number js-counter" data-target="32587" data-suffix="+">
         0
        </div>
        <div class="stat-label">
-        Переглядів
+        Переглядів відео
        </div>
       </div>
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="26900">
+       <div class="stat-number js-counter" data-target="27912" data-suffix="+">
         0
        </div>
        <div class="stat-label">
-        Охоплень
+        Охоплена аудиторія
        </div>
       </div>
       <div class="stat-card">
-       <div class="stat-number js-counter" data-target="2000">
+       <div class="stat-number js-counter" data-target="2118" data-suffix="+">
         0
        </div>
        <div class="stat-label">
@@ -1857,11 +1760,10 @@
       </div>
      </div>
      <ul class="bullet-list">
-      <li>Молодіжна аудиторія 18–30 років</li>
-      <li>Короткі відео з реальними кейсами</li>
-      <li>Експлейнери зі складних юридичних тем</li>
-      <li>Доступний виклад з легким гумором</li>
-      <li>Швидке поширення серед молодих членів ПРМТУ</li>
+      <li>Ставка на динамічний формат, прості візуальні акценти та зрозумілі приклади</li>
+      <li>Аудиторія: курсанти, молоді моряки та їхні близькі, які споживають контент переважно у TikTok</li>
+      <li>Серії відео за основними запитами: документи, контракти, виплати, права під час війни</li>
+      <li>Збереження, поширення та коментарі, з яких часто починаються індивідуальні звернення</li>
      </ul>
     </div>
    </div><!-- Slide 8: Feedback -->
@@ -1886,28 +1788,28 @@
      </div>
     </div>
     <div class="slide-header">
-     <h1 class="slide-title">💬 Зворотній зв'язок</h1>
+     <h1 class="slide-title">💙 Зворотній зв'язок</h1>
     </div>
     <div class="content-section">
      <div class="highlight-box">
-      <p class="content-text" style="font-size: 32px; text-align: center;"><strong>10 000+</strong> відвідувань за останні 6 місяців</p>
+      <p class="content-text" style="font-size: 32px; text-align: center;"><strong>15 000+</strong> відвідувань за останні 6 місяців</p>
      </div>
      <div class="psychology-grid">
       <div class="psychology-card">
-       <h3>💙 "Дякую за допомогу!"</h3>
-       <p>Вчасна консультація допомогла вирішити питання з контрактом</p>
+       <h3>💙 Олена Дрозд</h3>
+       <p>"Щиро дякую вам усім за професіоналізм, підтримку та плідну працю. Бажаю подальших успіхів, справедливих і позитивних рішень, задоволених позовів та незмінної впевненості у правоті своєї справи. Ваша допомога в суді є безцінною!"</p>
       </div>
       <div class="psychology-card">
-       <h3>⚓ "Нарешті зрозумів свої права"</h3>
-       <p>Відео пояснило складне питання простими словами</p>
+       <h3>⚓ Микола Чабаненко</h3>
+       <p>"Також хочу висловити подяку пані Юлії та нашій профспілці, з їхньою допомогою зняли статус «у розшуку», все це було зроблено віддалено, від мене знадобилося мінімум зусиль. Щиро дякуємо за допомогу"</p>
       </div>
       <div class="psychology-card">
-       <h3>🌍 "Підтримка з будь-якої точки світу"</h3>
-       <p>Отримав допомогу, перебуваючи у відкритому морі</p>
+       <h3>🌍 Тамара Кушніренко</h3>
+       <p>"Дякуємо профспілки моряків, за підтримку та за увагу! 💙"</p>
       </div>
       <div class="psychology-card">
-       <h3>📚 "Тепер я знаю, куди звертатись"</h3>
-       <p>Профспілка стала ближчою завдяки соцмережам</p>
+       <h3>📚 Кирило Фроленков</h3>
+       <p>"Наш юридичний фронт - найкращий! 🙌"</p>
       </div>
      </div>
      <p class="content-text" style="text-align: center; margin-top: 20px;">Вплив на імідж ПРМТУ як <strong style="color: #e9c46a;">відкритої і сучасної</strong> організації</p>
@@ -1945,7 +1847,7 @@
       <li>У соцмережах профспілковий контент — це не реклама, а <strong style="color: #e9c46a;">взаємопідтримка</strong></li>
      </ul>
      <div class="highlight-box">
-      <p class="content-text" style="font-size: 20px; text-align: center;">Кожен репост від активіста = +100-500 потенційних читачів</p>
+      <p class="content-text" style="font-size: 28px; text-align: center; font-weight: 600;">Кожен репост від активіста = +100-500 потенційних читачів</p>
      </div>
     </div>
    </div><!-- Slide 10: Data Visualization -->
@@ -2010,7 +1912,7 @@
         <svg width="60" height="60" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#000000" /> <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#EE1D52" /> <path d="M34.3 9c2.6 2.8 6.1 4.7 10.1 4.8v7.4c-3.9 0-7.6-1.2-10.6-3.3v13.4c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c.7 0 1.3 0 2 .1v7.6c-.6-.2-1.3-.3-2-.3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V-.5h7.4c0 3.3.9 6.5 2.6 9.2 0 .1 0 .2 0 .3z" fill="#69C9D0" />
         </svg>
        </div>
-       <div class="js-counter" style="font-size: 42px; font-weight: 900; color: #e9c46a; margin-bottom: 8px; text-shadow: 0 0 20px rgba(233, 196, 106, 0.5);" data-target="31000" data-suffix="+">
+       <div class="js-counter" style="font-size: 42px; font-weight: 900; color: #e9c46a; margin-bottom: 8px; text-shadow: 0 0 20px rgba(233, 196, 106, 0.5);" data-target="32587" data-suffix="+">
         0
        </div>
        <div style="font-size: 20px; color: rgba(255, 255, 255, 0.8);">
@@ -2035,7 +1937,7 @@
         582 000+
        </div>
        <div style="font-size: 22px; color: rgba(255, 255, 255, 0.9); margin-top: 6px;">
-        👁 Охоплень
+        🌍 Охоплень
        </div>
       </div>
       <div style="width: 2px; background: linear-gradient(180deg, transparent, #e9c46a, transparent);"></div>
@@ -2050,7 +1952,7 @@
       <div style="width: 2px; background: linear-gradient(180deg, transparent, #e9c46a, transparent);"></div>
       <div style="text-align: center;">
        <div style="font-size: 46px; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(233, 196, 106, 0.8);">
-        10 000+
+        15 000+
        </div>
        <div style="font-size: 22px; color: rgba(255, 255, 255, 0.9); margin-top: 6px;">
         🔗 Відвідувань
@@ -2061,7 +1963,86 @@
       <p style="font-size: 26px; color: #e9c46a; font-style: italic; text-shadow: 0 0 15px rgba(233, 196, 106, 0.4);">Ми створили потужну платформу підтримки для всіх членів ПРМТУ</p>
      </div>
     </div>
-   </div><!-- Slide 11: How You Can Help -->
+   </div><!-- Slide 11: NEW MEMBER FUNNEL -->
+   <div class="slide">
+    <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
+    </div>
+    <div class="lighthouse-scene">
+     <div class="lighthouse">
+      <div class="lighthouse-base"></div>
+      <div class="lighthouse-tower">
+       <div class="lighthouse-stripe stripe-1"></div>
+       <div class="lighthouse-stripe stripe-2"></div>
+      </div>
+      <div class="lighthouse-window window-1"></div>
+      <div class="lighthouse-window window-2"></div>
+      <div class="lighthouse-window window-3"></div>
+      <div class="lighthouse-top-section"></div>
+      <div class="lighthouse-dome">
+       <div class="lighthouse-light-source"></div>
+      </div>
+      <div class="lighthouse-beam"></div>
+     </div>
+    </div>
+    <div class="slide-header">
+     <h1 class="slide-title">🎯 Шлях до нового члена ПРМТУ</h1>
+     <p class="slide-subtitle" style="font-size: 36px;">Психологія прийняття рішення: від випадкового перегляду до вступу</p>
+    </div>
+    <div class="content-section" style="padding-top: 5px;"><!-- Visual Funnel -->
+     <div style="display: flex; align-items: center; justify-content: center; margin: 20px 0 30px 0; position: relative;">
+      <svg width="900" height="320" viewbox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 30px rgba(233, 196, 106, 0.3));"><!-- Funnel shape with gradient --> <defs>
+        <lineargradient id="funnelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+         <stop offset="0%" style="stop-color:rgba(233, 196, 106, 0.3);stop-opacity:1" />
+         <stop offset="100%" style="stop-color:rgba(233, 196, 106, 0.7);stop-opacity:1" />
+        </lineargradient>
+       </defs> <!-- Main funnel shape --> <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="url(#funnelGrad)" stroke="#e9c46a" stroke-width="3" opacity="0.9" /> <!-- Glow effect --> <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="none" stroke="#e9c46a" stroke-width="2" opacity="0.5" style="filter: blur(8px);" /> <!-- Stage 1: Wide top --> <text x="450" y="55" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="700" font-family="Cormorant Garamond, serif">
+        3 000 000+ переглядів
+       </text> <text x="450" y="85" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="20" font-family="Cormorant Garamond, serif">
+        👀 Випадково побачили в стрічці
+       </text> <!-- Stage 2 --> <text x="450" y="135" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="700" font-family="Cormorant Garamond, serif">
+        Сотні тисяч охоплень
+       </text> <text x="450" y="162" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="19" font-family="Cormorant Garamond, serif">
+        ❤️ Зацікавились, підписались, зберегли
+       </text> <!-- Stage 3 --> <text x="450" y="210" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700" font-family="Cormorant Garamond, serif">
+        Десятки тисяч звернень
+       </text> <text x="450" y="235" text-anchor="middle" fill="rgba(255, 255, 255, 0.85)" font-size="18" font-family="Cormorant Garamond, serif">
+        💬 Написали з проблемою, отримали допомогу
+       </text> <!-- Stage 4: Narrow bottom --> <text x="450" y="275" text-anchor="middle" fill="#e9c46a" font-size="30" font-weight="900" font-family="Cormorant Garamond, serif">
+        ⚓ НОВІ ЧЛЕНИ ПРМТУ
+       </text>
+      </svg>
+     </div><!-- Psychology Cards -->
+     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 25px 0;">
+      <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+       <div style="font-size: 42px; text-align: center; margin-bottom: 10px;">
+        🧠
+       </div>
+       <h3 style="color: #e9c46a; font-size: 26px; margin-bottom: 10px; font-weight: 700; text-align: center;">Ефект «знайомості»</h3>
+       <p style="font-size: 20px; line-height: 1.4; color: rgba(255, 255, 255, 0.9); margin: 0; text-align: center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
+      </div>
+      <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+       <div style="font-size: 42px; text-align: center; margin-bottom: 10px;">
+        💡
+       </div>
+       <h3 style="color: #e9c46a; font-size: 26px; margin-bottom: 10px; font-weight: 700; text-align: center;">Соціальний доказ</h3>
+       <p style="font-size: 20px; line-height: 1.4; color: rgba(255, 255, 255, 0.9); margin: 0; text-align: center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
+      </div>
+      <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+       <div style="font-size: 42px; text-align: center; margin-bottom: 10px;">
+        ⚡
+       </div>
+       <h3 style="color: #e9c46a; font-size: 26px; margin-bottom: 10px; font-weight: 700; text-align: center;">Тригер дії</h3>
+       <p style="font-size: 20px; line-height: 1.4; color: rgba(255, 255, 255, 0.9); margin: 0; text-align: center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
+      </div>
+     </div><!-- Final Strong Message -->
+     <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.3) 0%, rgba(233, 196, 106, 0.15) 100%); border: 4px solid #e9c46a; border-radius: 16px; padding: 25px; margin-top: 25px; text-align: center; box-shadow: 0 0 40px rgba(233, 196, 106, 0.4);">
+      <p style="font-size: 32px; line-height: 1.5; color: #e9c46a; margin: 0 0 12px 0; font-weight: 900;">Не кожен перегляд стає членством.<br>
+       Але кожне нове членство починається з перегляду.</p>
+      <p style="font-size: 24px; color: rgba(255, 255, 255, 0.95); margin: 0; font-weight: 600;">Соцмережі MTWTU LAW HUB — це не розвага.<br>
+        Це <strong style="color: #e9c46a;">перший крок до членства</strong> для тисяч моряків та їхніх родин.</p>
+     </div>
+    </div>
+   </div><!-- Slide 12: How You Can Help -->
    <div class="slide">
     <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
     </div>
@@ -2100,7 +2081,7 @@
       </div>
       <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 22px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
        <div style="font-size: 44px; margin-bottom: 12px;">
-        👍
+        💪
        </div>
        <h3 style="color: #e9c46a; font-size: 32px; margin-bottom: 12px; font-weight: 700;">Підсилювач</h3>
        <ul style="font-size: 24px; line-height: 1.6; color: rgba(255, 255, 255, 0.85); list-style: none; padding: 0;">
@@ -2116,7 +2097,7 @@
        <h3 style="color: #e9c46a; font-size: 32px; margin-bottom: 12px; font-weight: 700;">Навігатор</h3>
        <ul style="font-size: 24px; line-height: 1.6; color: rgba(255, 255, 255, 0.85); list-style: none; padding: 0;">
         <li style="margin-bottom: 8px;">• Надсилайте відео друзям</li>
-        <li style="margin-bottom: 8px;">• Кидайте посилання в чати екіпажу</li>
+        <li style="margin-bottom: 8px;">• Кидайте посилання у чати та ваші групи</li>
         <li style="margin-bottom: 8px;">• Зберігайте для швидкого доступу</li>
        </ul>
       </div>
@@ -2136,7 +2117,7 @@
       <p style="font-size: 26px; color: #e9c46a; font-weight: 600; line-height: 1.5; margin: 0;">Кожен ваш лайк, репост чи коментар — це про ще одного члена ПРМТУ, який дізнався про свої права</p>
      </div>
     </div>
-   </div><!-- Slide 12: Reels Journey -->
+   </div><!-- Slide 13: Reels Journey with Example - COMBINED SLIDE -->
    <div class="slide">
     <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
     </div>
@@ -2159,20 +2140,20 @@
     </div>
     <div class="slide-header">
      <h1 class="slide-title" style="font-size: 80px;">🌊 Як Reels стає реальною допомогою</h1>
-     <p class="slide-subtitle" style="font-size: 40px;">5 етапів від ідеї до захисту прав</p>
+     <p class="slide-subtitle" style="font-size: 40px;">На прикладі "Морсічсервіс"</p>
     </div>
     <div class="content-section" style="padding-top: 0;">
      <div class="timeline-container" style="margin: 10px 0;">
       <div class="timeline-line"></div>
       <div class="timeline-step">
        <div class="timeline-icon">
-        🧭
+        📞
        </div>
        <div class="timeline-content">
         <div class="timeline-title">
-         1️⃣ Ідея від члена ПРМТУ
+         1️⃣ Звернення моряка
         </div>
-        <p class="timeline-description">Член ПРМТУ або активіст ділиться проблемою: "Запишіть про це відео"</p>
+        <p class="timeline-description">Моряк звернувся за консультацією та проханням отримати замість нього документи у ДП "Морсічсервіс"</p>
        </div>
       </div>
       <div class="timeline-step">
@@ -2181,20 +2162,20 @@
        </div>
        <div class="timeline-content">
         <div class="timeline-title">
-         2️⃣ Робота MTWTU LAW HUB
+         2️⃣ Робота юристів MTWTU LAW HUB
         </div>
-        <p class="timeline-description">Юристи аналізують, готують пояснення, записують відео з алгоритмом дій</p>
+        <p class="timeline-description">Юристи проконсультували, оформили представництво і отримали документи без посередників</p>
        </div>
       </div>
       <div class="timeline-step">
        <div class="timeline-icon">
-        📲
+        📱
        </div>
        <div class="timeline-content">
         <div class="timeline-title">
-         3️⃣ Публікація в соцмережах
+         3️⃣ Створення Reels
         </div>
-        <p class="timeline-description">Reels виходить в Instagram / Facebook / TikTok, збирає перегляди та репости</p>
+        <p class="timeline-description">Зняли короткий Reels із поясненням — переглянули <strong style="color: #e9c46a;">73 000+ людей</strong></p>
        </div>
       </div>
       <div class="timeline-step">
@@ -2203,69 +2184,31 @@
        </div>
        <div class="timeline-content">
         <div class="timeline-title">
-         4️⃣ Нові звернення
+         4️⃣ Відгук аудиторії
         </div>
-        <p class="timeline-description">Інші члени ПРМТУ впізнають себе, пишуть у директ, просять допомоги</p>
+        <p class="timeline-description">Інші члени ПРМТУ впізнають себе, пишуть у директ, звернулися з таким самим проханням</p>
        </div>
       </div>
       <div class="timeline-step">
        <div class="timeline-icon">
-        ⚖️
+        🎯
        </div>
        <div class="timeline-content">
         <div class="timeline-title">
-         5️⃣ Консультації та вплив
+         5️⃣ Результат
         </div>
-        <p class="timeline-description">Юристи дають консультації, супроводжують справи, типові проблеми враховуються в адвокації</p>
+        <p class="timeline-description">Нові звернення, нові члени ПРМТУ, підвищення репутації профспілки</p>
        </div>
       </div>
      </div>
-    </div>
-   </div><!-- Slide 13: Live Example -->
-   <div class="slide">
-    <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
-    </div>
-    <div class="lighthouse-scene">
-     <div class="lighthouse">
-      <div class="lighthouse-base"></div>
-      <div class="lighthouse-tower">
-       <div class="lighthouse-stripe stripe-1"></div>
-       <div class="lighthouse-stripe stripe-2"></div>
-      </div>
-      <div class="lighthouse-window window-1"></div>
-      <div class="lighthouse-window window-2"></div>
-      <div class="lighthouse-window window-3"></div>
-      <div class="lighthouse-top-section"></div>
-      <div class="lighthouse-dome">
-       <div class="lighthouse-light-source"></div>
-      </div>
-      <div class="lighthouse-beam"></div>
-     </div>
-    </div>
-    <div class="slide-header">
-     <h1 class="slide-title">📄 Приклад: Морсічсервіс</h1>
-     <p class="slide-subtitle">Як одне відео допомогло десяткам членів ПРМТУ</p>
-    </div>
-    <div class="content-section">
-     <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.25) 0%, rgba(233, 196, 106, 0.15) 100%); border: 3px solid #e9c46a; border-radius: 16px; padding: 30px; margin-bottom: 20px;">
-      <h3 style="color: #e9c46a; font-size: 36px; margin-bottom: 20px; text-align: center; font-weight: 700;">Reels про отримання документів у ДП "Морсічсервіс"</h3>
-      <ul style="font-size: 26px; line-height: 1.7; color: rgba(255, 255, 255, 0.95); list-style: none; padding-left: 0; margin: 20px 0;">
-       <li style="padding: 10px 0; padding-left: 40px; position: relative;"><span style="position: absolute; left: 0; color: #e9c46a; font-size: 28px;">✅</span> Юристи MTWTU LAW HUB оформили представництво і отримали документи без посередників</li>
-       <li style="padding: 10px 0; padding-left: 40px; position: relative;"><span style="position: absolute; left: 0; color: #e9c46a; font-size: 28px;">✅</span> Зняли короткий Reels із поясненням — переглянули <strong style="color: #e9c46a;">73 000+ людей</strong></li>
-       <li style="padding: 10px 0; padding-left: 40px; position: relative;"><span style="position: absolute; left: 0; color: #e9c46a; font-size: 28px;">✅</span> Після публікації понад <strong style="color: #e9c46a;">5 членів ПРМТУ</strong> звернулися з таким самим проханням</li>
-      </ul>
-     </div>
-     <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border-radius: 16px; padding: 25px; border: 2px solid rgba(233, 196, 106, 0.4);">
-      <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-       <div style="font-size: 48px;">
+     <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.2) 0%, rgba(233, 196, 106, 0.1) 100%); border: 2px solid rgba(233, 196, 106, 0.5); border-radius: 12px; padding: 20px; margin-top: 20px;">
+      <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+       <div style="font-size: 40px;">
         ⚖️
        </div>
-       <h4 style="color: #e9c46a; font-size: 34px; margin: 0; font-weight: 700;">Наша перевага: адвокат у штаті</h4>
+       <h4 style="color: #e9c46a; font-size: 28px; margin: 0; font-weight: 700;">Наша перевага: адвокат у штаті</h4>
       </div>
-      <p style="font-size: 26px; line-height: 1.6; color: rgba(255, 255, 255, 0.95); margin: 0;">У штаті MTWTU LAW HUB працює <strong style="color: #e9c46a;">адвокат</strong>, який має право отримувати документи за ордером та представляти інтереси членів ПРМТУ у державних органах, судах, ТЦК</p>
-     </div>
-     <div style="text-align: center; margin-top: 20px; padding: 20px; background: rgba(233, 196, 106, 0.1); border-radius: 12px; border: 2px solid rgba(233, 196, 106, 0.4);">
-      <p style="font-size: 30px; color: #e9c46a; font-weight: 700; line-height: 1.5; margin: 0;">Кожне відео = хтось дізнався про права і отримав захист</p>
+      <p style="font-size: 22px; line-height: 1.5; color: rgba(255, 255, 255, 0.95); margin: 0;">У штаті MTWTU LAW HUB працює <strong style="color: #e9c46a;">адвокат</strong>, який має право отримувати документи за ордером та представляти інтереси членів ПРМТУ у державних органах, судах, ТЦК</p>
      </div>
     </div>
    </div><!-- Slide 14: Conclusion -->
@@ -2298,7 +2241,7 @@
      </div>
      <ul class="bullet-list" style="margin-top: 25px;">
       <li>Ми досягли понад <strong style="color: #e9c46a;">3 031 000 переглядів</strong> за 6 місяців</li>
-      <li>Більше <strong style="color: #e9c46a;">10 431 людей</strong> отримали нашу допомогу</li>
+      <li>Більше <strong style="color: #e9c46a;">15 000 людей</strong> відвідали наш контент</li>
       <li>Ми створили <strong style="color: #e9c46a;">довіру</strong> між профспілкою і членами ПРМТУ</li>
       <li>Наша присутність у соцмережах підвищує <strong style="color: #e9c46a;">престиж ПРМТУ</strong></li>
      </ul>
@@ -2380,10 +2323,7 @@
     </div>
    </div>
   </div><!-- Navigation -->
-  <div class="nav-container"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Назад</button>
-   <div class="slide-counter" id="counter">
-    1 / 15
-   </div><button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Далі →</button>
+  <div class="nav-container"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Назад</button> <span class="slide-counter" id="slideCounter">1 / 15</span> <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Далі →</button>
   </div>
   <script>
     const defaultConfig = {
@@ -2396,30 +2336,6 @@
     const totalSlides = slides.length;
     let canNavigate = true;
     const navigationDelay = 400;
-
-   // Обгортаємо заголовок і контент кожного слайда в .slide-inner — саме його будемо масштабувати
-slides.forEach(slide => {
-  const header = slide.querySelector('.slide-header');
-  const content = slide.querySelector('.content-section');
-
-  // Титульний слайд без header/content пропускаємо
-  if (!header && !content) {
-    return;
-  }
-
-  const wrapper = document.createElement('div');
-  wrapper.className = 'slide-inner';
-
-  if (header && header.parentElement === slide) {
-    wrapper.appendChild(header);
-  }
-  if (content && content.parentElement === slide) {
-    wrapper.appendChild(content);
-  }
-
-  slide.appendChild(wrapper);
-});
-
 
     function animateCounters(slideEl) {
       const counters = slideEl.querySelectorAll('.js-counter');
@@ -2439,60 +2355,24 @@ slides.forEach(slide => {
             clearInterval(interval);
             counter.dataset.animated = 'true';
           }
-          counter.textContent = current.toLocaleString('uk-UA').replace(/\s/g, '') + suffix;
+          counter.textContent = current.toLocaleString('uk-UA') + suffix;
         }, 30);
       });
     }
 
-   function showSlide(n) {
-  slides[currentSlide].classList.remove('active');
-
-  currentSlide = (n + totalSlides) % totalSlides;
-  slides[currentSlide].classList.add('active');
-
-  document.getElementById('counter').textContent = `${currentSlide + 1} / ${totalSlides}`;
-
-  document.getElementById('prevBtn').disabled = currentSlide === 0;
-  document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
-
-  animateCounters(slides[currentSlide]);
-
-  // Після перемикання — підганяємо масштаб під поточний розмір екрана
-  requestAnimationFrame(() => {
-    fitSlide(slides[currentSlide]);
-  });
-}
-
-   // Масштабуємо текстовий контент слайда, щоб він вліз у видиму область
-function fitSlide(slide) {
-  if (!slide) return;
-
-  const inner = slide.querySelector('.slide-inner');
-  if (!inner) return;
-
-  // Скидаємо масштаб до 1, щоб коректно поміряти
-  inner.style.transform = 'scale(1)';
-
-  const nav = document.querySelector('.nav-container');
-  const navHeight = nav ? nav.offsetHeight + 24 : 0;
-
-  const availableWidth = slide.clientWidth - 32;   // невеликий запас по краях
-  const availableHeight = slide.clientHeight - navHeight - 16;
-
-  const contentWidth = inner.scrollWidth;
-  const contentHeight = inner.scrollHeight;
-
-  if (!contentWidth || !contentHeight) return;
-
-  const scaleX = availableWidth / contentWidth;
-  const scaleY = availableHeight / contentHeight;
-
-  // Беремо найменший масштаб, щоб точно влізло, і не збільшуємо понад 1
-  const scale = Math.min(scaleX, scaleY, 1);
-
-  inner.style.transform = `scale(${scale})`;
-}
-
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (n + totalSlides) % totalSlides;
+      slides[currentSlide].classList.add('active');
+      
+      // Update slide counter
+      document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+      
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+      
+      animateCounters(slides[currentSlide]);
+    }
 
     function changeSlide(direction) {
       if (!canNavigate) return;
@@ -2577,12 +2457,7 @@ function fitSlide(slide) {
       window.elementSdk.init(element);
     }
 
-   showSlide(0);
-fitSlide(slides[currentSlide]);
-
-window.addEventListener('resize', () => {
-  fitSlide(slides[currentSlide]);
-});
+    showSlide(0);
 
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
@@ -2619,5 +2494,5 @@ window.addEventListener('resize', () => {
     createParticles();
     createAnimatedLines();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ab55daa55081788',t:'MTc2NTI5MjM2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ac5c805f69270c2',t:'MTc2NTQ2NDQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
