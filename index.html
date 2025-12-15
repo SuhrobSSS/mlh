@@ -14,104 +14,122 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 
     :root{
-      --gold: #e9c46a;
-      --deep: #0a3b5c;
-      --mid:  #041c2f;
-      --bg:   #000000;
+      --gold:#e9c46a;
+      --deep:#0a3b5c;
+      --mid:#041c2f;
+      --ink:#000000;
 
-      --pad: clamp(14px, 3vw, 46px);
-      --radius: clamp(18px, 2.2vw, 28px);
-      --maxw: 1200px;
+      /* NEW sizing system (all sizes redefined) */
+      --topbarH: clamp(56px, 7.5vh, 86px);
+      --gutter: clamp(14px, 3.8vw, 72px);
+      --padY: clamp(20px, 5.6vh, 84px);
+      --cardPad: clamp(16px, 2.6vw, 40px);
+      --radius: clamp(16px, 2.2vw, 26px);
+      --radiusSm: clamp(12px, 1.6vw, 18px);
+      --stroke: clamp(1px, 0.18vw, 2px);
+      --shadowA: 0 22px 70px rgba(0,0,0,.55);
+      --shadowB: inset 0 0 0 1px rgba(255,255,255,.04);
 
-      /* Responsive typography (keeps your design but scales nicely) */
-      --fz-cover-logo: clamp(44px, 6.4vw, 120px);
-      --fz-cover-sub:  clamp(18px, 3.2vw, 72px);
-      --fz-cover-tag:  clamp(16px, 2.6vw, 54px);
+      --maxText: min(1180px, calc(100vw - (2 * var(--gutter))));
 
-      --fz-title:      clamp(34px, 5.2vw, 96px);
-      --fz-subtitle:   clamp(16px, 2.6vw, 48px);
-      --fz-text:       clamp(15px, 2.1vw, 42px);
-      --fz-li:         clamp(15px, 2.0vw, 40px);
+      /* Typography (fully rescaled) */
+      --fz-brand: clamp(14px, 1.2vw, 18px);
+      --fz-brand-sub: clamp(11px, 0.95vw, 13px);
 
-      --fz-stat:       clamp(28px, 4.8vw, 76px);
-      --fz-stat-label: clamp(12px, 1.7vw, 30px);
+      --fz-cover-logo: clamp(42px, 7vw, 132px);
+      --fz-cover-sub:  clamp(16px, 2.6vw, 64px);
+      --fz-cover-tag:  clamp(14px, 2.2vw, 44px);
+
+      --fz-title:      clamp(28px, 4.8vw, 92px);
+      --fz-subtitle:   clamp(14px, 2.1vw, 44px);
+      --fz-text:       clamp(14px, 1.7vw, 34px);
+      --fz-li:         clamp(14px, 1.65vw, 32px);
+
+      --fz-stat:       clamp(24px, 4.2vw, 72px);
+      --fz-stat-label: clamp(12px, 1.25vw, 22px);
+
+      --icon:          clamp(22px, 3.2vw, 54px);
+      --space-1:       clamp(8px, 1.4vw, 16px);
+      --space-2:       clamp(12px, 2vw, 22px);
+      --space-3:       clamp(16px, 2.6vw, 30px);
+      --space-4:       clamp(20px, 3.4vw, 40px);
     }
 
-    html, body{
-      height: 100%;
-      margin: 0;
-      background: var(--bg);
-      color: #fff;
-      font-family: 'Cormorant Garamond', serif;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:'Cormorant Garamond', serif;
+      color:#fff;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+
+      /* Full-bleed background (approach change) */
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(233,196,106,.12) 0%, transparent 55%),
+        radial-gradient(1100px 700px at 90% 80%, rgba(10,59,92,.45) 0%, transparent 60%),
+        radial-gradient(900px 600px at 50% 45%, rgba(4,28,47,.75) 0%, rgba(0,0,0,1) 70%);
     }
+    *{ box-sizing:border-box; }
+    img,svg{ max-width:100%; height:auto; }
 
-    *{ box-sizing: border-box; }
-    img, svg{ max-width: 100%; height: auto; }
-
-    /* ====== Layout like a landing (UnionPoly-style) ====== */
+    /* ===== Topbar ===== */
     header.topbar{
-      position: sticky;
-      top: 0;
-      z-index: 2000;
+      position:sticky;
+      top:0;
+      z-index:2000;
+      height: var(--topbarH);
+      display:flex;
+      align-items:center;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       background: linear-gradient(135deg, rgba(0,0,0,.55) 0%, rgba(4,28,47,.35) 100%);
       border-bottom: 1px solid rgba(233,196,106,.22);
     }
     .topbar-inner{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 10px var(--pad);
+      width:100%;
+      max-width: var(--maxText);
+      margin:0 auto;
+      padding: 0 var(--gutter);
       display:flex;
       align-items:center;
-      justify-content: space-between;
-      gap: 12px;
+      justify-content:space-between;
+      gap: var(--space-2);
     }
-    .brand{
-      display:flex;
-      flex-direction: column;
-      line-height: 1.05;
-      user-select: none;
-    }
+    .brand{ display:flex; flex-direction:column; line-height:1.05; user-select:none; }
     .brand .b1{
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
+      font-weight:700;
       letter-spacing: 2.2px;
       color: var(--gold);
       text-shadow: 0 0 18px rgba(233,196,106,.35);
-      font-size: 18px;
+      font-size: var(--fz-brand);
     }
     .brand .b2{
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-family:'Montserrat', sans-serif;
+      font-weight:700;
+      letter-spacing: .9px;
       color: rgba(255,255,255,.85);
-      font-size: 12px;
+      font-size: var(--fz-brand-sub);
       margin-top: 2px;
     }
+    .top-actions{ display:flex; gap: var(--space-1); align-items:center; }
 
-    .top-actions{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-    }
     .btn{
-      background: linear-gradient(135deg, rgba(233, 196, 106, 0.22) 0%, rgba(233, 196, 106, 0.12) 100%);
-      border: 1.8px solid rgba(233, 196, 106, 0.9);
+      background: linear-gradient(135deg, rgba(233, 196, 106, 0.22) 0%, rgba(233, 196, 106, 0.10) 100%);
+      border: calc(var(--stroke) * 1.4) solid rgba(233, 196, 106, 0.9);
       color: var(--gold);
-      padding: 10px 16px;
+      padding: clamp(10px, 1.2vw, 14px) clamp(14px, 1.8vw, 18px);
       border-radius: 999px;
-      font-size: 13px;
+      font-size: clamp(12px, 0.95vw, 13px);
       font-weight: 800;
-      cursor: pointer;
+      cursor:pointer;
       transition: all .25s ease;
       letter-spacing: .4px;
       text-transform: uppercase;
       font-family: 'Montserrat', sans-serif;
       box-shadow: 0 8px 26px rgba(0,0,0,.35);
-      user-select: none;
+      user-select:none;
+      line-height:1;
+      white-space:nowrap;
     }
     .btn:hover{
       transform: translateY(-1px);
@@ -121,59 +139,56 @@
       border-color: rgba(244,213,141,1);
     }
 
-    /* Drawer menu (like a modern landing) */
+    /* ===== Drawer ===== */
     .overlay{
-      position: fixed;
-      inset: 0;
+      position:fixed;
+      inset:0;
       background: rgba(0,0,0,.55);
-      opacity: 0;
-      pointer-events: none;
+      opacity:0;
+      pointer-events:none;
       transition: opacity .2s ease;
-      z-index: 3000;
+      z-index:3000;
     }
-    .overlay.open{ opacity: 1; pointer-events: auto; }
+    .overlay.open{ opacity:1; pointer-events:auto; }
 
     .drawer{
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: min(380px, 88vw);
+      position:fixed;
+      top:0;
+      right:0;
+      height:100%;
+      width: min(420px, 92vw);
       background: linear-gradient(135deg, rgba(4,28,47,.96) 0%, rgba(0,0,0,.96) 100%);
       border-left: 1px solid rgba(233,196,106,.28);
       box-shadow: -24px 0 80px rgba(0,0,0,.55);
       transform: translateX(100%);
       transition: transform .25s ease;
-      z-index: 3100;
-      padding: 18px;
-      overflow: auto;
+      z-index:3100;
+      padding: clamp(14px, 2vw, 20px);
+      overflow:auto;
     }
     .drawer.open{ transform: translateX(0); }
     .drawer h3{
-      margin: 8px 0 14px;
+      margin: 0;
       color: var(--gold);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
+      font-family:'Montserrat',sans-serif;
+      font-size: clamp(12px, 1vw, 14px);
+      letter-spacing:.6px;
+      text-transform:uppercase;
     }
-    .navlist{
-      display:flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .navlist{ display:flex; flex-direction:column; gap: var(--space-1); margin-top: var(--space-2); }
     .navitem{
-      padding: 12px 12px;
-      border-radius: 14px;
+      padding: clamp(10px, 1.4vw, 14px) clamp(10px, 1.4vw, 14px);
+      border-radius: var(--radiusSm);
       border: 1px solid rgba(233,196,106,.18);
       background: rgba(233,196,106,.08);
       color: rgba(255,255,255,.92);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .3px;
-      cursor: pointer;
+      font-family:'Montserrat',sans-serif;
+      font-size: clamp(12px, 1.0vw, 13px);
+      font-weight:700;
+      letter-spacing:.3px;
+      cursor:pointer;
       transition: all .2s ease;
+      user-select:none;
     }
     .navitem:hover{
       border-color: rgba(233,196,106,.55);
@@ -186,200 +201,238 @@
       color: var(--gold);
     }
 
-    main#page{
-      width: 100%;
-    }
+    main#page{ width:100%; }
 
+    /* ===== Approach change: full-bleed panels (no centered "slide card") ===== */
     section.section{
-      padding: calc(var(--pad) + 10px) var(--pad);
-      scroll-margin-top: 78px;
+      min-height: 100svh;
+      min-height: 100vh;
+      padding: 0;
+      scroll-margin-top: calc(var(--topbarH) + 10px);
       position: relative;
+      display:flex;
     }
 
-    /* Full-screen feel: each block starts with a cinematic frame */
     .wrap{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      width: 100%;
+      width:100%;
+      flex:1;
     }
 
+    /* Panel fills the entire viewport width/height */
     .slide{
+      width: 100%;
+      min-height: 100svh;
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       position: relative;
-      overflow: hidden;
-      background: radial-gradient(ellipse at top, var(--deep) 0%, var(--mid) 50%, var(--bg) 100%);
-      border-radius: var(--radius);
-      border: 1px solid rgba(233,196,106,.18);
-      box-shadow:
-        0 22px 70px rgba(0,0,0,.55),
-        inset 0 0 0 1px rgba(255,255,255,.04);
-      padding: clamp(16px, 2.6vw, 34px);
-      min-height: min(92svh, 980px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      overflow:hidden;
+
+      /* Same palette, but now full-bleed */
+      background:
+        radial-gradient(1100px 700px at 50% 0%, rgba(233,196,106,.10) 0%, transparent 60%),
+        radial-gradient(1200px 800px at 0% 40%, rgba(10,59,92,.55) 0%, transparent 60%),
+        radial-gradient(1200px 900px at 100% 80%, rgba(4,28,47,.85) 0%, rgba(0,0,0,1) 70%);
+
+      /* keep your look, but sizes updated */
+      box-shadow: var(--shadowA), var(--shadowB);
+      border-top: 1px solid rgba(233,196,106,.16);
+      border-bottom: 1px solid rgba(233,196,106,.16);
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0; /* full-bleed */
+      padding: var(--padY) 0;
       transform: translateZ(0);
     }
 
-    /* Hero section: true full screen */
-    .hero .slide{
-      min-height: calc(100svh - 78px);
-      padding: clamp(18px, 3vw, 52px);
+    /* Inner content width constraint (new construction) */
+    .panel-inner{
+      width: 100%;
+      max-width: var(--maxText);
+      padding: 0 var(--gutter);
+      position: relative;
+      z-index: 3;
     }
 
-    /* Decorative layers */
+    /* Hero panel occupies remaining space under topbar */
+    .hero .slide{
+      min-height: calc(100svh - var(--topbarH));
+      min-height: calc(100vh - var(--topbarH));
+      padding: calc(var(--padY) * 0.9) 0;
+    }
+
+    /* Decorations */
     .particles, .animated-lines{
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      overflow: hidden;
-      z-index: 0;
-      pointer-events: none;
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      z-index:0;
+      pointer-events:none;
     }
     .particle{
-      position: absolute;
-      width: 4px; height: 4px;
+      position:absolute;
+      width: clamp(3px, 0.5vw, 6px);
+      height: clamp(3px, 0.5vw, 6px);
       background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
-      border-radius: 50%;
-      opacity: 0.6;
+      border-radius:50%;
+      opacity:.6;
       animation: float 20s infinite ease-in-out;
-      box-shadow: 0 0 10px rgba(233, 196, 106, 0.8);
+      box-shadow: 0 0 10px rgba(233,196,106,.8);
     }
     @keyframes float{
-      0%   { transform: translateY(110%) translateX(0) scale(0); opacity: 0; }
-      10%  { opacity: 0.6; transform: translateY(90%) translateX(20px) scale(1); }
-      90%  { opacity: 0.6; transform: translateY(10%) translateX(-20px) scale(1); }
-      100% { transform: translateY(-10%) translateX(0) scale(0); opacity: 0; }
+      0%{ transform: translateY(110%) translateX(0) scale(0); opacity:0; }
+      10%{ opacity:.6; transform: translateY(90%) translateX(20px) scale(1); }
+      90%{ opacity:.6; transform: translateY(10%) translateX(-20px) scale(1); }
+      100%{ transform: translateY(-10%) translateX(0) scale(0); opacity:0; }
     }
 
     .moving-line{
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(233, 196, 106, 0.3) 50%, transparent 100%);
-      opacity: 0.5;
+      position:absolute;
+      width:100%;
+      height: clamp(1px, 0.25vw, 2px);
+      background: linear-gradient(90deg, transparent 0%, rgba(233,196,106,.3) 50%, transparent 100%);
+      opacity:.5;
       animation: waveMove 8s infinite ease-in-out;
     }
     @keyframes waveMove{
-      0%   { transform: translateX(-100%); opacity: 0; }
-      50%  { opacity: 0.5; }
-      100% { transform: translateX(100%); opacity: 0; }
+      0%{ transform: translateX(-100%); opacity:0; }
+      50%{ opacity:.5; }
+      100%{ transform: translateX(100%); opacity:0; }
     }
 
     .orb{
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.15;
+      position:absolute;
+      border-radius:50%;
+      filter: blur(clamp(46px, 6vw, 92px));
+      opacity:.15;
       animation: orbFloat 15s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
+      pointer-events:none;
+      z-index:0;
     }
-    .orb-1{ width: 400px; height: 400px; background: var(--gold); top: 10%; left: 10%; animation-delay: 0s; }
-    .orb-2{ width: 520px; height: 520px; background: var(--deep); bottom: 10%; right: 8%; animation-delay: 5s; }
-    .orb-3{ width: 320px; height: 320px; background: var(--gold); top: 50%; right: 20%; animation-delay: 10s; }
+    .orb-1{ width: clamp(260px, 32vw, 520px); height: clamp(260px, 32vw, 520px); background: var(--gold); top: 6%; left: 6%; animation-delay:0s; }
+    .orb-2{ width: clamp(320px, 40vw, 720px); height: clamp(320px, 40vw, 720px); background: var(--deep); bottom: 4%; right: 6%; animation-delay:5s; }
+    .orb-3{ width: clamp(220px, 26vw, 480px); height: clamp(220px, 26vw, 480px); background: var(--gold); top: 46%; right: 18%; animation-delay:10s; }
     @keyframes orbFloat{
       0%,100%{ transform: translate(0,0) scale(1); }
-      33%{ transform: translate(50px,-50px) scale(1.1); }
-      66%{ transform: translate(-30px,30px) scale(.9); }
+      33%{ transform: translate(50px,-50px) scale(1.08); }
+      66%{ transform: translate(-30px,30px) scale(.94); }
     }
 
     /* Watermark */
     .logo-watermark{
-      font-family: 'Cormorant Garamond', serif;
-      position: absolute;
-      top: 18px;
-      right: 20px;
+      font-family:'Cormorant Garamond', serif;
+      position:absolute;
+      top: clamp(12px, 1.6vw, 22px);
+      right: clamp(12px, 1.6vw, 22px);
       color: var(--gold);
-      opacity: 0.3;
-      text-shadow: 0 0 20px rgba(233, 196, 106, 0.5);
+      opacity: .3;
+      text-shadow: 0 0 20px rgba(233,196,106,.5);
       animation: pulse 3s ease-in-out infinite;
-      text-align: right;
-      line-height: 1.2;
-      z-index: 5;
-      pointer-events: none;
+      text-align:right;
+      line-height:1.15;
+      z-index:2;
+      pointer-events:none;
     }
-    .logo-watermark-main{ font-size: 28px; font-weight: 700; letter-spacing: 3px; display: block; }
-    .logo-watermark-sub{ font-size: 26px; font-weight: 500; letter-spacing: 0.5px; display: block; margin-top: -2px; margin-left: 16px; }
+    .logo-watermark-main{
+      font-size: clamp(18px, 2.2vw, 30px);
+      font-weight:700;
+      letter-spacing: 3px;
+      display:block;
+    }
+    .logo-watermark-sub{
+      font-size: clamp(16px, 2.1vw, 28px);
+      font-weight:500;
+      letter-spacing:.5px;
+      display:block;
+      margin-top: -0.15em;
+      margin-left: 0.6em;
+    }
     @keyframes pulse{
-      0%,100%{ opacity: .3; text-shadow: 0 0 20px rgba(233,196,106,.5); }
-      50%{ opacity: .5; text-shadow: 0 0 30px rgba(233,196,106,.8); }
+      0%,100%{ opacity:.3; text-shadow: 0 0 20px rgba(233,196,106,.5); }
+      50%{ opacity:.5; text-shadow: 0 0 30px rgba(233,196,106,.8); }
     }
 
-    /* Lighthouse (kept as-is, but scaled responsively) */
+    /* ===== Lighthouse (sizes rescaled) ===== */
     .lighthouse-scene{
-      position: absolute;
-      bottom: 14px;
-      right: 18px;
-      width: 70px;
-      height: 130px;
-      z-index: 10;
-      transform: scale(clamp(0.55, 1.1vw, 0.75));
+      position:absolute;
+      bottom: clamp(10px, 1.6vw, 18px);
+      right:  clamp(10px, 1.6vw, 18px);
+      width:  clamp(54px, 5.8vw, 78px);
+      height: clamp(110px, 12vw, 148px);
+      z-index: 4;
       transform-origin: bottom right;
-      pointer-events: none;
+      pointer-events:none;
       opacity: .98;
     }
-    .lighthouse{ position: relative; width: 100%; height: 100%; filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6)); }
+    .lighthouse{ position:relative; width:100%; height:100%; filter: drop-shadow(0 10px 30px rgba(0,0,0,.6)); }
     .lighthouse-base{
       position:absolute; bottom:0; left:50%;
-      transform: translateX(-50%);
-      width: 80px; height: 25px;
+      transform:translateX(-50%);
+      width: 120%;
+      height: 18%;
       background: linear-gradient(135deg, #4a4a4a 0%, #2a2a2a 50%, #1a1a1a 100%);
       border-radius: 50% 50% 0 0 / 30% 30% 0 0;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 20px rgba(0,0,0,.8);
     }
     .lighthouse-base::before{
       content:'';
       position:absolute;
-      bottom:-8px; left:-10px; right:-10px;
-      height:12px;
+      bottom:-28%;
+      left:-14%;
+      right:-14%;
+      height:34%;
       background: linear-gradient(135deg, #0a2a3a 0%, #051520 100%);
-      border-radius: 50%;
+      border-radius:50%;
       z-index:-1;
       box-shadow: 0 2px 10px rgba(0,0,0,.6);
     }
     .lighthouse-tower{
-      position:absolute; bottom:25px; left:50%;
-      transform: translateX(-50%);
-      width:45px; height:90px;
+      position:absolute; bottom:18%; left:50%;
+      transform:translateX(-50%);
+      width: 62%;
+      height: 66%;
       background: linear-gradient(90deg, #c0c0c0 0%, #ffffff 30%, #f0f0f0 50%, #d0d0d0 70%, #b0b0b0 100%);
-      border-radius: 8px 8px 0 0;
+      border-radius: 10% 10% 0 0;
       box-shadow: inset -3px 0 8px rgba(0,0,0,.3), inset 3px 0 8px rgba(255,255,255,.5);
     }
     .lighthouse-stripe{
       position:absolute; left:0; right:0;
-      height:18px;
+      height: 20%;
       background: linear-gradient(90deg, #d4a259 0%, var(--gold) 25%, #f4d58d 50%, var(--gold) 75%, #d4a259 100%);
       box-shadow: inset 0 2px 6px rgba(0,0,0,.3), inset 0 -2px 6px rgba(255,255,255,.2);
     }
-    .stripe-1{ top:18px; }
-    .stripe-2{ top:54px; }
+    .stripe-1{ top: 18%; }
+    .stripe-2{ top: 52%; }
 
     .lighthouse-window{
       position:absolute; left:50%;
-      transform: translateX(-50%);
-      width:9px; height:12px;
+      transform:translateX(-50%);
+      width: 16%;
+      height: 12%;
       background: linear-gradient(135deg, var(--deep) 0%, #1a4a6c 50%, var(--mid) 100%);
-      border-radius: 4px 4px 0 0;
+      border-radius: 40% 40% 0 0;
       border: 1.5px solid #3a3a3a;
       box-shadow: inset 0 0 6px rgba(10,59,92,.9);
     }
-    .window-1{ bottom:68px; }
-    .window-2{ bottom:44px; }
-    .window-3{ bottom:8px; }
+    .window-1{ bottom: 68%; }
+    .window-2{ bottom: 46%; }
+    .window-3{ bottom: 14%; }
 
     .lighthouse-top-section{
-      position:absolute; bottom:115px; left:50%;
-      transform: translateX(-50%);
-      width:52px; height:8px;
+      position:absolute; bottom: 86%; left:50%;
+      transform:translateX(-50%);
+      width: 74%;
+      height: 6%;
       background: linear-gradient(135deg, var(--gold) 0%, #f4d58d 50%, #d4a259 100%);
-      border-radius: 4px;
+      border-radius: 999px;
       box-shadow: 0 2px 10px rgba(0,0,0,.4);
     }
-
     .lighthouse-dome{
-      position:absolute; bottom:123px; left:50%;
-      transform: translateX(-50%);
-      width:42px; height:30px;
+      position:absolute; bottom: 90%; left:50%;
+      transform:translateX(-50%);
+      width: 64%;
+      height: 22%;
       background: linear-gradient(135deg, rgba(233,196,106,.7) 0%, rgba(233,196,106,.5) 50%, rgba(233,196,106,.6) 100%);
       border: 3px solid var(--gold);
       border-radius: 50% 50% 0 0;
@@ -405,21 +458,24 @@
     .lighthouse-light-source{
       position:absolute; top:50%; left:50%;
       transform: translate(-50%,-50%);
-      width:18px; height:18px;
+      width: 34%;
+      height: 34%;
       background: radial-gradient(circle, #ffffff 0%, #fffaed 30%, #f4d58d 60%, var(--gold) 100%);
-      border-radius: 50%;
+      border-radius:50%;
       box-shadow: 0 0 25px #ffffff, 0 0 40px #fffaed, 0 0 60px #f4d58d, 0 0 80px var(--gold);
       animation: lightSourcePulse 2s ease-in-out infinite;
     }
     @keyframes lightSourcePulse{
-      0%,100%{ transform: translate(-50%,-50%) scale(1); opacity: .95; }
-      50%{ transform: translate(-50%,-50%) scale(1.2); opacity: 1; }
+      0%,100%{ transform: translate(-50%,-50%) scale(1); opacity:.95; }
+      50%{ transform: translate(-50%,-50%) scale(1.18); opacity:1; }
     }
     .lighthouse-beam{
       position:absolute;
-      bottom:138px; left:50%;
+      bottom: 98%;
+      left:50%;
       transform: translateX(-50%);
-      width:900px; height:900px;
+      width: max(90vw, 980px);
+      height: max(90vw, 980px);
       background: radial-gradient(
         ellipse 2% 85% at 50% 100%,
         rgba(255, 255, 255, 0.95) 0%,
@@ -435,70 +491,43 @@
       );
       transform-origin: 50% 100%;
       animation: rotateBeam 8s linear infinite;
-      pointer-events: none;
-      z-index: 2;
+      pointer-events:none;
+      z-index:2;
       filter: blur(2px);
-      opacity: 0.95;
-    }
-    .lighthouse-beam::before{
-      content:'';
-      position:absolute; inset:0;
-      background: radial-gradient(
-        ellipse 1% 80% at 50% 100%,
-        rgba(255,255,255,1) 0%,
-        rgba(255,255,255,.95) 5%,
-        rgba(255,250,240,.9) 12%,
-        rgba(255,245,220,.75) 22%,
-        rgba(233,196,106,.6) 32%,
-        rgba(233,196,106,.4) 45%,
-        transparent 60%
-      );
-      filter: blur(1px);
-    }
-    .lighthouse-beam::after{
-      content:'';
-      position:absolute; inset:0;
-      background: radial-gradient(
-        ellipse 4% 88% at 50% 100%,
-        rgba(233,196,106,.35) 0%,
-        rgba(233,196,106,.25) 20%,
-        rgba(233,196,106,.15) 40%,
-        rgba(233,196,106,.08) 60%,
-        rgba(233,196,106,.03) 75%,
-        transparent 88%
-      );
-      filter: blur(6px);
+      opacity:.95;
     }
     .lighthouse-scene::before{
       content:'';
       position:absolute;
-      bottom: 138px; left: 50%;
+      bottom: 98%;
+      left:50%;
       transform: translateX(-50%);
-      width: 500px; height: 500px;
+      width: max(56vw, 520px);
+      height: max(56vw, 520px);
       background: radial-gradient(ellipse 35% 55% at 50% 100%,
         rgba(255,250,230,.25) 0%,
         rgba(233,196,106,.15) 20%,
         rgba(233,196,106,.08) 40%,
         transparent 65%);
       animation: pulseGlow 3s ease-in-out infinite;
-      pointer-events: none;
+      pointer-events:none;
       filter: blur(25px);
-      opacity: 0.8;
+      opacity:.8;
     }
     @keyframes pulseGlow{
-      0%,100%{ opacity: .7; transform: translateX(-50%) scale(1); }
-      50%{ opacity: .95; transform: translateX(-50%) scale(1.08); }
+      0%,100%{ opacity:.7; transform: translateX(-50%) scale(1); }
+      50%{ opacity:.95; transform: translateX(-50%) scale(1.08); }
     }
     @keyframes rotateBeam{
-      0%{ transform: translateX(-50%) rotate(0deg); opacity: .9; }
-      25%{ opacity: 1; }
-      50%{ opacity: .95; }
-      75%{ opacity: 1; }
-      100%{ transform: translateX(-50%) rotate(360deg); opacity: .9; }
+      0%{ transform: translateX(-50%) rotate(0deg); opacity:.9; }
+      25%{ opacity:1; }
+      50%{ opacity:.95; }
+      75%{ opacity:1; }
+      100%{ transform: translateX(-50%) rotate(360deg); opacity:.9; }
     }
 
-    /* ====== Your content styles (kept, but made responsive) ====== */
-    .slide-header{ margin-bottom: 18px; z-index: 3; position: relative; }
+    /* ===== Text blocks (same content; sizes rewritten) ===== */
+    .slide-header{ margin-bottom: var(--space-3); position:relative; z-index:3; }
     .slide-title{
       font-size: var(--fz-title) !important;
       font-weight: 800;
@@ -507,10 +536,10 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 10px;
-      padding-bottom: 12px;
-      display: inline-block;
-      position: relative;
+      margin: 0 0 var(--space-1) 0;
+      padding-bottom: var(--space-1);
+      display:inline-block;
+      position:relative;
       filter: drop-shadow(0 0 20px rgba(233,196,106,.4));
       animation: shimmer 5s linear infinite;
     }
@@ -518,7 +547,8 @@
       content:'';
       position:absolute;
       bottom:0; left:0;
-      width:100%; height:3px;
+      width:100%;
+      height: clamp(2px, 0.35vw, 4px);
       background: linear-gradient(90deg, var(--gold) 0%, #f4d58d 50%, transparent 100%);
       box-shadow: 0 0 15px rgba(233,196,106,.8), 0 0 30px rgba(233,196,106,.4);
       animation: glowPulse 2s ease-in-out infinite;
@@ -533,46 +563,44 @@
       color: rgba(255,255,255,.9);
       font-weight: 300;
       text-shadow: 0 2px 8px rgba(0,0,0,.3);
+      margin: 0;
     }
 
-    .content-section{
-      z-index: 2;
-      position: relative;
-    }
+    .content-section{ position:relative; z-index:3; }
     .content-text{
       font-size: var(--fz-text) !important;
       line-height: 1.55;
-      margin: 0 0 12px 0;
+      margin: 0 0 var(--space-1) 0;
       color: rgba(255,255,255,.9);
     }
 
     .highlight-box{
-      background: linear-gradient(135deg, rgba(233,196,106,.2) 0%, rgba(233,196,106,.1) 100%);
-      border-left: 4px solid var(--gold);
-      padding: 16px 18px;
-      margin: 14px 0;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(233,196,106,.2);
+      background: linear-gradient(135deg, rgba(233,196,106,.20) 0%, rgba(233,196,106,.09) 100%);
+      border-left: clamp(3px, 0.55vw, 6px) solid var(--gold);
+      padding: var(--space-3) var(--space-3);
+      margin: var(--space-2) 0;
+      border-radius: var(--radiusSm);
+      box-shadow: 0 4px 24px rgba(233,196,106,.16);
       transition: all .25s ease;
     }
-    .highlight-box:hover{ transform: translateX(6px); box-shadow: 0 10px 34px rgba(233,196,106,.26); }
+    .highlight-box:hover{ transform: translateX(clamp(4px, 0.8vw, 10px)); box-shadow: 0 10px 34px rgba(233,196,106,.22); }
 
-    .bullet-list{ list-style:none; padding:0; margin: 12px 0; }
+    .bullet-list{ list-style:none; padding:0; margin: var(--space-2) 0; }
     .bullet-list li{
       font-size: var(--fz-li) !important;
-      padding: 16px 0;
-      padding-left: 62px;
-      position: relative;
+      padding: var(--space-2) 0;
+      padding-left: clamp(46px, 5.8vw, 78px);
+      position:relative;
       line-height: 1.45;
       transition: all .25s ease;
     }
-    .bullet-list li:hover{ transform: translateX(8px); color: var(--gold); }
+    .bullet-list li:hover{ transform: translateX(clamp(6px, 1vw, 12px)); color: var(--gold); }
 
     .bullet-list li:before{
       content:"⚓";
       position:absolute; left:0;
       color: var(--gold);
-      font-size: clamp(22px, 3vw, 46px);
+      font-size: clamp(20px, 3.2vw, 48px);
       animation: bounce 2s ease-in-out infinite, rotate 4s linear infinite;
       filter: drop-shadow(0 0 10px rgba(233,196,106,.6)) drop-shadow(0 0 20px rgba(233,196,106,.3));
       transition: all .25s ease;
@@ -597,27 +625,27 @@
     .stats-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 16px 0;
+      gap: var(--space-2);
+      margin: var(--space-3) 0;
     }
     .stat-card{
-      background: linear-gradient(135deg, rgba(10,59,92,.4) 0%, rgba(4,28,47,.6) 100%);
-      border: 2px solid rgba(233,196,106,.4);
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
+      background: linear-gradient(135deg, rgba(10,59,92,.40) 0%, rgba(4,28,47,.62) 100%);
+      border: calc(var(--stroke) * 1.6) solid rgba(233,196,106,.35);
+      border-radius: var(--radius);
+      padding: var(--cardPad);
+      text-align:center;
       transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,.3);
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,.28);
       transform-style: preserve-3d;
       perspective: 1000px;
     }
     .stat-card:hover{
-      transform: translateY(-8px) scale(1.02) rotateX(4deg);
-      box-shadow: 0 20px 50px rgba(233,196,106,.26),
-                  0 0 40px rgba(233,196,106,.18),
-                  inset 0 0 25px rgba(233,196,106,.08);
+      transform: translateY(clamp(-6px, -0.8vw, -10px)) scale(1.02) rotateX(4deg);
+      box-shadow: 0 20px 50px rgba(233,196,106,.20),
+                  0 0 40px rgba(233,196,106,.14),
+                  inset 0 0 25px rgba(233,196,106,.06);
       border-color: var(--gold);
     }
     .stat-number{
@@ -628,8 +656,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 6px;
-      filter: drop-shadow(0 0 15px rgba(233,196,106,.4));
+      margin-bottom: var(--space-1);
+      filter: drop-shadow(0 0 15px rgba(233,196,106,.35));
       animation: shimmer 3s linear infinite;
       transition: all .25s ease;
     }
@@ -638,11 +666,11 @@
       color: rgba(255,255,255,.9);
       font-weight: 500;
       letter-spacing: .3px;
-      font-family: 'Montserrat', sans-serif;
+      font-family:'Montserrat',sans-serif;
     }
     .platform-icon{
-      font-size: clamp(26px, 3.8vw, 58px);
-      margin-bottom: 10px;
+      font-size: var(--icon);
+      margin-bottom: var(--space-1);
       animation: iconBounce 2s ease-in-out infinite;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,.3));
     }
@@ -651,71 +679,72 @@
     .psychology-grid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin: 16px 0;
+      gap: var(--space-2);
+      margin: var(--space-3) 0;
     }
     .psychology-card{
-      background: rgba(233,196,106,.1);
-      border: 2px solid rgba(233,196,106,.3);
-      border-radius: 12px;
-      padding: 16px;
+      background: rgba(233,196,106,.10);
+      border: calc(var(--stroke) * 1.6) solid rgba(233,196,106,.28);
+      border-radius: var(--radiusSm);
+      padding: var(--cardPad);
     }
     .psychology-card h3{
       color: var(--gold);
-      font-size: clamp(16px, 2.2vw, 28px);
-      margin: 0 0 8px 0;
+      font-size: clamp(15px, 1.65vw, 26px);
+      margin: 0 0 var(--space-1) 0;
       font-weight: 700;
     }
     .psychology-card p{
-      font-size: clamp(14px, 1.8vw, 22px);
-      line-height: 1.45;
+      font-size: clamp(13px, 1.35vw, 20px);
+      line-height: 1.5;
       color: rgba(255,255,255,.9);
-      margin: 0;
+      margin:0;
     }
 
-    .timeline-container{ position: relative; margin: 16px 0; padding: 10px 0; }
-    .timeline-step{ position: relative; padding: 10px 0 10px 58px; }
+    .timeline-container{ position: relative; margin: var(--space-3) 0; padding: var(--space-1) 0; }
+    .timeline-step{ position: relative; padding: var(--space-1) 0 var(--space-1) clamp(52px, 6vw, 82px); }
     .timeline-icon{
-      position:absolute; left:0; top:14px;
-      width: 42px; height: 42px;
+      position:absolute; left:0; top: calc(var(--space-1) + 2px);
+      width: clamp(38px, 4.4vw, 54px);
+      height: clamp(38px, 4.4vw, 54px);
       border-radius: 50%;
       background: linear-gradient(135deg, var(--gold) 0%, #f4d58d 100%);
       display:flex; align-items:center; justify-content:center;
-      font-size: 20px;
-      box-shadow: 0 0 25px rgba(233,196,106,.6);
+      font-size: clamp(18px, 2vw, 22px);
+      box-shadow: 0 0 25px rgba(233,196,106,.55);
       z-index: 2;
       transition: all .25s ease;
     }
     .timeline-line{
-      position:absolute; left:20px; top:0; bottom:0;
-      width:2px;
-      background: linear-gradient(180deg, rgba(233,196,106,.3) 0%, rgba(233,196,106,.6) 50%, rgba(233,196,106,.3) 100%);
+      position:absolute; left: calc(clamp(38px, 4.4vw, 54px) / 2);
+      top: 0; bottom: 0;
+      width: clamp(2px, 0.35vw, 3px);
+      background: linear-gradient(180deg, rgba(233,196,106,.25) 0%, rgba(233,196,106,.6) 50%, rgba(233,196,106,.25) 100%);
       z-index: 1;
     }
     .timeline-content{
-      background: linear-gradient(135deg, rgba(10,59,92,.4) 0%, rgba(4,28,47,.6) 100%);
-      border: 2px solid rgba(233,196,106,.3);
-      border-radius: 12px;
-      padding: 12px 14px;
+      background: linear-gradient(135deg, rgba(10,59,92,.40) 0%, rgba(4,28,47,.62) 100%);
+      border: calc(var(--stroke) * 1.6) solid rgba(233,196,106,.28);
+      border-radius: var(--radiusSm);
+      padding: var(--space-2) var(--space-2);
       transition: all .25s ease;
     }
     .timeline-title{
-      font-size: clamp(16px, 2.2vw, 30px);
+      font-size: clamp(15px, 1.65vw, 26px);
       font-weight: 700;
       color: var(--gold);
-      margin: 0 0 6px 0;
+      margin: 0 0 var(--space-1) 0;
     }
     .timeline-description{
-      font-size: clamp(14px, 1.9vw, 24px);
-      line-height: 1.4;
+      font-size: clamp(13px, 1.4vw, 20px);
+      line-height: 1.5;
       color: rgba(255,255,255,.9);
       margin: 0;
     }
 
     /* Hero text */
-    .cover-content{ position: relative; z-index: 3; text-align: center; }
+    .cover-content{ position:relative; z-index:3; text-align:center; }
     .cover-logo{
-      font-family: 'Cormorant Garamond', serif;
       font-size: var(--fz-cover-logo) !important;
       font-weight: 700;
       background: linear-gradient(135deg, var(--gold) 0%, #f4d58d 30%, #ffffff 50%, #f4d58d 70%, var(--gold) 100%);
@@ -723,24 +752,24 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 14px;
+      margin: 0 0 var(--space-2) 0;
       letter-spacing: 1px;
       animation: titleGlow 3s ease-in-out infinite, shimmer 4s linear infinite;
     }
     @keyframes titleGlow{
       0%,100%{
-        filter: drop-shadow(0 0 30px rgba(233,196,106,.8)) drop-shadow(0 0 60px rgba(233,196,106,.4));
+        filter: drop-shadow(0 0 30px rgba(233,196,106,.75)) drop-shadow(0 0 60px rgba(233,196,106,.35));
         transform: scale(1);
       }
       50%{
-        filter: drop-shadow(0 0 50px rgba(233,196,106,1)) drop-shadow(0 0 80px rgba(233,196,106,.6));
+        filter: drop-shadow(0 0 50px rgba(233,196,106,1)) drop-shadow(0 0 80px rgba(233,196,106,.55));
         transform: scale(1.02);
       }
     }
     .cover-subtitle{
       font-size: var(--fz-cover-sub) !important;
-      color: #fff;
-      margin-bottom: 18px;
+      color:#fff;
+      margin: 0 0 var(--space-2) 0;
       font-weight: 300;
       line-height: 1.35;
       text-shadow: 0 2px 10px rgba(0,0,0,.5);
@@ -749,26 +778,26 @@
       font-size: var(--fz-cover-tag) !important;
       color: var(--gold);
       font-style: italic;
-      margin-top: 12px;
+      margin: 0;
       text-shadow: 0 0 15px rgba(233,196,106,.4);
     }
 
-    /* Floating bottom controls (like UnionPoly back-to-top / nav) */
+    /* Floating navigation */
     .nav-float{
       position: fixed;
-      right: 18px;
-      bottom: 18px;
+      right: clamp(10px, 1.6vw, 18px);
+      bottom: clamp(10px, 1.6vw, 18px);
       z-index: 2500;
       display:flex;
       flex-direction: column;
-      gap: 10px;
+      gap: var(--space-1);
       align-items: flex-end;
     }
     .pill{
       display:flex;
       align-items:center;
-      gap: 10px;
-      padding: 10px 12px;
+      gap: var(--space-1);
+      padding: clamp(10px, 1.2vw, 12px);
       border-radius: 999px;
       background: rgba(0,0,0,.55);
       border: 1px solid rgba(233,196,106,.28);
@@ -777,29 +806,31 @@
       box-shadow: 0 12px 40px rgba(0,0,0,.45);
     }
     .pill .counter{
-      font-family: 'Montserrat', sans-serif;
+      font-family:'Montserrat',sans-serif;
       font-weight: 800;
       color: var(--gold);
-      font-size: 12px;
+      font-size: clamp(11px, 0.95vw, 12px);
       letter-spacing: .6px;
-      min-width: 58px;
+      min-width: clamp(54px, 6vw, 70px);
       text-align:center;
-      user-select: none;
+      user-select:none;
     }
     .mini{
       border-radius: 999px;
-      padding: 10px 12px;
-      border: 1.8px solid rgba(233,196,106,.8);
+      padding: clamp(10px, 1.2vw, 12px) clamp(12px, 1.6vw, 14px);
+      border: calc(var(--stroke) * 1.6) solid rgba(233,196,106,.8);
       background: linear-gradient(135deg, rgba(233,196,106,.22) 0%, rgba(233,196,106,.10) 100%);
       color: var(--gold);
-      font-family: 'Montserrat', sans-serif;
+      font-family:'Montserrat',sans-serif;
       font-weight: 900;
-      font-size: 12px;
+      font-size: clamp(11px, 0.9vw, 12px);
       letter-spacing: .5px;
       text-transform: uppercase;
-      cursor: pointer;
+      cursor:pointer;
       transition: all .2s ease;
-      user-select: none;
+      user-select:none;
+      line-height:1;
+      white-space:nowrap;
     }
     .mini:hover{
       transform: translateY(-1px);
@@ -807,23 +838,22 @@
       background: linear-gradient(135deg, rgba(233, 196, 106, 0.95) 0%, rgba(244, 213, 141, 0.95) 100%);
       border-color: rgba(244,213,141,1);
     }
-    .mini:disabled{ opacity: .35; cursor: not-allowed; transform: none; }
+    .mini:disabled{ opacity:.35; cursor:not-allowed; transform:none; }
 
-    /* Mobile safety: grids stack */
+    /* Responsive stacks */
     @media (max-width: 980px){
       .stats-grid{ grid-template-columns: 1fr; }
       .psychology-grid{ grid-template-columns: 1fr; }
-      .lighthouse-scene{ opacity: .88; }
+      .lighthouse-scene{ opacity:.88; }
     }
-
     @media (prefers-reduced-motion: reduce){
-      *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Top bar (UnionPoly-style landing header) -->
+  <!-- Top bar -->
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
@@ -840,14 +870,14 @@
   <!-- Drawer -->
   <div class="overlay" id="overlay"></div>
   <aside class="drawer" id="drawer" aria-hidden="true">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
-      <h3 style="margin:0;">Навігація</h3>
-      <button class="btn" id="btnClose" type="button" style="padding:10px 14px;">Закрити</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <h3>Навігація</h3>
+      <button class="btn" id="btnClose" type="button" style="padding: 12px 16px;">Закрити</button>
     </div>
-    <div class="navlist" id="navlist" style="margin-top:14px;"></div>
+    <div class="navlist" id="navlist"></div>
   </aside>
 
-  <!-- Templates to avoid repeating the same конструкції -->
+  <!-- Templates -->
   <template id="tpl-watermark">
     <div class="logo-watermark" aria-hidden="true">
       <span class="logo-watermark-main">MTWTU</span>
@@ -877,17 +907,19 @@
     <!-- SECTION 1 -->
     <section class="section hero" id="s1" data-slide="1" data-nav="MTWTU LAW HUB">
       <div class="wrap">
-        <article class="slide" data-watermark="1" data-lighthouse="1" data-hero-bg="1">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="particles js-particles"></div>
           <div class="animated-lines js-lines"></div>
           <div class="orb orb-1"></div>
           <div class="orb orb-2"></div>
           <div class="orb orb-3"></div>
 
-          <div class="cover-content">
-            <div class="cover-logo" id="main-title">MTWTU LAW HUB</div>
-            <div class="cover-subtitle" id="subtitle">Instagram • Facebook • TikTok</div>
-            <div class="cover-tagline">Юридична допомога, підтримка членів ПРМТУ в умовах викликів</div>
+          <div class="panel-inner">
+            <div class="cover-content">
+              <div class="cover-logo" id="main-title">MTWTU LAW HUB</div>
+              <div class="cover-subtitle" id="subtitle">Instagram • Facebook • TikTok</div>
+              <div class="cover-tagline">Юридична допомога, підтримка членів ПРМТУ в умовах викликів</div>
+            </div>
           </div>
         </article>
       </div>
@@ -897,19 +929,21 @@
     <section class="section" id="s2" data-slide="2" data-nav="Хто ми">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header"><h1 class="slide-title">Хто ми</h1></div>
-          <div class="content-section">
-            <div class="highlight-box">
-              <p class="content-text"><strong>MTWTU LAW (Legal Aid and Welfare) HUB</strong> — правозахист членів ПРМТУ</p>
-              <p class="content-text" style="margin-top: 10px;">Реалізується в межах проєкту ПРМТУ та МОП, що фінансується урядом Бельгії</p>
+          <div class="panel-inner">
+            <div class="slide-header"><h1 class="slide-title">Хто ми</h1></div>
+            <div class="content-section">
+              <div class="highlight-box">
+                <p class="content-text"><strong>MTWTU LAW (Legal Aid and Welfare) HUB</strong> — правозахист членів ПРМТУ</p>
+                <p class="content-text" style="margin-top: var(--space-1);">Реалізується в межах проєкту ПРМТУ та МОП, що фінансується урядом Бельгії</p>
+              </div>
+              <ul class="bullet-list">
+                <li>Консультації з трудового законодавства, отримання кваліфікаційних документів, ТЦК та СП</li>
+                <li>Роз'яснення складних юридичних питань</li>
+                <li>Захист прав членів ПРМТУ у судах України очно та дистанційно</li>
+                <li>Навчальні відео, семінари, тренінги, інструкції, консультації</li>
+                <li>Зручна та комфортна комунікація</li>
+              </ul>
             </div>
-            <ul class="bullet-list">
-              <li>Консультації з трудового законодавства, отримання кваліфікаційних документів, ТЦК та СП</li>
-              <li>Роз'яснення складних юридичних питань</li>
-              <li>Захист прав членів ПРМТУ у судах України очно та дистанційно</li>
-              <li>Навчальні відео, семінари, тренінги, інструкції, консультації</li>
-              <li>Зручна та комфортна комунікація</li>
-            </ul>
           </div>
         </article>
       </div>
@@ -919,15 +953,17 @@
     <section class="section" id="s3" data-slide="3" data-nav="Навіщо це пріоритетно">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header"><h1 class="slide-title">Навіщо це пріоритетно</h1></div>
-          <div class="content-section" style="justify-content:center;">
-            <div class="stats-grid" style="margin-top:18px; margin-bottom:0;">
-              <div class="stat-card"><div class="platform-icon">⚖️</div><div class="stat-label">Підвищення правової культури членів ПРМТУ</div></div>
-              <div class="stat-card"><div class="platform-icon">🌍</div><div class="stat-label">Доступ до правничої допомоги з будь-якої точки світу</div></div>
-              <div class="stat-card"><div class="platform-icon">🎓</div><div class="stat-label">Репутаційна цілісність профспілки як сучасної структури</div></div>
-            </div>
-            <div class="highlight-box" style="margin-top:18px;">
-              <p class="content-text">Ми робимо юридичну допомогу доступною кожному члену ПРМТУ, незалежно від його місцезнаходження.</p>
+          <div class="panel-inner">
+            <div class="slide-header"><h1 class="slide-title">Навіщо це пріоритетно</h1></div>
+            <div class="content-section">
+              <div class="stats-grid" style="margin-top: var(--space-3); margin-bottom: 0;">
+                <div class="stat-card"><div class="platform-icon">⚖️</div><div class="stat-label">Підвищення правової культури членів ПРМТУ</div></div>
+                <div class="stat-card"><div class="platform-icon">🌍</div><div class="stat-label">Доступ до правничої допомоги з будь-якої точки світу</div></div>
+                <div class="stat-card"><div class="platform-icon">🎓</div><div class="stat-label">Репутаційна цілісність профспілки як сучасної структури</div></div>
+              </div>
+              <div class="highlight-box" style="margin-top: var(--space-3);">
+                <p class="content-text">Ми робимо юридичну допомогу доступною кожному члену ПРМТУ, незалежно від його місцезнаходження.</p>
+              </div>
             </div>
           </div>
         </article>
@@ -938,18 +974,20 @@
     <section class="section" id="s4" data-slide="4" data-nav="Соцмережі як інструмент впливу">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header"><h1 class="slide-title">Соцмережі як інструмент впливу</h1></div>
-          <div class="content-section">
-            <p class="content-text">Соціальні мережі стали одним з основних каналів зв'язку з членами ПРМТУ по всьому світу</p>
-            <ul class="bullet-list">
-              <li>Короткі відео з роз'ясненнями складних юридичних понять</li>
-              <li>Швидкі відповіді на термінові питання</li>
-              <li>Живі приклади з реальної практики</li>
-              <li>Інтерактивна комунікація з членами профспілки</li>
-              <li>Поширення актуальної та корисної інформації</li>
-            </ul>
-            <div class="highlight-box">
-              <p class="content-text">За останні 6 місяців ми досягли понад <strong style="color:var(--gold);">3 000 000+ переглядів</strong> на всіх платформах</p>
+          <div class="panel-inner">
+            <div class="slide-header"><h1 class="slide-title">Соцмережі як інструмент впливу</h1></div>
+            <div class="content-section">
+              <p class="content-text">Соціальні мережі стали одним з основних каналів зв'язку з членами ПРМТУ по всьому світу</p>
+              <ul class="bullet-list">
+                <li>Короткі відео з роз'ясненнями складних юридичних понять</li>
+                <li>Швидкі відповіді на термінові питання</li>
+                <li>Живі приклади з реальної практики</li>
+                <li>Інтерактивна комунікація з членами профспілки</li>
+                <li>Поширення актуальної та корисної інформації</li>
+              </ul>
+              <div class="highlight-box">
+                <p class="content-text">За останні 6 місяців ми досягли понад <strong style="color:var(--gold);">3 000 000+ переглядів</strong> на всіх платформах</p>
+              </div>
             </div>
           </div>
         </article>
@@ -960,39 +998,41 @@
     <section class="section" id="s5" data-slide="5" data-nav="Instagram">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header">
-            <h1 class="slide-title">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:10px;">
-                <rect width="24" height="24" rx="6" fill="url(#instagramGrad)"/>
-                <defs>
-                  <linearGradient id="instagramGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#FED576" />
-                    <stop offset="25%" style="stop-color:#F47133" />
-                    <stop offset="50%" style="stop-color:#BC3081" />
-                    <stop offset="100%" style="stop-color:#4C63D2" />
-                  </linearGradient>
-                </defs>
-                <rect x="6" y="6" width="12" height="12" rx="3" stroke="white" stroke-width="2" fill="none"/>
-                <circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none"/>
-                <circle cx="16" cy="8" r="1" fill="white"/>
-              </svg>
-              Instagram
-            </h1>
-            <p class="slide-subtitle">Основна платформа для візуального контенту</p>
-          </div>
-
-          <div class="content-section">
-            <div class="stats-grid">
-              <div class="stat-card"><div class="stat-number js-counter" data-target="1603370" data-suffix="+">0</div><div class="stat-label">Переглядів</div></div>
-              <div class="stat-card"><div class="stat-number js-counter" data-target="542111" data-suffix="+">0</div><div class="stat-label">Охоплень</div></div>
-              <div class="stat-card"><div class="stat-number js-counter" data-target="6250" data-suffix="+">0</div><div class="stat-label">Взаємодії</div></div>
+          <div class="panel-inner">
+            <div class="slide-header">
+              <h1 class="slide-title">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right: var(--space-1);">
+                  <rect width="24" height="24" rx="6" fill="url(#instagramGrad)"/>
+                  <defs>
+                    <linearGradient id="instagramGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" style="stop-color:#FED576" />
+                      <stop offset="25%" style="stop-color:#F47133" />
+                      <stop offset="50%" style="stop-color:#BC3081" />
+                      <stop offset="100%" style="stop-color:#4C63D2" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="6" y="6" width="12" height="12" rx="3" stroke="white" stroke-width="2" fill="none"/>
+                  <circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none"/>
+                  <circle cx="16" cy="8" r="1" fill="white"/>
+                </svg>
+                Instagram
+              </h1>
+              <p class="slide-subtitle">Основна платформа для візуального контенту</p>
             </div>
-            <ul class="bullet-list">
-              <li>Понад 600+ підписників у спільноті</li>
-              <li>Stories з опитуваннями та правовими вікторинами</li>
-              <li>Highlights з найважливішими темами для швидкого доступу</li>
-              <li>Direct-консультації: швидка відповідь у повідомленнях</li>
-            </ul>
+
+            <div class="content-section">
+              <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number js-counter" data-target="1603370" data-suffix="+">0</div><div class="stat-label">Переглядів</div></div>
+                <div class="stat-card"><div class="stat-number js-counter" data-target="542111" data-suffix="+">0</div><div class="stat-label">Охоплень</div></div>
+                <div class="stat-card"><div class="stat-number js-counter" data-target="6250" data-suffix="+">0</div><div class="stat-label">Взаємодії</div></div>
+              </div>
+              <ul class="bullet-list">
+                <li>Понад 600+ підписників у спільноті</li>
+                <li>Stories з опитуваннями та правовими вікторинами</li>
+                <li>Highlights з найважливішими темами для швидкого доступу</li>
+                <li>Direct-консультації: швидка відповідь у повідомленнях</li>
+              </ul>
+            </div>
           </div>
         </article>
       </div>
@@ -1002,30 +1042,32 @@
     <section class="section" id="s6" data-slide="6" data-nav="Facebook">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header">
-            <h1 class="slide-title">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:10px;">
-                <circle cx="12" cy="12" r="12" fill="#1877F2"/>
-                <path d="M13.5 20.5V13H16L16.5 10H13.5V8.5C13.5 7.67 13.67 7 14.83 7H16.5V4.14C16.17 4.1 15.17 4 14 4C11.58 4 10 5.5 10 8.17V10H7.5V13H10V20.5H13.5Z" fill="white"/>
-              </svg>
-              Facebook
-            </h1>
-            <p class="slide-subtitle">Юридичний контент для тих, хто обирає Facebook, а не Instagram</p>
-          </div>
-
-          <div class="content-section">
-            <div class="stats-grid">
-              <div class="stat-card"><div class="stat-number js-counter" data-target="1387228" data-suffix="+">0</div><div class="stat-label">Переглядів</div></div>
-              <div class="stat-card"><div class="stat-number js-counter" data-target="13903" data-suffix="+">0</div><div class="stat-label">Охоплень</div></div>
-              <div class="stat-card"><div class="stat-number js-counter" data-target="2950" data-suffix="+">0</div><div class="stat-label">Взаємодій</div></div>
+          <div class="panel-inner">
+            <div class="slide-header">
+              <h1 class="slide-title">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right: var(--space-1);">
+                  <circle cx="12" cy="12" r="12" fill="#1877F2"/>
+                  <path d="M13.5 20.5V13H16L16.5 10H13.5V8.5C13.5 7.67 13.67 7 14.83 7H16.5V4.14C16.17 4.1 15.17 4 14 4C11.58 4 10 5.5 10 8.17V10H7.5V13H10V20.5H13.5Z" fill="white"/>
+                </svg>
+                Facebook
+              </h1>
+              <p class="slide-subtitle">Юридичний контент для тих, хто обирає Facebook, а не Instagram</p>
             </div>
-            <ul class="bullet-list">
-              <li>Сфокусована спільнота моряків, їхніх родин та профспілкових активістів</li>
-              <li>Ті самі ключові юридичні теми, адаптовані у доступний формат для Facebook</li>
-              <li>Репости в профспілкові групи та на сторінки активістів, що розширює охоплення</li>
-              <li>Коментарі та обговорення, з яких часто починаються індивідуальні звернення</li>
-              <li>Messenger-консультації: можливість швидко поставити запитання юристам MTWTU LAW HUB</li>
-            </ul>
+
+            <div class="content-section">
+              <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number js-counter" data-target="1387228" data-suffix="+">0</div><div class="stat-label">Переглядів</div></div>
+                <div class="stat-card"><div class="stat-number js-counter" data-target="13903" data-suffix="+">0</div><div class="stat-label">Охоплень</div></div>
+                <div class="stat-card"><div class="stat-number js-counter" data-target="2950" data-suffix="+">0</div><div class="stat-label">Взаємодій</div></div>
+              </div>
+              <ul class="bullet-list">
+                <li>Сфокусована спільнота моряків, їхніх родин та профспілкових активістів</li>
+                <li>Ті самі ключові юридичні теми, адаптовані у доступний формат для Facebook</li>
+                <li>Репости в профспілкові групи та на сторінки активістів, що розширює охоплення</li>
+                <li>Коментарі та обговорення, з яких часто починаються індивідуальні звернення</li>
+                <li>Messenger-консультації: можливість швидко поставити запитання юристам MTWTU LAW HUB</li>
+              </ul>
+            </div>
           </div>
         </article>
       </div>
@@ -1035,30 +1077,32 @@
     <section class="section" id="s7" data-slide="7" data-nav="TikTok">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header">
-            <h1 class="slide-title">
-              <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:10px;">
-                <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#000000"/>
-                <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#EE1D52"/>
-                <path d="M34.3 9c2.6 2.8 6.1 4.7 10.1 4.8v7.4c-3.9 0-7.6-1.2-10.6-3.3v13.4c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c.7 0 1.3 0 2 .1v7.6c-.6-.2-1.3-.3-2-.3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V-.5h7.4c0 3.3.9 6.5 2.6 9.2 0 .1 0 .2 0 .3z" fill="#69C9D0"/>
-              </svg>
-              TikTok
-            </h1>
-            <p class="slide-subtitle">Готуємо молодь до того, щоб упевнено захищати свої права</p>
-          </div>
-
-          <div class="content-section">
-            <div class="stats-grid">
-              <div class="stat-card"><div class="stat-number js-counter" data-target="32587" data-suffix="+">0</div><div class="stat-label">Переглядів відео</div></div>
-              <div class="stat-card"><div class="stat-number js-counter" data-target="27912" data-suffix="+">0</div><div class="stat-label">Охоплена аудиторія</div></div>
-              <div class="stat-card"><div class="stat-number js-counter" data-target="2118" data-suffix="+">0</div><div class="stat-label">Взаємодій</div></div>
+          <div class="panel-inner">
+            <div class="slide-header">
+              <h1 class="slide-title">
+                <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right: var(--space-1);">
+                  <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#000000"/>
+                  <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#EE1D52"/>
+                  <path d="M34.3 9c2.6 2.8 6.1 4.7 10.1 4.8v7.4c-3.9 0-7.6-1.2-10.6-3.3v13.4c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c.7 0 1.3 0 2 .1v7.6c-.6-.2-1.3-.3-2-.3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V-.5h7.4c0 3.3.9 6.5 2.6 9.2 0 .1 0 .2 0 .3z" fill="#69C9D0"/>
+                </svg>
+                TikTok
+              </h1>
+              <p class="slide-subtitle">Готуємо молодь до того, щоб упевнено захищати свої права</p>
             </div>
-            <ul class="bullet-list">
-              <li>Ставка на динамічний формат, прості візуальні акценти та зрозумілі приклади</li>
-              <li>Аудиторія: курсанти, молоді моряки та їхні близькі, які споживають контент переважно у TikTok</li>
-              <li>Серії відео за основними запитами: документи, контракти, виплати, права під час війни</li>
-              <li>Збереження, поширення та коментарі, з яких часто починаються індивідуальні звернення</li>
-            </ul>
+
+            <div class="content-section">
+              <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number js-counter" data-target="32587" data-suffix="+">0</div><div class="stat-label">Переглядів відео</div></div>
+                <div class="stat-card"><div class="stat-number js-counter" data-target="27912" data-suffix="+">0</div><div class="stat-label">Охоплена аудиторія</div></div>
+                <div class="stat-card"><div class="stat-number js-counter" data-target="2118" data-suffix="+">0</div><div class="stat-label">Взаємодій</div></div>
+              </div>
+              <ul class="bullet-list">
+                <li>Ставка на динамічний формат, прості візуальні акценти та зрозумілі приклади</li>
+                <li>Аудиторія: курсанти, молоді моряки та їхні близькі, які споживають контент переважно у TikTok</li>
+                <li>Серії відео за основними запитами: документи, контракти, виплати, права під час війни</li>
+                <li>Збереження, поширення та коментарі, з яких часто починаються індивідуальні звернення</li>
+              </ul>
+            </div>
           </div>
         </article>
       </div>
@@ -1068,30 +1112,32 @@
     <section class="section" id="s8" data-slide="8" data-nav="Зворотній зв'язок">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header"><h1 class="slide-title">💙 Зворотній зв'язок</h1></div>
-          <div class="content-section">
-            <div class="highlight-box">
-              <p class="content-text" style="font-size: clamp(16px, 2.2vw, 32px) !important; text-align: center;"><strong>15 000+</strong> відвідувань за останні 6 місяців</p>
+          <div class="panel-inner">
+            <div class="slide-header"><h1 class="slide-title">💙 Зворотній зв'язок</h1></div>
+            <div class="content-section">
+              <div class="highlight-box">
+                <p class="content-text" style="text-align:center;"><strong>15 000+</strong> відвідувань за останні 6 місяців</p>
+              </div>
+              <div class="psychology-grid">
+                <div class="psychology-card">
+                  <h3>💙 Олена Дрозд</h3>
+                  <p>"Щиро дякую вам усім за професіоналізм, підтримку та плідну працю. Бажаю подальших успіхів, справедливих і позитивних рішень, задоволених позовів та незмінної впевненості у правоті своєї справи. Ваша допомога в суді є безцінною!"</p>
+                </div>
+                <div class="psychology-card">
+                  <h3>⚓ Микола Чабаненко</h3>
+                  <p>"Також хочу висловити подяку пані Юлії та нашій профспілці, з їхньою допомогою зняли статус «у розшуку», все це було зроблено віддалено, від мене знадобилося мінімум зусиль. Щиро дякуємо за допомогу"</p>
+                </div>
+                <div class="psychology-card">
+                  <h3>🌍 Тамара Кушніренко</h3>
+                  <p>"Дякуємо профспілки моряків, за підтримку та за увагу! 💙"</p>
+                </div>
+                <div class="psychology-card">
+                  <h3>📚 Кирило Фроленков</h3>
+                  <p>"Наш юридичний фронт - найкращий! 🙌"</p>
+                </div>
+              </div>
+              <p class="content-text" style="text-align:center; margin-top: var(--space-2);">Вплив на імідж ПРМТУ як <strong style="color:var(--gold);">відкритої і сучасної</strong> організації</p>
             </div>
-            <div class="psychology-grid">
-              <div class="psychology-card">
-                <h3>💙 Олена Дрозд</h3>
-                <p>"Щиро дякую вам усім за професіоналізм, підтримку та плідну працю. Бажаю подальших успіхів, справедливих і позитивних рішень, задоволених позовів та незмінної впевненості у правоті своєї справи. Ваша допомога в суді є безцінною!"</p>
-              </div>
-              <div class="psychology-card">
-                <h3>⚓ Микола Чабаненко</h3>
-                <p>"Також хочу висловити подяку пані Юлії та нашій профспілці, з їхньою допомогою зняли статус «у розшуку», все це було зроблено віддалено, від мене знадобилося мінімум зусиль. Щиро дякуємо за допомогу"</p>
-              </div>
-              <div class="psychology-card">
-                <h3>🌍 Тамара Кушніренко</h3>
-                <p>"Дякуємо профспілки моряків, за підтримку та за увагу! 💙"</p>
-              </div>
-              <div class="psychology-card">
-                <h3>📚 Кирило Фроленков</h3>
-                <p>"Наш юридичний фронт - найкращий! 🙌"</p>
-              </div>
-            </div>
-            <p class="content-text" style="text-align: center; margin-top: 14px;">Вплив на імідж ПРМТУ як <strong style="color:var(--gold);">відкритої і сучасної</strong> організації</p>
           </div>
         </article>
       </div>
@@ -1101,17 +1147,19 @@
     <section class="section" id="s9" data-slide="9" data-nav="Чому важливо ділитись контентом">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header"><h1 class="slide-title">🧠 Чому важливо ділитись контентом</h1></div>
-          <div class="content-section">
-            <ul class="bullet-list">
-              <li>Люди довіряють інформації від знайомих — ймовірність прочитати <strong style="color:var(--gold);">у 5 разів вища</strong></li>
-              <li>Публікації активістів підсилюють довіру до профспілки і мотивують інших ставати членами</li>
-              <li>Спільне поширення створює ефект "ланцюгової довіри" — одне відео доходить до <strong style="color:var(--gold);">десятків тисяч</strong></li>
-              <li>Люди 40+ активніше реагують на знайомі обличчя і особисте поширення = найефективніший спосіб</li>
-              <li>У соцмережах профспілковий контент — це не реклама, а <strong style="color:var(--gold);">взаємопідтримка</strong></li>
-            </ul>
-            <div class="highlight-box">
-              <p class="content-text" style="font-size: clamp(14px, 2.0vw, 28px) !important; text-align: center; font-weight: 600;">Кожен репост від активіста = +100-500 потенційних читачів</p>
+          <div class="panel-inner">
+            <div class="slide-header"><h1 class="slide-title">🧠 Чому важливо ділитись контентом</h1></div>
+            <div class="content-section">
+              <ul class="bullet-list">
+                <li>Люди довіряють інформації від знайомих — ймовірність прочитати <strong style="color:var(--gold);">у 5 разів вища</strong></li>
+                <li>Публікації активістів підсилюють довіру до профспілки і мотивують інших ставати членами</li>
+                <li>Спільне поширення створює ефект "ланцюгової довіри" — одне відео доходить до <strong style="color:var(--gold);">десятків тисяч</strong></li>
+                <li>Люди 40+ активніше реагують на знайомі обличчя і особисте поширення = найефективніший спосіб</li>
+                <li>У соцмережах профспілковий контент — це не реклама, а <strong style="color:var(--gold);">взаємопідтримка</strong></li>
+              </ul>
+              <div class="highlight-box">
+                <p class="content-text" style="text-align:center; font-weight:600;">Кожен репост від активіста = +100-500 потенційних читачів</p>
+              </div>
             </div>
           </div>
         </article>
@@ -1122,80 +1170,82 @@
     <section class="section" id="s10" data-slide="10" data-nav="Наш вплив у цифрах">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header"><h1 class="slide-title">📊 Наш вплив у цифрах</h1></div>
+          <div class="panel-inner">
+            <div class="slide-header"><h1 class="slide-title">📊 Наш вплив у цифрах</h1></div>
 
-          <div class="content-section">
-            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 14px 0;">
-              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite;">
-                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="6" fill="url(#ig1)"/>
-                    <defs>
-                      <linearGradient id="ig1" x1="0%" y1="100%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#FED576" />
-                        <stop offset="25%" style="stop-color:#F47133" />
-                        <stop offset="50%" style="stop-color:#BC3081" />
-                        <stop offset="100%" style="stop-color:#4C63D2" />
-                      </linearGradient>
-                    </defs>
-                    <rect x="6" y="6" width="12" height="12" rx="3" stroke="white" stroke-width="2" fill="none" />
-                    <circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none" />
-                    <circle cx="16" cy="8" r="1" fill="white" />
-                  </svg>
+            <div class="content-section">
+              <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); margin: var(--space-2) 0;">
+                <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                  <div style="font-size: clamp(26px, 4.4vw, 58px); margin-bottom: var(--space-1); animation: bounce 2s ease-in-out infinite;">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="6" fill="url(#ig1)"/>
+                      <defs>
+                        <linearGradient id="ig1" x1="0%" y1="100%" x2="100%" y2="0%">
+                          <stop offset="0%" style="stop-color:#FED576" />
+                          <stop offset="25%" style="stop-color:#F47133" />
+                          <stop offset="50%" style="stop-color:#BC3081" />
+                          <stop offset="100%" style="stop-color:#4C63D2" />
+                        </linearGradient>
+                      </defs>
+                      <rect x="6" y="6" width="12" height="12" rx="3" stroke="white" stroke-width="2" fill="none" />
+                      <circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="none" />
+                      <circle cx="16" cy="8" r="1" fill="white" />
+                    </svg>
+                  </div>
+                  <div class="js-counter" style="font-size: clamp(20px, 3.6vw, 40px); font-weight:900; color:var(--gold); margin-bottom: var(--space-1); text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1600000" data-suffix="+">0</div>
+                  <div style="font-size: clamp(12px, 1.25vw, 18px); color: rgba(255,255,255,.8);">Instagram</div>
                 </div>
-                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1600000" data-suffix="+">0</div>
-                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">Instagram</div>
-              </div>
 
-              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.2s;">
-                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="12" fill="#1877F2" />
-                    <path d="M13.5 20.5V13H16L16.5 10H13.5V8.5C13.5 7.67 13.67 7 14.83 7H16.5V4.14C16.17 4.1 15.17 4 14 4C11.58 4 10 5.5 10 8.17V10H7.5V13H10V20.5H13.5Z" fill="white" />
-                  </svg>
+                <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                  <div style="font-size: clamp(26px, 4.4vw, 58px); margin-bottom: var(--space-1); animation: bounce 2s ease-in-out infinite 0.2s;">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="12" fill="#1877F2" />
+                      <path d="M13.5 20.5V13H16L16.5 10H13.5V8.5C13.5 7.67 13.67 7 14.83 7H16.5V4.14C16.17 4.1 15.17 4 14 4C11.58 4 10 5.5 10 8.17V10H7.5V13H10V20.5H13.5Z" fill="white" />
+                    </svg>
+                  </div>
+                  <div class="js-counter" style="font-size: clamp(20px, 3.6vw, 40px); font-weight:900; color:var(--gold); margin-bottom: var(--space-1); text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1400000" data-suffix="+">0</div>
+                  <div style="font-size: clamp(12px, 1.25vw, 18px); color: rgba(255,255,255,.8);">Facebook</div>
                 </div>
-                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1400000" data-suffix="+">0</div>
-                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">Facebook</div>
-              </div>
 
-              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.4s;">
-                  <svg width="60" height="60" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#000000"/>
-                    <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#EE1D52"/>
-                    <path d="M34.3 9c2.6 2.8 6.1 4.7 10.1 4.8v7.4c-3.9 0-7.6-1.2-10.6-3.3v13.4c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c.7 0 1.3 0 2 .1v7.6c-.6-.2-1.3-.3-2-.3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V-.5h7.4c0 3.3.9 6.5 2.6 9.2 0 .1 0 .2 0 .3z" fill="#69C9D0"/>
-                  </svg>
+                <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                  <div style="font-size: clamp(26px, 4.4vw, 58px); margin-bottom: var(--space-1); animation: bounce 2s ease-in-out infinite 0.4s;">
+                    <svg width="60" height="60" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#000000"/>
+                      <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#EE1D52"/>
+                      <path d="M34.3 9c2.6 2.8 6.1 4.7 10.1 4.8v7.4c-3.9 0-7.6-1.2-10.6-3.3v13.4c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c.7 0 1.3 0 2 .1v7.6c-.6-.2-1.3-.3-2-.3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V-.5h7.4c0 3.3.9 6.5 2.6 9.2 0 .1 0 .2 0 .3z" fill="#69C9D0"/>
+                    </svg>
+                  </div>
+                  <div class="js-counter" style="font-size: clamp(20px, 3.6vw, 40px); font-weight:900; color:var(--gold); margin-bottom: var(--space-1); text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="32587" data-suffix="+">0</div>
+                  <div style="font-size: clamp(12px, 1.25vw, 18px); color: rgba(255,255,255,.8);">TikTok</div>
                 </div>
-                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="32587" data-suffix="+">0</div>
-                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">TikTok</div>
+
+                <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                  <div style="font-size: clamp(26px, 4.4vw, 58px); margin-bottom: var(--space-1); animation: bounce 2s ease-in-out infinite 0.6s;">📈</div>
+                  <div class="js-counter" style="font-size: clamp(20px, 3.6vw, 40px); font-weight:900; color:var(--gold); margin-bottom: var(--space-1); text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="3031000" data-suffix="+">0</div>
+                  <div style="font-size: clamp(12px, 1.25vw, 18px); color: rgba(255,255,255,.8);">Загалом</div>
+                </div>
               </div>
 
-              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.6s;">📈</div>
-                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="3031000" data-suffix="+">0</div>
-                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">Загалом</div>
+              <div style="display:flex; flex-wrap:wrap; justify-content:space-around; gap: var(--space-2); margin-top: var(--space-3); padding: var(--cardPad); background: linear-gradient(135deg, rgba(233, 196, 106, 0.20) 0%, rgba(233, 196, 106, 0.10) 100%); border-radius: var(--radius); border: calc(var(--stroke) * 1.6) solid rgba(233,196,106,.35);">
+                <div style="text-align:center; min-width: min(220px, 42vw);">
+                  <div style="font-size: clamp(18px, 3.6vw, 44px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">582 000+</div>
+                  <div style="font-size: clamp(12px, 1.6vw, 22px); color: rgba(255,255,255,.9); margin-top: var(--space-1);">🌍 Охоплень</div>
+                </div>
+                <div style="width: clamp(1px, 0.2vw, 2px); background: linear-gradient(180deg, transparent, var(--gold), transparent);"></div>
+                <div style="text-align:center; min-width: min(220px, 42vw);">
+                  <div style="font-size: clamp(18px, 3.6vw, 44px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">10 000+</div>
+                  <div style="font-size: clamp(12px, 1.6vw, 22px); color: rgba(255,255,255,.9); margin-top: var(--space-1);">💬 Взаємодій</div>
+                </div>
+                <div style="width: clamp(1px, 0.2vw, 2px); background: linear-gradient(180deg, transparent, var(--gold), transparent);"></div>
+                <div style="text-align:center; min-width: min(220px, 42vw);">
+                  <div style="font-size: clamp(18px, 3.6vw, 44px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">15 000+</div>
+                  <div style="font-size: clamp(12px, 1.6vw, 22px); color: rgba(255,255,255,.9); margin-top: var(--space-1);">🔗 Відвідувань</div>
+                </div>
               </div>
-            </div>
 
-            <div style="display:flex; flex-wrap:wrap; justify-content:space-around; gap: 12px; margin-top:18px; padding:18px; background: linear-gradient(135deg, rgba(233, 196, 106, 0.2) 0%, rgba(233, 196, 106, 0.1) 100%); border-radius:16px; border:2px solid rgba(233,196,106,.4);">
-              <div style="text-align:center; min-width: 220px;">
-                <div style="font-size: clamp(20px, 4.2vw, 46px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">582 000+</div>
-                <div style="font-size: clamp(12px, 2vw, 22px); color: rgba(255,255,255,.9); margin-top:6px;">🌍 Охоплень</div>
+              <div style="text-align:center; margin-top: var(--space-2);">
+                <p style="font-size: clamp(13px, 1.8vw, 24px); color:var(--gold); font-style:italic; text-shadow: 0 0 15px rgba(233,196,106,.4); margin:0;">Ми створили потужну платформу підтримки для всіх членів ПРМТУ</p>
               </div>
-              <div style="width:2px; background: linear-gradient(180deg, transparent, var(--gold), transparent);"></div>
-              <div style="text-align:center; min-width: 220px;">
-                <div style="font-size: clamp(20px, 4.2vw, 46px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">10 000+</div>
-                <div style="font-size: clamp(12px, 2vw, 22px); color: rgba(255,255,255,.9); margin-top:6px;">💬 Взаємодій</div>
-              </div>
-              <div style="width:2px; background: linear-gradient(180deg, transparent, var(--gold), transparent);"></div>
-              <div style="text-align:center; min-width: 220px;">
-                <div style="font-size: clamp(20px, 4.2vw, 46px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">15 000+</div>
-                <div style="font-size: clamp(12px, 2vw, 22px); color: rgba(255,255,255,.9); margin-top:6px;">🔗 Відвідувань</div>
-              </div>
-            </div>
-
-            <div style="text-align:center; margin-top:16px;">
-              <p style="font-size: clamp(14px, 2vw, 26px); color:var(--gold); font-style:italic; text-shadow: 0 0 15px rgba(233,196,106,.4); margin:0;">Ми створили потужну платформу підтримки для всіх членів ПРМТУ</p>
             </div>
           </div>
         </article>
@@ -1206,58 +1256,60 @@
     <section class="section" id="s11" data-slide="11" data-nav="Шлях до нового члена ПРМТУ">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header">
-            <h1 class="slide-title">🎯 Шлях до нового члена ПРМТУ</h1>
-            <p class="slide-subtitle" style="font-size: clamp(14px, 2.2vw, 36px) !important;">Психологія прийняття рішення: від випадкового перегляду до вступу</p>
-          </div>
-
-          <div class="content-section" style="padding-top:5px;">
-            <div style="display:flex; align-items:center; justify-content:center; margin: 14px 0 18px 0;">
-              <svg width="900" height="320" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 30px rgba(233, 196, 106, 0.3));">
-                <defs>
-                  <linearGradient id="funnelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:rgba(233, 196, 106, 0.3);stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:rgba(233, 196, 106, 0.7);stop-opacity:1"/>
-                  </linearGradient>
-                </defs>
-                <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="url(#funnelGrad)" stroke="#e9c46a" stroke-width="3" opacity="0.9"/>
-                <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="none" stroke="#e9c46a" stroke-width="2" opacity="0.5" style="filter: blur(8px);"/>
-                <text x="450" y="55" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="700" font-family="Cormorant Garamond, serif">3 000 000+ переглядів</text>
-                <text x="450" y="85" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="20" font-family="Cormorant Garamond, serif">👀 Випадково побачили в стрічці</text>
-                <text x="450" y="135" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="700" font-family="Cormorant Garamond, serif">Сотні тисяч охоплень</text>
-                <text x="450" y="162" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="19" font-family="Cormorant Garamond, serif">❤️ Зацікавились, підписались, зберегли</text>
-                <text x="450" y="210" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700" font-family="Cormorant Garamond, serif">Десятки тисяч звернень</text>
-                <text x="450" y="235" text-anchor="middle" fill="rgba(255, 255, 255, 0.85)" font-size="18" font-family="Cormorant Garamond, serif">💬 Написали з проблемою, отримали допомогу</text>
-                <text x="450" y="275" text-anchor="middle" fill="#e9c46a" font-size="30" font-weight="900" font-family="Cormorant Garamond, serif">⚓ НОВІ ЧЛЕНИ ПРМТУ</text>
-              </svg>
+          <div class="panel-inner">
+            <div class="slide-header">
+              <h1 class="slide-title">🎯 Шлях до нового члена ПРМТУ</h1>
+              <p class="slide-subtitle">Психологія прийняття рішення: від випадкового перегляду до вступу</p>
             </div>
 
-            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0;">
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 18px; transition: all 0.3s ease;"
-                   onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-                <div style="font-size:42px; text-align:center; margin-bottom:10px;">🧠</div>
-                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.0vw, 26px); margin-bottom:10px; font-weight:700; text-align:center;">Ефект «знайомості»</h3>
-                <p style="font-size: clamp(14px, 1.7vw, 20px); line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
+            <div class="content-section">
+              <div style="display:flex; align-items:center; justify-content:center; margin: var(--space-2) 0 var(--space-3) 0;">
+                <svg width="900" height="320" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" style="width:min(980px, 100%); height:auto; filter: drop-shadow(0 10px 30px rgba(233, 196, 106, 0.3));">
+                  <defs>
+                    <linearGradient id="funnelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style="stop-color:rgba(233, 196, 106, 0.3);stop-opacity:1"/>
+                      <stop offset="100%" style="stop-color:rgba(233, 196, 106, 0.7);stop-opacity:1"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="url(#funnelGrad)" stroke="#e9c46a" stroke-width="3" opacity="0.9"/>
+                  <path d="M 50 20 L 850 20 L 650 180 L 550 300 L 350 300 L 250 180 Z" fill="none" stroke="#e9c46a" stroke-width="2" opacity="0.5" style="filter: blur(8px);"/>
+                  <text x="450" y="55" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="700" font-family="Cormorant Garamond, serif">3 000 000+ переглядів</text>
+                  <text x="450" y="85" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="20" font-family="Cormorant Garamond, serif">👀 Випадково побачили в стрічці</text>
+                  <text x="450" y="135" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="700" font-family="Cormorant Garamond, serif">Сотні тисяч охоплень</text>
+                  <text x="450" y="162" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="19" font-family="Cormorant Garamond, serif">❤️ Зацікавились, підписались, зберегли</text>
+                  <text x="450" y="210" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700" font-family="Cormorant Garamond, serif">Десятки тисяч звернень</text>
+                  <text x="450" y="235" text-anchor="middle" fill="rgba(255, 255, 255, 0.85)" font-size="18" font-family="Cormorant Garamond, serif">💬 Написали з проблемою, отримали допомогу</text>
+                  <text x="450" y="275" text-anchor="middle" fill="#e9c46a" font-size="30" font-weight="900" font-family="Cormorant Garamond, serif">⚓ НОВІ ЧЛЕНИ ПРМТУ</text>
+                </svg>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 18px; transition: all 0.3s ease;"
-                   onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-                <div style="font-size:42px; text-align:center; margin-bottom:10px;">💡</div>
-                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.0vw, 26px); margin-bottom:10px; font-weight:700; text-align:center;">Соціальний доказ</h3>
-                <p style="font-size: clamp(14px, 1.7vw, 20px); line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
+              <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); margin: var(--space-3) 0;">
+                <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
+                     onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+                  <div style="font-size: clamp(34px, 4.4vw, 46px); text-align:center; margin-bottom: var(--space-1);">🧠</div>
+                  <h3 style="color:#e9c46a; font-size: clamp(15px, 1.65vw, 24px); margin:0 0 var(--space-1) 0; font-weight:700; text-align:center;">Ефект «знайомості»</h3>
+                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height:1.5; color: rgba(255,255,255,.9); margin:0; text-align:center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
+                     onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+                  <div style="font-size: clamp(34px, 4.4vw, 46px); text-align:center; margin-bottom: var(--space-1);">💡</div>
+                  <h3 style="color:#e9c46a; font-size: clamp(15px, 1.65vw, 24px); margin:0 0 var(--space-1) 0; font-weight:700; text-align:center;">Соціальний доказ</h3>
+                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height:1.5; color: rgba(255,255,255,.9); margin:0; text-align:center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
+                     onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+                  <div style="font-size: clamp(34px, 4.4vw, 46px); text-align:center; margin-bottom: var(--space-1);">⚡</div>
+                  <h3 style="color:#e9c46a; font-size: clamp(15px, 1.65vw, 24px); margin:0 0 var(--space-1) 0; font-weight:700; text-align:center;">Тригер дії</h3>
+                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height:1.5; color: rgba(255,255,255,.9); margin:0; text-align:center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
+                </div>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 18px; transition: all 0.3s ease;"
-                   onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-                <div style="font-size:42px; text-align:center; margin-bottom:10px;">⚡</div>
-                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.0vw, 26px); margin-bottom:10px; font-weight:700; text-align:center;">Тригер дії</h3>
-                <p style="font-size: clamp(14px, 1.7vw, 20px); line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
+              <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.28) 0%, rgba(233, 196, 106, 0.14) 100%); border: clamp(3px, 0.55vw, 6px) solid #e9c46a; border-radius: var(--radius); padding: var(--cardPad); margin-top: var(--space-3); text-align:center; box-shadow: 0 0 40px rgba(233, 196, 106, 0.35);">
+                <p style="font-size: clamp(16px, 2.2vw, 30px); line-height:1.35; color:#e9c46a; margin:0 0 var(--space-1) 0; font-weight:900;">Не кожен перегляд стає членством.<br>Але кожне нове членство починається з перегляду.</p>
+                <p style="font-size: clamp(14px, 1.7vw, 22px); color: rgba(255,255,255,.95); margin:0; font-weight:600;">Соцмережі MTWTU LAW HUB — це не розвага.<br>Це <strong style="color:#e9c46a;">перший крок до членства</strong> для тисяч моряків та їхніх родин.</p>
               </div>
-            </div>
-
-            <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.3) 0%, rgba(233, 196, 106, 0.15) 100%); border: 4px solid #e9c46a; border-radius: 16px; padding: 18px; margin-top: 16px; text-align:center; box-shadow: 0 0 40px rgba(233, 196, 106, 0.4);">
-              <p style="font-size: clamp(18px, 2.6vw, 32px); line-height:1.35; color:#e9c46a; margin:0 0 10px 0; font-weight:900;">Не кожен перегляд стає членством.<br>Але кожне нове членство починається з перегляду.</p>
-              <p style="font-size: clamp(14px, 2.0vw, 24px); color: rgba(255,255,255,.95); margin:0; font-weight:600;">Соцмережі MTWTU LAW HUB — це не розвага.<br>Це <strong style="color:#e9c46a;">перший крок до членства</strong> для тисяч моряків та їхніх родин.</p>
             </div>
           </div>
         </article>
@@ -1268,57 +1320,59 @@
     <section class="section" id="s12" data-slide="12" data-nav="Чим ви можете допомогти?">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header"><h1 class="slide-title">🤝 Чим ви можете допомогти?</h1></div>
+          <div class="panel-inner">
+            <div class="slide-header"><h1 class="slide-title">🤝 Чим ви можете допомогти?</h1></div>
 
-          <div class="content-section">
-            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 14px 0;">
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
-                   onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-                <div style="font-size:44px; margin-bottom:12px;">📢</div>
-                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Амбасадор</h3>
-                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
-                  <li style="margin-bottom:8px;">• Поділіться постом у сторіс/стрічці</li>
-                  <li style="margin-bottom:8px;">• Залишіть 1-2 фрази від себе</li>
-                  <li style="margin-bottom:8px;">• Відмітьте @mtwtu_law_hub</li>
-                </ul>
+            <div class="content-section">
+              <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); margin: var(--space-2) 0;">
+                <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
+                     onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+                  <div style="font-size: clamp(34px, 4.4vw, 46px); margin-bottom: var(--space-1);">📢</div>
+                  <h3 style="color:#e9c46a; font-size: clamp(15px, 1.9vw, 28px); margin:0 0 var(--space-1) 0; font-weight:700;">Амбасадор</h3>
+                  <ul style="font-size: clamp(13px, 1.5vw, 22px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
+                    <li style="margin-bottom: var(--space-1);">• Поділіться постом у сторіс/стрічці</li>
+                    <li style="margin-bottom: var(--space-1);">• Залишіть 1-2 фрази від себе</li>
+                    <li style="margin-bottom: var(--space-1);">• Відмітьте @mtwtu_law_hub</li>
+                  </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
+                     onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+                  <div style="font-size: clamp(34px, 4.4vw, 46px); margin-bottom: var(--space-1);">💪</div>
+                  <h3 style="color:#e9c46a; font-size: clamp(15px, 1.9vw, 28px); margin:0 0 var(--space-1) 0; font-weight:700;">Підсилювач</h3>
+                  <ul style="font-size: clamp(13px, 1.5vw, 22px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
+                    <li style="margin-bottom: var(--space-1);">• Ставте лайк під відео/постами</li>
+                    <li style="margin-bottom: var(--space-1);">• Залишайте короткий коментар</li>
+                    <li style="margin-bottom: var(--space-1);">• Відповідайте на опитування</li>
+                  </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
+                     onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+                  <div style="font-size: clamp(34px, 4.4vw, 46px); margin-bottom: var(--space-1);">🧭</div>
+                  <h3 style="color:#e9c46a; font-size: clamp(15px, 1.9vw, 28px); margin:0 0 var(--space-1) 0; font-weight:700;">Навігатор</h3>
+                  <ul style="font-size: clamp(13px, 1.5vw, 22px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
+                    <li style="margin-bottom: var(--space-1);">• Надсилайте відео друзям</li>
+                    <li style="margin-bottom: var(--space-1);">• Кидайте посилання у чати та ваші групи</li>
+                    <li style="margin-bottom: var(--space-1);">• Зберігайте для швидкого доступу</li>
+                  </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
+                     onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
+                  <div style="font-size: clamp(34px, 4.4vw, 46px); margin-bottom: var(--space-1);">💡</div>
+                  <h3 style="color:#e9c46a; font-size: clamp(15px, 1.9vw, 28px); margin:0 0 var(--space-1) 0; font-weight:700;">Співвідкривач</h3>
+                  <ul style="font-size: clamp(13px, 1.5vw, 22px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
+                    <li style="margin-bottom: var(--space-1);">• Пропонуйте теми для відео</li>
+                    <li style="margin-bottom: var(--space-1);">• Пишіть у коментарях або Direct</li>
+                    <li style="margin-bottom: var(--space-1);">• Розказуйте про реальні ситуації</li>
+                  </ul>
+                </div>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
-                   onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-                <div style="font-size:44px; margin-bottom:12px;">💪</div>
-                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Підсилювач</h3>
-                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
-                  <li style="margin-bottom:8px;">• Ставте лайк під відео/постами</li>
-                  <li style="margin-bottom:8px;">• Залишайте короткий коментар</li>
-                  <li style="margin-bottom:8px;">• Відповідайте на опитування</li>
-                </ul>
+              <div style="text-align:center; margin-top: var(--space-2); padding: var(--space-3); background: rgba(233, 196, 106, 0.1); border-radius: var(--radiusSm); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.3);">
+                <p style="font-size: clamp(14px, 1.7vw, 24px); color:var(--gold); font-weight:600; line-height:1.45; margin:0;">Кожен ваш лайк, репост чи коментар — це про ще одного члена ПРМТУ, який дізнався про свої права</p>
               </div>
-
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
-                   onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-                <div style="font-size:44px; margin-bottom:12px;">🧭</div>
-                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Навігатор</h3>
-                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
-                  <li style="margin-bottom:8px;">• Надсилайте відео друзям</li>
-                  <li style="margin-bottom:8px;">• Кидайте посилання у чати та ваші групи</li>
-                  <li style="margin-bottom:8px;">• Зберігайте для швидкого доступу</li>
-                </ul>
-              </div>
-
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
-                   onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
-                <div style="font-size:44px; margin-bottom:12px;">💡</div>
-                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Співвідкривач</h3>
-                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
-                  <li style="margin-bottom:8px;">• Пропонуйте теми для відео</li>
-                  <li style="margin-bottom:8px;">• Пишіть у коментарях або Direct</li>
-                  <li style="margin-bottom:8px;">• Розказуйте про реальні ситуації</li>
-                </ul>
-              </div>
-            </div>
-
-            <div style="text-align:center; margin-top:10px; padding:16px; background: rgba(233, 196, 106, 0.1); border-radius: 12px; border: 2px solid rgba(233, 196, 106, 0.3);">
-              <p style="font-size: clamp(14px, 2.0vw, 26px); color:var(--gold); font-weight:600; line-height:1.45; margin:0;">Кожен ваш лайк, репост чи коментар — це про ще одного члена ПРМТУ, який дізнався про свої права</p>
             </div>
           </div>
         </article>
@@ -1329,54 +1383,56 @@
     <section class="section" id="s13" data-slide="13" data-nav="Як Reels стає реальною допомогою">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
-          <div class="slide-header">
-            <h1 class="slide-title" style="font-size: clamp(28px, 4.5vw, 80px) !important;">🌊 Як Reels стає реальною допомогою</h1>
-            <p class="slide-subtitle" style="font-size: clamp(16px, 2.4vw, 40px) !important;">На прикладі "Морсічсервіс"</p>
-          </div>
+          <div class="panel-inner">
+            <div class="slide-header">
+              <h1 class="slide-title">🌊 Як Reels стає реальною допомогою</h1>
+              <p class="slide-subtitle">На прикладі "Морсічсервіс"</p>
+            </div>
 
-          <div class="content-section" style="padding-top:0;">
-            <div class="timeline-container" style="margin:10px 0;">
-              <div class="timeline-line"></div>
+            <div class="content-section">
+              <div class="timeline-container" style="margin: var(--space-2) 0;">
+                <div class="timeline-line"></div>
 
-              <div class="timeline-step">
-                <div class="timeline-icon">📞</div>
-                <div class="timeline-content">
-                  <div class="timeline-title">1️⃣ Звернення моряка</div>
-                  <p class="timeline-description">Моряк звернувся за консультацією та проханням отримати замість нього документи у ДП "Морсічсервіс"</p>
+                <div class="timeline-step">
+                  <div class="timeline-icon">📞</div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">1️⃣ Звернення моряка</div>
+                    <p class="timeline-description">Моряк звернувся за консультацією та проханням отримати замість нього документи у ДП "Морсічсервіс"</p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="timeline-step">
-                <div class="timeline-icon">⚖️</div>
-                <div class="timeline-content">
-                  <div class="timeline-title">2️⃣ Робота юристів MTWTU LAW HUB</div>
-                  <p class="timeline-description">Юристи проконсультували, оформили представництво і отримали документи без посередників</p>
+                <div class="timeline-step">
+                  <div class="timeline-icon">⚖️</div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">2️⃣ Робота юристів MTWTU LAW HUB</div>
+                    <p class="timeline-description">Юристи проконсультували, оформили представництво і отримали документи без посередників</p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="timeline-step">
-                <div class="timeline-icon">📱</div>
-                <div class="timeline-content">
-                  <div class="timeline-title">3️⃣ Створення Reels</div>
-                  <p class="timeline-description">Зняли короткий Reels із поясненням — переглянули <strong style="color:var(--gold);">73 000+ людей</strong></p>
+                <div class="timeline-step">
+                  <div class="timeline-icon">📱</div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">3️⃣ Створення Reels</div>
+                    <p class="timeline-description">Зняли короткий Reels із поясненням — переглянули <strong style="color:var(--gold);">73 000+ людей</strong></p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="timeline-step">
-                <div class="timeline-icon">💬</div>
-                <div class="timeline-content">
-                  <div class="timeline-title">4️⃣ Відгук аудиторії</div>
-                  <p class="timeline-description">Інші члени ПРМТУ вп</p>
+                <div class="timeline-step">
+                  <div class="timeline-icon">💬</div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">4️⃣ Відгук аудиторії</div>
+                    <p class="timeline-description">Інші члени ПРМТУ вп</p>
+                  </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- SECTION 14 / 15: якщо у вас є текст слайдів 14–15 — просто вставте їх за аналогією з секціями вище -->
+    <!-- SECTION 14 / 15: у вашому коді вони не надані -->
   </main>
 
   <!-- Floating navigation -->
@@ -1390,16 +1446,14 @@
 
   <script>
     (function(){
-      const page = document.getElementById('page');
       const sections = Array.from(document.querySelectorAll('section.section'));
       const counterEl = document.getElementById('counter');
       const btnPrev = document.getElementById('btnPrev');
       const btnNext = document.getElementById('btnNext');
 
-      // Inject watermark + lighthouse into slides that request them
+      // Inject watermark + lighthouse
       const tplWatermark = document.getElementById('tpl-watermark');
       const tplLighthouse = document.getElementById('tpl-lighthouse');
-
       document.querySelectorAll('.slide').forEach(slide=>{
         if (slide.dataset.watermark === "1" && tplWatermark){
           slide.appendChild(tplWatermark.content.cloneNode(true));
@@ -1409,7 +1463,7 @@
         }
       });
 
-      // Build menu from sections (UnionPoly-like)
+      // Menu
       const overlay = document.getElementById('overlay');
       const drawer = document.getElementById('drawer');
       const navlist = document.getElementById('navlist');
@@ -1427,7 +1481,6 @@
         drawer.classList.remove('open');
         drawer.setAttribute('aria-hidden','true');
       }
-
       btnMenu?.addEventListener('click', openMenu);
       btnClose?.addEventListener('click', closeMenu);
       overlay?.addEventListener('click', closeMenu);
@@ -1447,7 +1500,7 @@
         navButtons.push(b);
       });
 
-      // Particles + lines (only where containers exist)
+      // Particles + lines
       function seedParticles(){
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         document.querySelectorAll('.js-particles').forEach(el=>{
@@ -1482,9 +1535,8 @@
         });
       }
       seedParticles();
-      window.addEventListener('resize', ()=>{ /* keep it light */ });
 
-      // Counters (IntersectionObserver)
+      // Counters
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       function animateCounter(el){
@@ -1519,7 +1571,6 @@
         }, {threshold: 0.35});
         counterEls.forEach(el=>io.observe(el));
       } else {
-        // Reduced motion: set final values immediately
         counterEls.forEach(el=>{
           const target = Number(el.dataset.target || '0');
           const suffix = el.dataset.suffix || '';
@@ -1527,9 +1578,9 @@
         });
       }
 
-      // Active section tracking + bottom prev/next + menu highlight
+      // Active tracking + prev/next + menu highlight
       function getActiveIndex(){
-        const y = window.scrollY + 120;
+        const y = window.scrollY + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbarH')) || 70) + 40;
         let idx = 0;
         for (let i=0;i<sections.length;i++){
           if (sections[i].offsetTop <= y) idx = i;
@@ -1543,7 +1594,6 @@
         counterEl.textContent = `${String(idx+1).padStart(2,'0')}/${String(total).padStart(2,'0')}`;
         btnPrev.disabled = idx === 0;
         btnNext.disabled = idx === total - 1;
-
         navButtons.forEach((b,i)=>b.classList.toggle('active', i===idx));
       }
 
@@ -1558,37 +1608,25 @@
       window.addEventListener('scroll', ()=>{ updateUI(); }, {passive:true});
       updateUI();
 
-      // Optional: click on empty space in a section -> go next (nice, but not intrusive)
-      sections.forEach((sec, i)=>{
-        sec.addEventListener('click', (e)=>{
-          const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
-          // ignore clicks on buttons/links
-          if (['button','a','input','textarea','select'].includes(tag)) return;
-          // ignore selection inside text
-          if (window.getSelection && String(window.getSelection()).length > 0) return;
-          // only if user clicks the section background area, not inside interactive cards
-          const slide = sec.querySelector('.slide');
-          if (!slide) return;
-          if (slide.contains(e.target) && (e.target.closest('.stat-card,.navitem,.btn,.mini') || tag === 'svg')) return;
-          if (i < sections.length - 1) scrollToIndex(i+1);
-        });
-      });
-
-      // Mobile grid stacking for inline 4-col in section 10
+      // Responsive inline grids (kept logic; sizes already rewritten)
       function responsiveInlineGrids(){
-        const s10 = document.getElementById('s10');
-        if (!s10) return;
         const w = window.innerWidth;
-        const grid = s10.querySelector('div[style*="grid-template-columns: repeat(4"]');
-        if (grid){
-          grid.style.gridTemplateColumns = (w < 980) ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
-          if (w < 520) grid.style.gridTemplateColumns = '1fr';
+
+        const s10 = document.getElementById('s10');
+        if (s10){
+          const grid = s10.querySelector('div[style*="grid-template-columns: repeat(4"]');
+          if (grid){
+            grid.style.gridTemplateColumns = (w < 980) ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
+            if (w < 520) grid.style.gridTemplateColumns = '1fr';
+          }
         }
+
         const s12 = document.getElementById('s12');
         if (s12){
           const g = s12.querySelector('div[style*="grid-template-columns: repeat(2"]');
           if (g) g.style.gridTemplateColumns = (w < 980) ? '1fr' : 'repeat(2, 1fr)';
         }
+
         const s11 = document.getElementById('s11');
         if (s11){
           const g3 = s11.querySelector('div[style*="grid-template-columns: repeat(3"]');
