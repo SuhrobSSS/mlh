@@ -1405,13 +1405,23 @@
         transform: scale(0.5);
       }
     }
+   html, body { height: 100%; margin: 0; }
+body { overflow: hidden; display: flex; align-items: center; justify-content: center; }
+
+#scaleRoot { 
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 50% 50%;
+}
+
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
-  <div class="presentation-container"><!-- Slide 1: Cover -->
+  <div class="presentation-container" id="scaleRoot">
+   <!-- Slide 1: Cover -->
    <div class="slide active">
     <div class="particles" id="particles"></div>
     <div class="animated-lines" id="animatedLines"></div>
@@ -2340,6 +2350,37 @@
 const scaleRoot = document.querySelector('.presentation-container');
 const BASE_W = 1920;
 const BASE_H = 1080;
+<script>
+  const defaultConfig = { ... };
+
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  // ✅ ОТУТ вставляєш масштаб
+  const BASE_W = 1920;
+  const BASE_H = 1080;
+  const scaleRoot = document.getElementById('scaleRoot');
+
+  function fitToViewport() {
+    if (!scaleRoot) return;
+    const pad = 16;
+    const availW = window.innerWidth - pad * 2;
+    const availH = window.innerHeight - pad * 2;
+    const scale = Math.min(availW / BASE_W, availH / BASE_H);
+    scaleRoot.style.transform = `scale(${scale})`;
+  }
+
+  window.addEventListener('resize', fitToViewport);
+  fitToViewport();
+  // ✅ кінець блоку масштабу
+
+  function animateCounters(slideEl) { ... }
+  function showSlide(n) { ... }
+  function changeSlide(direction) { ... }
+
+  document.addEventListener('keydown', (e) => { ... });
+</script>
 
 function fitToScreen() {
   const vw = window.innerWidth;
@@ -2547,5 +2588,23 @@ window.addEventListener('orientationchange', fitToScreen);
     createParticles();
     createAnimatedLines();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9acd2cdf94bb70c2',t:'MTc2NTU0MjAyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9acd2cdf94bb70c2',t:'MTc2NTU0MjAyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+      const BASE_W = 1920;
+const BASE_H = 1080;
+const scaleRoot = document.getElementById('scaleRoot');
+
+function fitToViewport() {
+  if (!scaleRoot) return;
+
+  const pad = 16;
+  const availW = window.innerWidth - pad * 2;
+  const availH = window.innerHeight - pad * 2;
+
+  const scale = Math.min(availW / BASE_W, availH / BASE_H);
+  scaleRoot.style.transform = `scale(${scale})`;
+}
+
+window.addEventListener('resize', fitToViewport);
+fitToViewport();
+      </body>
 </html>
