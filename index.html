@@ -1375,21 +1375,8 @@
       letter-spacing: 0.5px;
       text-shadow: 0 2px 10px rgba(233, 196, 106, 0.3);
     }
-/* ===== FONT SCALE FIX (після переносу з Canva) ===== */
-:root { --ui-scale: 0.67; } /* міняй: 0.70..0.90 */
 
-.cover-content,
-.slide-header,
-.content-section,
-.nav-container {
-  zoom: var(--ui-scale);
-}
-
-/* (опційно) трохи зменшити водяний знак */
-.logo-watermark { zoom: 0.85; }
-
-/* ===== далі твій код без змін ===== */
-@media (max-width: 1400px) {
+    @media (max-width: 1400px) {
       .slide {
         padding: 25px 40px 80px;
       }
@@ -1420,80 +1407,12 @@
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
-  <style>
-/* --- Slide 1 bubbles (small gold, top strip) --- */
-#slide1 { position: relative; }
-
-#slide1 .bubbles{
-  position:absolute;
-  left:0; right:0; top:0;
-  height:18vh;                 /* тільки верх, як на фото */
-  overflow:hidden;
-  pointer-events:none;
-  z-index:2;
-}
-
-#slide1 .bubble{
-  position:absolute;
-  bottom:-40px;
-  left:var(--left, 50%);
-  width:var(--size, 4px);
-  height:var(--size, 4px);
-  border-radius:50%;
-  opacity:var(--alpha, .18);
-
-  /* золотий як шрифт (MTWTU LAW HUB) */
-  background: radial-gradient(circle at 30% 30%,
-    rgba(255,255,255,.65) 0%,
-    rgba(233,196,106,.45) 40%,
-    rgba(233,196,106,.12) 60%,
-    rgba(233,196,106,0) 75%
-  );
-  box-shadow: 0 0 10px rgba(233,196,106,.18);
-  filter: blur(0.2px);
-
-  transform: translate3d(0,0,0);
-  animation: bubble-rise var(--dur, 10s) linear infinite;
-}
-
-/* рух такий самий “вгору”, просто в межах верхньої смуги */
-@keyframes bubble-rise{
-  0%   { transform: translate3d(0, 0, 0) scale(.95); }
-  20%  { transform: translate3d(6px, -6vh, 0) scale(1); }
-  60%  { transform: translate3d(-8px, -16vh, 0) scale(1.05); }
-  100% { transform: translate3d(5px, -28vh, 0) scale(1.1); }
-}
-
-@media (prefers-reduced-motion: reduce){
-  #slide1 .bubble{ animation: none; }
-}
-  @media (prefers-reduced-motion: reduce){
-    #slide1 .bubble{ animation: none; }
-  }
-/* --- Slide 5: KPI cards slightly smaller (fonts unchanged) --- */
-#slide5 .stats-grid.kpi-row{
-  max-width: 1500px;      /* трохи звужує ряд */
-  margin: 0 auto;
-  gap: 18px !important;   /* менший проміжок між плитками (якщо в тебе є gap) */
-}
-
-#slide5 .stats-grid.kpi-row .stat-card{
-  padding: 18px 22px !important; /* робить плитку компактнішою, шрифти не змінює */
-  min-height: 140px !important;  /* трохи нижча плитка */
-}
-
-  </style>
-
  </head>
  <body>
-  <div class="presentation-container">
-   <!-- Slide 1: Cover -->
- <div class="slide active" id="slide1">
+  <div class="presentation-container"><!-- Slide 1: Cover -->
+   <div class="slide active">
     <div class="particles" id="particles"></div>
     <div class="animated-lines" id="animatedLines"></div>
-    <div class="bubbles" id="bubbles1"></div>
-    <div class="bubbles" id="bubbles" aria-hidden="true"></div>
-    <div class="bubbles" id="bubbles" aria-hidden="true"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -1657,7 +1576,7 @@
      </div>
     </div>
    </div><!-- Slide 5: Instagram Stats -->
-   <div class="slide" id="slide5">
+   <div class="slide">
     <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
     </div>
     <div class="lighthouse-scene">
@@ -1691,7 +1610,7 @@
      <p class="slide-subtitle">Основна платформа для візуального контенту</p>
     </div>
     <div class="content-section">
-     <div class="stats-grid kpi-row">
+     <div class="stats-grid">
       <div class="stat-card">
        <div class="stat-number js-counter" data-target="1603370" data-suffix="+">
         0
@@ -2575,37 +2494,5 @@
     createParticles();
     createAnimatedLines();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9acd2cdf94bb70c2',t:'MTc2NTU0MjAyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
- <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const bubbles = document.getElementById("bubbles");
-    if (!bubbles) return;
-
-    // щоб не дублювало пузирки при повторному запуску
-    if (bubbles.dataset.ready === "1") return;
-    bubbles.dataset.ready = "1";
-
-    const count = 40;
-    for (let i = 0; i < count; i++) {
-      const b = document.createElement("span");
-      b.className = "bubble";
-
-      const size = 2 + Math.random() * 4;       // 2..6px
-      const left = Math.random() * 100;           // 0..100%
-      const dur  = 8 + Math.random() * 10;        // 8..18s
-      const delay = -Math.random() * dur;         // старт “в процесі”
-      const alpha = 0.06 + Math.random() * 0.14;  // 0.06..0.20
-
-      b.style.setProperty("--size", `${size}px`);
-      b.style.setProperty("--left", `${left}%`);
-      b.style.setProperty("--dur", `${dur}s`);
-      b.style.setProperty("--alpha", `${alpha}`);
-      b.style.animationDelay = `${delay}s`;
-
-      bubbles.appendChild(b);
-    }
-  });
-</script>
-
- </body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9acd2cdf94bb70c2',t:'MTc2NTU0MjAyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
