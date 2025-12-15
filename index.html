@@ -1470,7 +1470,19 @@
   @media (prefers-reduced-motion: reduce){
     #slide1 .bubble{ animation: none; }
   }
-</style>
+/* --- Slide 5: KPI cards slightly smaller (fonts unchanged) --- */
+#slide5 .stats-grid.kpi-row{
+  max-width: 1500px;      /* трохи звужує ряд */
+  margin: 0 auto;
+  gap: 18px !important;   /* менший проміжок між плитками (якщо в тебе є gap) */
+}
+
+#slide5 .stats-grid.kpi-row .stat-card{
+  padding: 18px 22px !important; /* робить плитку компактнішою, шрифти не змінює */
+  min-height: 140px !important;  /* трохи нижча плитка */
+}
+
+  </style>
 
  </head>
  <body>
@@ -1645,7 +1657,7 @@
      </div>
     </div>
    </div><!-- Slide 5: Instagram Stats -->
-   <div class="slide">
+   <div class="slide" id="slide5">
     <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span> <span class="logo-watermark-sub">LAW HUB</span>
     </div>
     <div class="lighthouse-scene">
@@ -1679,7 +1691,7 @@
      <p class="slide-subtitle">Основна платформа для візуального контенту</p>
     </div>
     <div class="content-section">
-     <div class="stats-grid">
+     <div class="stats-grid kpi-row">
       <div class="stat-card">
        <div class="stat-number js-counter" data-target="1603370" data-suffix="+">
         0
