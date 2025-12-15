@@ -2,7 +2,8 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
   <title>MTWTU LAW HUB - Презентація</title>
 
   <script src="/_sdk/element_sdk.js"></script>
@@ -13,90 +14,220 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 
     :root{
-      --design-w: 1920;
-      --design-h: 1080;
-      --scale: 1;
-      --pad: 16px;
-      --navH: 0px;
+      --gold: #e9c46a;
+      --deep: #0a3b5c;
+      --mid:  #041c2f;
+      --bg:   #000000;
+
+      --pad: clamp(14px, 3vw, 46px);
+      --radius: clamp(18px, 2.2vw, 28px);
+      --maxw: 1200px;
+
+      /* Responsive typography (keeps your design but scales nicely) */
+      --fz-cover-logo: clamp(44px, 6.4vw, 120px);
+      --fz-cover-sub:  clamp(18px, 3.2vw, 72px);
+      --fz-cover-tag:  clamp(16px, 2.6vw, 54px);
+
+      --fz-title:      clamp(34px, 5.2vw, 96px);
+      --fz-subtitle:   clamp(16px, 2.6vw, 48px);
+      --fz-text:       clamp(15px, 2.1vw, 42px);
+      --fz-li:         clamp(15px, 2.0vw, 40px);
+
+      --fz-stat:       clamp(28px, 4.8vw, 76px);
+      --fz-stat-label: clamp(12px, 1.7vw, 30px);
     }
 
-    html, body {
+    html, body{
       height: 100%;
       margin: 0;
-      background: #000000;
-      color: #ffffff;
+      background: var(--bg);
+      color: #fff;
       font-family: 'Cormorant Garamond', serif;
-    }
-
-    * { box-sizing: border-box; }
-
-    /* One-page scroll with snap */
-    body{
-      overflow-y: auto;
       overflow-x: hidden;
       scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      -webkit-overflow-scrolling: touch;
     }
 
-    .page{
-      width: 100%;
-      min-height: 100%;
-    }
+    *{ box-sizing: border-box; }
+    img, svg{ max-width: 100%; height: auto; }
 
-    .section{
-      height: 100vh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--pad);
-      position: relative;
+    /* ====== Layout like a landing (UnionPoly-style) ====== */
+    header.topbar{
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(135deg, rgba(0,0,0,.55) 0%, rgba(4,28,47,.35) 100%);
+      border-bottom: 1px solid rgba(233,196,106,.22);
     }
-
-    /* Keeps your original 1920x1080 design, scaled to fit screen */
-    .frame{
-      width: 1920px;
-      height: 1080px;
-      transform: scale(var(--scale));
-      transform-origin: center center;
-      position: relative;
-      overflow: hidden;
-      background: radial-gradient(ellipse at top, #0a3b5c 0%, #041c2f 50%, #000000 100%);
-      border-radius: 0;
+    .topbar-inner{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 10px var(--pad);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
     }
-
-    /* Click-to-next hint (subtle) */
-    .section::after{
-      content: "Клік — наступний слайд";
-      position: absolute;
-      left: 50%;
-      bottom: 10px;
-      transform: translateX(-50%);
+    .brand{
+      display:flex;
+      flex-direction: column;
+      line-height: 1.05;
+      user-select: none;
+    }
+    .brand .b1{
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(233,196,106,.35);
+      font-size: 18px;
+    }
+    .brand .b2{
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,.85);
       font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .top-actions{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+    .btn{
+      background: linear-gradient(135deg, rgba(233, 196, 106, 0.22) 0%, rgba(233, 196, 106, 0.12) 100%);
+      border: 1.8px solid rgba(233, 196, 106, 0.9);
+      color: var(--gold);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all .25s ease;
       letter-spacing: .4px;
-      color: rgba(233, 196, 106, 0.7);
-      opacity: .35;
-      pointer-events: none;
       text-transform: uppercase;
       font-family: 'Montserrat', sans-serif;
+      box-shadow: 0 8px 26px rgba(0,0,0,.35);
+      user-select: none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 34px rgba(233,196,106,.22), 0 8px 26px rgba(0,0,0,.35);
+      color: #0a3b5c;
+      background: linear-gradient(135deg, rgba(233, 196, 106, 0.95) 0%, rgba(244, 213, 141, 0.95) 100%);
+      border-color: rgba(244,213,141,1);
     }
 
-    /* --- Your original slide styles (almost unchanged) --- */
-    .slide {
-      width: 100%;
+    /* Drawer menu (like a modern landing) */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+      z-index: 3000;
+    }
+    .overlay.open{ opacity: 1; pointer-events: auto; }
+
+    .drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
       height: 100%;
-      padding: 30px 50px 90px;
+      width: min(380px, 88vw);
+      background: linear-gradient(135deg, rgba(4,28,47,.96) 0%, rgba(0,0,0,.96) 100%);
+      border-left: 1px solid rgba(233,196,106,.28);
+      box-shadow: -24px 0 80px rgba(0,0,0,.55);
+      transform: translateX(100%);
+      transition: transform .25s ease;
+      z-index: 3100;
+      padding: 18px;
+      overflow: auto;
+    }
+    .drawer.open{ transform: translateX(0); }
+    .drawer h3{
+      margin: 8px 0 14px;
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .navlist{
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .navitem{
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(233,196,106,.18);
+      background: rgba(233,196,106,.08);
+      color: rgba(255,255,255,.92);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .navitem:hover{
+      border-color: rgba(233,196,106,.55);
+      transform: translateX(-2px);
+      background: rgba(233,196,106,.14);
+    }
+    .navitem.active{
+      border-color: rgba(233,196,106,.85);
+      background: rgba(233,196,106,.18);
+      color: var(--gold);
+    }
+
+    main#page{
+      width: 100%;
+    }
+
+    section.section{
+      padding: calc(var(--pad) + 10px) var(--pad);
+      scroll-margin-top: 78px;
+      position: relative;
+    }
+
+    /* Full-screen feel: each block starts with a cinematic frame */
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .slide{
       position: relative;
       overflow: hidden;
+      background: radial-gradient(ellipse at top, var(--deep) 0%, var(--mid) 50%, var(--bg) 100%);
+      border-radius: var(--radius);
+      border: 1px solid rgba(233,196,106,.18);
+      box-shadow:
+        0 22px 70px rgba(0,0,0,.55),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+      padding: clamp(16px, 2.6vw, 34px);
+      min-height: min(92svh, 980px);
       display: flex;
       flex-direction: column;
       justify-content: center;
+      transform: translateZ(0);
     }
 
-    /* Animated Background Particles */
-    .particles {
+    /* Hero section: true full screen */
+    .hero .slide{
+      min-height: calc(100svh - 78px);
+      padding: clamp(18px, 3vw, 52px);
+    }
+
+    /* Decorative layers */
+    .particles, .animated-lines{
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
@@ -104,32 +235,23 @@
       z-index: 0;
       pointer-events: none;
     }
-    .particle {
+    .particle{
       position: absolute;
       width: 4px; height: 4px;
-      background: radial-gradient(circle, #e9c46a 0%, transparent 70%);
+      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
       border-radius: 50%;
       opacity: 0.6;
       animation: float 20s infinite ease-in-out;
       box-shadow: 0 0 10px rgba(233, 196, 106, 0.8);
     }
-    @keyframes float {
-      0%   { transform: translateY(100%) translateX(0) scale(0); opacity: 0; }
+    @keyframes float{
+      0%   { transform: translateY(110%) translateX(0) scale(0); opacity: 0; }
       10%  { opacity: 0.6; transform: translateY(90%) translateX(20px) scale(1); }
       90%  { opacity: 0.6; transform: translateY(10%) translateX(-20px) scale(1); }
       100% { transform: translateY(-10%) translateX(0) scale(0); opacity: 0; }
     }
 
-    /* Elegant wave lines */
-    .animated-lines {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      overflow: hidden;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .moving-line {
+    .moving-line{
       position: absolute;
       width: 100%;
       height: 2px;
@@ -137,143 +259,167 @@
       opacity: 0.5;
       animation: waveMove 8s infinite ease-in-out;
     }
-    @keyframes waveMove {
+    @keyframes waveMove{
       0%   { transform: translateX(-100%); opacity: 0; }
       50%  { opacity: 0.5; }
       100% { transform: translateX(100%); opacity: 0; }
     }
 
-    /* Glowing orbs in background */
-    .orb {
+    .orb{
       position: absolute;
       border-radius: 50%;
       filter: blur(80px);
       opacity: 0.15;
       animation: orbFloat 15s ease-in-out infinite;
       pointer-events: none;
+      z-index: 0;
     }
-    .orb-1 { width: 400px; height: 400px; background: #e9c46a; top: 10%; left: 10%; animation-delay: 0s; }
-    .orb-2 { width: 500px; height: 500px; background: #0a3b5c; bottom: 10%; right: 10%; animation-delay: 5s; }
-    .orb-3 { width: 300px; height: 300px; background: #e9c46a; top: 50%; right: 20%; animation-delay: 10s; }
-    @keyframes orbFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33%      { transform: translate(50px, -50px) scale(1.1); }
-      66%      { transform: translate(-30px, 30px) scale(0.9); }
+    .orb-1{ width: 400px; height: 400px; background: var(--gold); top: 10%; left: 10%; animation-delay: 0s; }
+    .orb-2{ width: 520px; height: 520px; background: var(--deep); bottom: 10%; right: 8%; animation-delay: 5s; }
+    .orb-3{ width: 320px; height: 320px; background: var(--gold); top: 50%; right: 20%; animation-delay: 10s; }
+    @keyframes orbFloat{
+      0%,100%{ transform: translate(0,0) scale(1); }
+      33%{ transform: translate(50px,-50px) scale(1.1); }
+      66%{ transform: translate(-30px,30px) scale(.9); }
     }
 
-    /* Lighthouse scene container */
-    .lighthouse-scene {
+    /* Watermark */
+    .logo-watermark{
+      font-family: 'Cormorant Garamond', serif;
       position: absolute;
-      bottom: 20px;
-      right: 40px;
+      top: 18px;
+      right: 20px;
+      color: var(--gold);
+      opacity: 0.3;
+      text-shadow: 0 0 20px rgba(233, 196, 106, 0.5);
+      animation: pulse 3s ease-in-out infinite;
+      text-align: right;
+      line-height: 1.2;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .logo-watermark-main{ font-size: 28px; font-weight: 700; letter-spacing: 3px; display: block; }
+    .logo-watermark-sub{ font-size: 26px; font-weight: 500; letter-spacing: 0.5px; display: block; margin-top: -2px; margin-left: 16px; }
+    @keyframes pulse{
+      0%,100%{ opacity: .3; text-shadow: 0 0 20px rgba(233,196,106,.5); }
+      50%{ opacity: .5; text-shadow: 0 0 30px rgba(233,196,106,.8); }
+    }
+
+    /* Lighthouse (kept as-is, but scaled responsively) */
+    .lighthouse-scene{
+      position: absolute;
+      bottom: 14px;
+      right: 18px;
       width: 70px;
       height: 130px;
       z-index: 10;
-      transform: scale(0.7);
+      transform: scale(clamp(0.55, 1.1vw, 0.75));
+      transform-origin: bottom right;
+      pointer-events: none;
+      opacity: .98;
     }
-    .lighthouse { position: relative; width: 100%; height: 100%; filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6)); }
-    .lighthouse-base {
-      position: absolute; bottom: 0; left: 50%;
+    .lighthouse{ position: relative; width: 100%; height: 100%; filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6)); }
+    .lighthouse-base{
+      position:absolute; bottom:0; left:50%;
       transform: translateX(-50%);
       width: 80px; height: 25px;
       background: linear-gradient(135deg, #4a4a4a 0%, #2a2a2a 50%, #1a1a1a 100%);
       border-radius: 50% 50% 0 0 / 30% 30% 0 0;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     }
-    .lighthouse-base::before {
-      content: '';
-      position: absolute;
-      bottom: -8px; left: -10px; right: -10px;
-      height: 12px;
+    .lighthouse-base::before{
+      content:'';
+      position:absolute;
+      bottom:-8px; left:-10px; right:-10px;
+      height:12px;
       background: linear-gradient(135deg, #0a2a3a 0%, #051520 100%);
       border-radius: 50%;
-      z-index: -1;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      z-index:-1;
+      box-shadow: 0 2px 10px rgba(0,0,0,.6);
     }
     .lighthouse-tower{
-      position: absolute; bottom: 25px; left: 50%;
+      position:absolute; bottom:25px; left:50%;
       transform: translateX(-50%);
-      width: 45px; height: 90px;
+      width:45px; height:90px;
       background: linear-gradient(90deg, #c0c0c0 0%, #ffffff 30%, #f0f0f0 50%, #d0d0d0 70%, #b0b0b0 100%);
       border-radius: 8px 8px 0 0;
-      box-shadow: inset -3px 0 8px rgba(0, 0, 0, 0.3), inset 3px 0 8px rgba(255, 255, 255, 0.5);
+      box-shadow: inset -3px 0 8px rgba(0,0,0,.3), inset 3px 0 8px rgba(255,255,255,.5);
     }
     .lighthouse-stripe{
-      position: absolute; left: 0; right: 0;
-      height: 18px;
-      background: linear-gradient(90deg, #d4a259 0%, #e9c46a 25%, #f4d58d 50%, #e9c46a 75%, #d4a259 100%);
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 -2px 6px rgba(255, 255, 255, 0.2);
+      position:absolute; left:0; right:0;
+      height:18px;
+      background: linear-gradient(90deg, #d4a259 0%, var(--gold) 25%, #f4d58d 50%, var(--gold) 75%, #d4a259 100%);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,.3), inset 0 -2px 6px rgba(255,255,255,.2);
     }
-    .stripe-1{ top: 18px; }
-    .stripe-2{ top: 54px; }
+    .stripe-1{ top:18px; }
+    .stripe-2{ top:54px; }
 
     .lighthouse-window{
-      position: absolute; left: 50%;
+      position:absolute; left:50%;
       transform: translateX(-50%);
-      width: 9px; height: 12px;
-      background: linear-gradient(135deg, #0a3b5c 0%, #1a4a6c 50%, #041c2f 100%);
+      width:9px; height:12px;
+      background: linear-gradient(135deg, var(--deep) 0%, #1a4a6c 50%, var(--mid) 100%);
       border-radius: 4px 4px 0 0;
       border: 1.5px solid #3a3a3a;
-      box-shadow: inset 0 0 6px rgba(10, 59, 92, 0.9);
+      box-shadow: inset 0 0 6px rgba(10,59,92,.9);
     }
-    .window-1{ bottom: 68px; }
-    .window-2{ bottom: 44px; }
-    .window-3{ bottom: 8px; }
+    .window-1{ bottom:68px; }
+    .window-2{ bottom:44px; }
+    .window-3{ bottom:8px; }
 
     .lighthouse-top-section{
-      position: absolute; bottom: 115px; left: 50%;
+      position:absolute; bottom:115px; left:50%;
       transform: translateX(-50%);
-      width: 52px; height: 8px;
-      background: linear-gradient(135deg, #e9c46a 0%, #f4d58d 50%, #d4a259 100%);
+      width:52px; height:8px;
+      background: linear-gradient(135deg, var(--gold) 0%, #f4d58d 50%, #d4a259 100%);
       border-radius: 4px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 10px rgba(0,0,0,.4);
     }
 
     .lighthouse-dome{
-      position: absolute; bottom: 123px; left: 50%;
+      position:absolute; bottom:123px; left:50%;
       transform: translateX(-50%);
-      width: 42px; height: 30px;
-      background: linear-gradient(135deg, rgba(233, 196, 106, 0.7) 0%, rgba(233, 196, 106, 0.5) 50%, rgba(233, 196, 106, 0.6) 100%);
-      border: 3px solid #e9c46a;
+      width:42px; height:30px;
+      background: linear-gradient(135deg, rgba(233,196,106,.7) 0%, rgba(233,196,106,.5) 50%, rgba(233,196,106,.6) 100%);
+      border: 3px solid var(--gold);
       border-radius: 50% 50% 0 0;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(233, 196, 106, 0.9),
-                  0 0 60px rgba(233, 196, 106, 0.6),
-                  inset 0 0 20px rgba(255, 255, 255, 0.5);
+      overflow:hidden;
+      box-shadow: 0 0 40px rgba(233,196,106,.9),
+                  0 0 60px rgba(233,196,106,.6),
+                  inset 0 0 20px rgba(255,255,255,.5);
       animation: domeGlow 3s ease-in-out infinite;
     }
     @keyframes domeGlow{
-      0%, 100%{
-        box-shadow: 0 0 40px rgba(233, 196, 106, 0.9),
-                    0 0 60px rgba(233, 196, 106, 0.6),
-                    inset 0 0 20px rgba(255, 255, 255, 0.5);
+      0%,100%{
+        box-shadow: 0 0 40px rgba(233,196,106,.9),
+                    0 0 60px rgba(233,196,106,.6),
+                    inset 0 0 20px rgba(255,255,255,.5);
       }
       50%{
-        box-shadow: 0 0 60px rgba(233, 196, 106, 1),
-                    0 0 90px rgba(233, 196, 106, 0.8),
-                    0 0 120px rgba(233, 196, 106, 0.5),
-                    inset 0 0 30px rgba(255, 255, 255, 0.7);
+        box-shadow: 0 0 60px rgba(233,196,106,1),
+                    0 0 90px rgba(233,196,106,.8),
+                    0 0 120px rgba(233,196,106,.5),
+                    inset 0 0 30px rgba(255,255,255,.7);
       }
     }
     .lighthouse-light-source{
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 18px; height: 18px;
-      background: radial-gradient(circle, #ffffff 0%, #fffaed 30%, #f4d58d 60%, #e9c46a 100%);
+      position:absolute; top:50%; left:50%;
+      transform: translate(-50%,-50%);
+      width:18px; height:18px;
+      background: radial-gradient(circle, #ffffff 0%, #fffaed 30%, #f4d58d 60%, var(--gold) 100%);
       border-radius: 50%;
-      box-shadow: 0 0 25px #ffffff, 0 0 40px #fffaed, 0 0 60px #f4d58d, 0 0 80px #e9c46a;
+      box-shadow: 0 0 25px #ffffff, 0 0 40px #fffaed, 0 0 60px #f4d58d, 0 0 80px var(--gold);
       animation: lightSourcePulse 2s ease-in-out infinite;
     }
     @keyframes lightSourcePulse{
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .95; }
-      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      0%,100%{ transform: translate(-50%,-50%) scale(1); opacity: .95; }
+      50%{ transform: translate(-50%,-50%) scale(1.2); opacity: 1; }
     }
-
     .lighthouse-beam{
-      position: absolute;
-      bottom: 138px; left: 50%;
+      position:absolute;
+      bottom:138px; left:50%;
       transform: translateX(-50%);
-      width: 900px; height: 900px;
+      width:900px; height:900px;
       background: radial-gradient(
         ellipse 2% 85% at 50% 100%,
         rgba(255, 255, 255, 0.95) 0%,
@@ -299,12 +445,12 @@
       position:absolute; inset:0;
       background: radial-gradient(
         ellipse 1% 80% at 50% 100%,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.95) 5%,
-        rgba(255, 250, 240, 0.9) 12%,
-        rgba(255, 245, 220, 0.75) 22%,
-        rgba(233, 196, 106, 0.6) 32%,
-        rgba(233, 196, 106, 0.4) 45%,
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,.95) 5%,
+        rgba(255,250,240,.9) 12%,
+        rgba(255,245,220,.75) 22%,
+        rgba(233,196,106,.6) 32%,
+        rgba(233,196,106,.4) 45%,
         transparent 60%
       );
       filter: blur(1px);
@@ -314,11 +460,11 @@
       position:absolute; inset:0;
       background: radial-gradient(
         ellipse 4% 88% at 50% 100%,
-        rgba(233, 196, 106, 0.35) 0%,
-        rgba(233, 196, 106, 0.25) 20%,
-        rgba(233, 196, 106, 0.15) 40%,
-        rgba(233, 196, 106, 0.08) 60%,
-        rgba(233, 196, 106, 0.03) 75%,
+        rgba(233,196,106,.35) 0%,
+        rgba(233,196,106,.25) 20%,
+        rgba(233,196,106,.15) 40%,
+        rgba(233,196,106,.08) 60%,
+        rgba(233,196,106,.03) 75%,
         transparent 88%
       );
       filter: blur(6px);
@@ -330,9 +476,9 @@
       transform: translateX(-50%);
       width: 500px; height: 500px;
       background: radial-gradient(ellipse 35% 55% at 50% 100%,
-        rgba(255, 250, 230, 0.25) 0%,
-        rgba(233, 196, 106, 0.15) 20%,
-        rgba(233, 196, 106, 0.08) 40%,
+        rgba(255,250,230,.25) 0%,
+        rgba(233,196,106,.15) 20%,
+        rgba(233,196,106,.08) 40%,
         transparent 65%);
       animation: pulseGlow 3s ease-in-out infinite;
       pointer-events: none;
@@ -340,92 +486,23 @@
       opacity: 0.8;
     }
     @keyframes pulseGlow{
-      0%,100%{ opacity: 0.7; transform: translateX(-50%) scale(1); }
-      50%{ opacity: 0.95; transform: translateX(-50%) scale(1.08); }
+      0%,100%{ opacity: .7; transform: translateX(-50%) scale(1); }
+      50%{ opacity: .95; transform: translateX(-50%) scale(1.08); }
     }
     @keyframes rotateBeam{
-      0%   { transform: translateX(-50%) rotate(0deg); opacity: .9; }
-      25%  { opacity: 1; }
-      50%  { opacity: .95; }
-      75%  { opacity: 1; }
-      100% { transform: translateX(-50%) rotate(360deg); opacity: .9; }
+      0%{ transform: translateX(-50%) rotate(0deg); opacity: .9; }
+      25%{ opacity: 1; }
+      50%{ opacity: .95; }
+      75%{ opacity: 1; }
+      100%{ transform: translateX(-50%) rotate(360deg); opacity: .9; }
     }
 
-    .logo-watermark {
-      font-family: 'Cormorant Garamond', serif;
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: #e9c46a;
-      opacity: 0.3;
-      text-shadow: 0 0 20px rgba(233, 196, 106, 0.5);
-      animation: pulse 3s ease-in-out infinite;
-      text-align: right;
-      line-height: 1.2;
-      z-index: 5;
-    }
-    .logo-watermark-main { font-size: 32px; font-weight: 700; letter-spacing: 3px; display: block; }
-    .logo-watermark-sub  { font-size: 30px; font-weight: 500; letter-spacing: 0.5px; display: block; margin-top: -2px; margin-left: 20px; }
-    @keyframes pulse{
-      0%,100%{ opacity: .3; text-shadow: 0 0 20px rgba(233, 196, 106, 0.5); }
-      50%{ opacity: .5; text-shadow: 0 0 30px rgba(233, 196, 106, 0.8); }
-    }
-
-    .cover-content { position: relative; z-index: 3; text-align: center; }
-    .cover-logo{
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 120px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #e9c46a 0%, #f4d58d 30%, #ffffff 50%, #f4d58d 70%, #e9c46a 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-      animation: titleGlow 3s ease-in-out infinite, shimmer 4s linear infinite;
-    }
-    @keyframes titleGlow{
-      0%,100%{
-        filter: drop-shadow(0 0 30px rgba(233, 196, 106, 0.8)) drop-shadow(0 0 60px rgba(233, 196, 106, 0.4));
-        transform: scale(1);
-      }
-      50%{
-        filter: drop-shadow(0 0 50px rgba(233, 196, 106, 1)) drop-shadow(0 0 80px rgba(233, 196, 106, 0.6));
-        transform: scale(1.02);
-      }
-    }
-    @keyframes shimmer{
-      0%{ background-position: 0% center; }
-      100%{ background-position: 200% center; }
-    }
-    .cover-subtitle{
-      font-size: 72px;
-      color: #ffffff;
-      margin-bottom: 30px;
-      font-weight: 300;
-      line-height: 1.6;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      animation: fadeInUp 1s ease-out 0.3s both;
-    }
-    .cover-tagline{
-      font-size: 54px;
-      color: #e9c46a;
-      font-style: italic;
-      margin-top: 20px;
-      text-shadow: 0 0 15px rgba(233, 196, 106, 0.4);
-      animation: fadeInUp 1s ease-out 0.6s both;
-    }
-    @keyframes fadeInUp{
-      from{ opacity: 0; transform: translateY(30px); }
-      to{ opacity: 1; transform: translateY(0); }
-    }
-
-    .slide-header { margin-bottom: 25px; animation: fadeInUp 0.6s ease-out; z-index: 3; position: relative; }
+    /* ====== Your content styles (kept, but made responsive) ====== */
+    .slide-header{ margin-bottom: 18px; z-index: 3; position: relative; }
     .slide-title{
-      font-size: 96px;
+      font-size: var(--fz-title) !important;
       font-weight: 800;
-      background: linear-gradient(135deg, #e9c46a 0%, #fff 40%, #f4d58d 60%, #e9c46a 100%);
+      background: linear-gradient(135deg, var(--gold) 0%, #fff 40%, #f4d58d 60%, var(--gold) 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -434,7 +511,7 @@
       padding-bottom: 12px;
       display: inline-block;
       position: relative;
-      filter: drop-shadow(0 0 20px rgba(233, 196, 106, 0.4));
+      filter: drop-shadow(0 0 20px rgba(233,196,106,.4));
       animation: shimmer 5s linear infinite;
     }
     .slide-title::after{
@@ -442,85 +519,66 @@
       position:absolute;
       bottom:0; left:0;
       width:100%; height:3px;
-      background: linear-gradient(90deg, #e9c46a 0%, #f4d58d 50%, transparent 100%);
-      box-shadow: 0 0 15px rgba(233, 196, 106, 0.8), 0 0 30px rgba(233, 196, 106, 0.4);
+      background: linear-gradient(90deg, var(--gold) 0%, #f4d58d 50%, transparent 100%);
+      box-shadow: 0 0 15px rgba(233,196,106,.8), 0 0 30px rgba(233,196,106,.4);
       animation: glowPulse 2s ease-in-out infinite;
     }
+    @keyframes shimmer{ 0%{ background-position: 0% center; } 100%{ background-position: 200% center; } }
     @keyframes glowPulse{
-      0%,100%{ box-shadow: 0 0 15px rgba(233, 196, 106, 0.8), 0 0 30px rgba(233, 196, 106, 0.4); }
-      50%{ box-shadow: 0 0 25px rgba(233, 196, 106, 1), 0 0 50px rgba(233, 196, 106, 0.6); }
+      0%,100%{ box-shadow: 0 0 15px rgba(233,196,106,.8), 0 0 30px rgba(233,196,106,.4); }
+      50%{ box-shadow: 0 0 25px rgba(233,196,106,1), 0 0 50px rgba(233,196,106,.6); }
     }
     .slide-subtitle{
-      font-size: 48px;
-      color: rgba(255, 255, 255, 0.9);
+      font-size: var(--fz-subtitle) !important;
+      color: rgba(255,255,255,.9);
       font-weight: 300;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 8px rgba(0,0,0,.3);
     }
 
     .content-section{
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
       z-index: 2;
-      padding-top: 10px;
-      overflow: hidden;
       position: relative;
     }
-
     .content-text{
-      font-size: 42px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-      color: rgba(255, 255, 255, 0.9);
-      z-index: 2;
-      position: relative;
+      font-size: var(--fz-text) !important;
+      line-height: 1.55;
+      margin: 0 0 12px 0;
+      color: rgba(255,255,255,.9);
     }
 
     .highlight-box{
-      background: linear-gradient(135deg, rgba(233, 196, 106, 0.2) 0%, rgba(233, 196, 106, 0.1) 100%);
-      border-left: 4px solid #e9c46a;
-      padding: 18px 25px;
-      margin: 15px 0;
+      background: linear-gradient(135deg, rgba(233,196,106,.2) 0%, rgba(233,196,106,.1) 100%);
+      border-left: 4px solid var(--gold);
+      padding: 16px 18px;
+      margin: 14px 0;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(233, 196, 106, 0.2);
-      transition: all 0.3s ease;
-      animation: fadeInUp 0.6s ease-out;
-      z-index: 2;
-      position: relative;
+      box-shadow: 0 4px 20px rgba(233,196,106,.2);
+      transition: all .25s ease;
     }
-    .highlight-box:hover{ transform: translateX(10px); box-shadow: 0 8px 30px rgba(233, 196, 106, 0.3); }
+    .highlight-box:hover{ transform: translateX(6px); box-shadow: 0 10px 34px rgba(233,196,106,.26); }
 
-    .bullet-list{ list-style:none; padding:0; margin:15px 0; z-index: 2; position: relative; }
+    .bullet-list{ list-style:none; padding:0; margin: 12px 0; }
     .bullet-list li{
-      font-size: 40px;
-      padding: 20px 0;
-      padding-left: 70px;
+      font-size: var(--fz-li) !important;
+      padding: 16px 0;
+      padding-left: 62px;
       position: relative;
-      line-height: 1.5;
-      animation: fadeInUp 0.6s ease-out backwards;
-      transition: all 0.3s ease;
+      line-height: 1.45;
+      transition: all .25s ease;
     }
-    .bullet-list li:nth-child(1){ animation-delay: 0.1s; }
-    .bullet-list li:nth-child(2){ animation-delay: 0.2s; }
-    .bullet-list li:nth-child(3){ animation-delay: 0.3s; }
-    .bullet-list li:nth-child(4){ animation-delay: 0.4s; }
-    .bullet-list li:nth-child(5){ animation-delay: 0.5s; }
-    .bullet-list li:hover{ transform: translateX(10px); color:#e9c46a; }
+    .bullet-list li:hover{ transform: translateX(8px); color: var(--gold); }
 
     .bullet-list li:before{
       content:"⚓";
       position:absolute; left:0;
-      color:#e9c46a;
-      font-size: 46px;
+      color: var(--gold);
+      font-size: clamp(22px, 3vw, 46px);
       animation: bounce 2s ease-in-out infinite, rotate 4s linear infinite;
-      filter: drop-shadow(0 0 10px rgba(233, 196, 106, 0.6)) drop-shadow(0 0 20px rgba(233, 196, 106, 0.3));
-      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(233,196,106,.6)) drop-shadow(0 0 20px rgba(233,196,106,.3));
+      transition: all .25s ease;
     }
     @keyframes bounce{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-10px);} }
     @keyframes rotate{ from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
-
-    /* icons per slide (same logic as before but now by data-slide) */
     .section[data-slide="2"] .bullet-list li:before{ content:"⚓"; }
     .section[data-slide="3"] .bullet-list li:before{ content:"🎯"; }
     .section[data-slide="4"] .bullet-list li:before{ content:"⭐"; }
@@ -532,363 +590,313 @@
     .section[data-slide="11"] .bullet-list li:before{ content:"🤝"; }
 
     .bullet-list li:hover:before{
-      transform: scale(1.3) rotate(360deg);
-      filter: drop-shadow(0 0 15px rgba(233, 196, 106, 0.9)) drop-shadow(0 0 30px rgba(233, 196, 106, 0.5));
+      transform: scale(1.15) rotate(360deg);
+      filter: drop-shadow(0 0 15px rgba(233,196,106,.9)) drop-shadow(0 0 30px rgba(233,196,106,.5));
     }
 
     .stats-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin: 20px 0;
-      z-index: 2;
-      position: relative;
+      gap: 16px;
+      margin: 16px 0;
     }
     .stat-card{
-      background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%);
-      border: 2px solid rgba(233, 196, 106, 0.4);
+      background: linear-gradient(135deg, rgba(10,59,92,.4) 0%, rgba(4,28,47,.6) 100%);
+      border: 2px solid rgba(233,196,106,.4);
       border-radius: 16px;
-      padding: 25px;
+      padding: 18px;
       text-align: center;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
       transform-style: preserve-3d;
       perspective: 1000px;
     }
-    .stat-card::before{
-      content:'';
-      position:absolute;
-      top:-50%; left:-50%;
-      width:200%; height:200%;
-      background: radial-gradient(circle, rgba(233, 196, 106, 0.2) 0%, transparent 70%);
-      opacity:0;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      animation: rotateCard 10s linear infinite;
-    }
-    @keyframes rotateCard{ from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
-    .stat-card:hover::before{ opacity: 1; }
-    .stat-card::after{
-      content:'';
-      position:absolute; inset:0;
-      border-radius: 16px;
-      padding:2px;
-      background: linear-gradient(135deg, #e9c46a, transparent, #e9c46a);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity:0;
-      transition: opacity 0.5s ease;
-    }
-    .stat-card:hover::after{ opacity: 1; }
     .stat-card:hover{
-      transform: translateY(-10px) scale(1.03) rotateX(5deg);
-      box-shadow: 0 20px 50px rgba(233, 196, 106, 0.4),
-                  0 0 40px rgba(233, 196, 106, 0.3),
-                  inset 0 0 25px rgba(233, 196, 106, 0.1);
-      border-color: #e9c46a;
+      transform: translateY(-8px) scale(1.02) rotateX(4deg);
+      box-shadow: 0 20px 50px rgba(233,196,106,.26),
+                  0 0 40px rgba(233,196,106,.18),
+                  inset 0 0 25px rgba(233,196,106,.08);
+      border-color: var(--gold);
     }
-
     .stat-number{
-      font-size: 76px;
+      font-size: var(--fz-stat) !important;
       font-weight: 900;
-      background: linear-gradient(135deg, #e9c46a 0%, #fff 50%, #f4d58d 100%);
+      background: linear-gradient(135deg, var(--gold) 0%, #fff 50%, #f4d58d 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 0 15px rgba(233, 196, 106, 0.4));
+      margin-bottom: 6px;
+      filter: drop-shadow(0 0 15px rgba(233,196,106,.4));
       animation: shimmer 3s linear infinite;
-      transition: all 0.3s ease;
-    }
-    .stat-card:hover .stat-number{
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 25px rgba(233, 196, 106, 0.8));
+      transition: all .25s ease;
     }
     .stat-label{
-      font-size: 30px;
-      color: rgba(255, 255, 255, 0.9);
+      font-size: var(--fz-stat-label) !important;
+      color: rgba(255,255,255,.9);
       font-weight: 500;
-      letter-spacing: 0.3px;
+      letter-spacing: .3px;
+      font-family: 'Montserrat', sans-serif;
     }
     .platform-icon{
-      font-size: 58px;
-      margin-bottom: 15px;
+      font-size: clamp(26px, 3.8vw, 58px);
+      margin-bottom: 10px;
       animation: iconBounce 2s ease-in-out infinite;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.3));
     }
     @keyframes iconBounce{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-10px);} }
 
     .psychology-grid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin: 20px 0;
-      z-index: 2;
-      position: relative;
+      gap: 14px;
+      margin: 16px 0;
     }
     .psychology-card{
-      background: rgba(233, 196, 106, 0.1);
-      border: 2px solid rgba(233, 196, 106, 0.3);
-      border-radius: 10px;
-      padding: 18px;
+      background: rgba(233,196,106,.1);
+      border: 2px solid rgba(233,196,106,.3);
+      border-radius: 12px;
+      padding: 16px;
     }
     .psychology-card h3{
-      color: #e9c46a;
-      font-size: 28px;
-      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: clamp(16px, 2.2vw, 28px);
+      margin: 0 0 8px 0;
       font-weight: 700;
     }
     .psychology-card p{
-      font-size: 22px;
-      line-height: 1.5;
-      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(14px, 1.8vw, 22px);
+      line-height: 1.45;
+      color: rgba(255,255,255,.9);
+      margin: 0;
     }
 
-    .timeline-container{ position: relative; margin: 20px 0; padding: 15px 0; z-index:2; }
-    .timeline-step{ position: relative; padding: 10px 0 10px 60px; animation: fadeInUp 0.6s ease-out backwards; }
-    .timeline-step:nth-child(1){ animation-delay: 0.1s; }
-    .timeline-step:nth-child(2){ animation-delay: 0.2s; }
-    .timeline-step:nth-child(3){ animation-delay: 0.3s; }
-    .timeline-step:nth-child(4){ animation-delay: 0.4s; }
-    .timeline-step:nth-child(5){ animation-delay: 0.5s; }
+    .timeline-container{ position: relative; margin: 16px 0; padding: 10px 0; }
+    .timeline-step{ position: relative; padding: 10px 0 10px 58px; }
     .timeline-icon{
       position:absolute; left:0; top:14px;
       width: 42px; height: 42px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #e9c46a 0%, #f4d58d 100%);
+      background: linear-gradient(135deg, var(--gold) 0%, #f4d58d 100%);
       display:flex; align-items:center; justify-content:center;
       font-size: 20px;
-      box-shadow: 0 0 25px rgba(233, 196, 106, 0.6);
+      box-shadow: 0 0 25px rgba(233,196,106,.6);
       z-index: 2;
-      transition: all 0.3s ease;
-    }
-    .timeline-step:hover .timeline-icon{
-      transform: scale(1.15) rotate(10deg);
-      box-shadow: 0 0 40px rgba(233, 196, 106, 0.9);
+      transition: all .25s ease;
     }
     .timeline-line{
       position:absolute; left:20px; top:0; bottom:0;
       width:2px;
-      background: linear-gradient(180deg, rgba(233, 196, 106, 0.3) 0%, rgba(233, 196, 106, 0.6) 50%, rgba(233, 196, 106, 0.3) 100%);
+      background: linear-gradient(180deg, rgba(233,196,106,.3) 0%, rgba(233,196,106,.6) 50%, rgba(233,196,106,.3) 100%);
       z-index: 1;
     }
     .timeline-content{
-      background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%);
-      border: 2px solid rgba(233, 196, 106, 0.3);
+      background: linear-gradient(135deg, rgba(10,59,92,.4) 0%, rgba(4,28,47,.6) 100%);
+      border: 2px solid rgba(233,196,106,.3);
       border-radius: 12px;
-      padding: 12px 16px;
-      transition: all 0.3s ease;
+      padding: 12px 14px;
+      transition: all .25s ease;
     }
-    .timeline-step:hover .timeline-content{
-      border-color: #e9c46a;
-      transform: translateX(8px);
-      box-shadow: 0 8px 30px rgba(233, 196, 106, 0.3);
-    }
-    .timeline-title{ font-size: 30px; font-weight: 700; color:#e9c46a; margin-bottom: 6px; }
-    .timeline-description{ font-size: 24px; line-height: 1.4; color: rgba(255,255,255,.9); }
-
-    .final-message{
-      font-size: 48px;
-      font-weight: 600;
-      color: #e9c46a;
-      text-align: center;
-      margin: 25px 0;
-      text-shadow: 0 2px 10px rgba(233, 196, 106, 0.3);
-      z-index:2;
-      position: relative;
-    }
-
-    .qr-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-      margin: 20px 0;
-      z-index: 2;
-      position: relative;
-    }
-    .qr-card{
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 249, 249, 0.95) 100%);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      border: 3px solid #e9c46a;
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-    }
-    .qr-card::before{
-      content:'';
-      position:absolute;
-      top:-50%; left:-50%;
-      width:200%; height:200%;
-      background: conic-gradient(transparent, rgba(233, 196, 106, 0.3), transparent 30%);
-      animation: rotateCard 4s linear infinite;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .qr-card:hover::before{ opacity: 1; }
-    .qr-card:hover{
-      transform: translateY(-15px) scale(1.05) rotateY(3deg);
-      box-shadow: 0 20px 60px rgba(233, 196, 106, 0.6),
-                  0 0 50px rgba(233, 196, 106, 0.4),
-                  inset 0 0 40px rgba(233, 196, 106, 0.1);
-      border-color: #f4d58d;
-    }
-    .qr-code{
-      width: 260px; height: 260px;
-      margin: 0 auto 15px;
-      background:#fff;
-      border-radius: 12px;
-      display:flex; align-items:center; justify-content:center;
-      border: 3px solid #e9c46a;
-      box-shadow: 0 4px 20px rgba(233, 196, 106, 0.3);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .qr-code img{ width:100%; height:100%; object-fit: cover; }
-    .qr-card:hover .qr-code{ transform: scale(1.05); box-shadow: 0 8px 30px rgba(233, 196, 106, 0.5); }
-    .qr-label{
-      font-size: 32px;
+    .timeline-title{
+      font-size: clamp(16px, 2.2vw, 30px);
       font-weight: 700;
-      color: #0a3b5c;
-      margin-top: 10px;
-      letter-spacing: 0.3px;
-      position: relative;
-      z-index: 2;
+      color: var(--gold);
+      margin: 0 0 6px 0;
+    }
+    .timeline-description{
+      font-size: clamp(14px, 1.9vw, 24px);
+      line-height: 1.4;
+      color: rgba(255,255,255,.9);
+      margin: 0;
     }
 
-    /* Fixed navigation (scrolls between sections) */
-    .nav-container{
+    /* Hero text */
+    .cover-content{ position: relative; z-index: 3; text-align: center; }
+    .cover-logo{
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fz-cover-logo) !important;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold) 0%, #f4d58d 30%, #ffffff 50%, #f4d58d 70%, var(--gold) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+      animation: titleGlow 3s ease-in-out infinite, shimmer 4s linear infinite;
+    }
+    @keyframes titleGlow{
+      0%,100%{
+        filter: drop-shadow(0 0 30px rgba(233,196,106,.8)) drop-shadow(0 0 60px rgba(233,196,106,.4));
+        transform: scale(1);
+      }
+      50%{
+        filter: drop-shadow(0 0 50px rgba(233,196,106,1)) drop-shadow(0 0 80px rgba(233,196,106,.6));
+        transform: scale(1.02);
+      }
+    }
+    .cover-subtitle{
+      font-size: var(--fz-cover-sub) !important;
+      color: #fff;
+      margin-bottom: 18px;
+      font-weight: 300;
+      line-height: 1.35;
+      text-shadow: 0 2px 10px rgba(0,0,0,.5);
+    }
+    .cover-tagline{
+      font-size: var(--fz-cover-tag) !important;
+      color: var(--gold);
+      font-style: italic;
+      margin-top: 12px;
+      text-shadow: 0 0 15px rgba(233,196,106,.4);
+    }
+
+    /* Floating bottom controls (like UnionPoly back-to-top / nav) */
+    .nav-float{
       position: fixed;
+      right: 18px;
       bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 15px;
-      z-index: 1000;
-      align-items: center;
-      padding: 6px 10px;
-      backdrop-filter: blur(10px);
+      z-index: 2500;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
     }
-    .nav-btn{
-      background: linear-gradient(135deg, rgba(233, 196, 106, 0.25) 0%, rgba(233, 196, 106, 0.15) 100%);
-      border: 2px solid #e9c46a;
-      color: #e9c46a;
-      padding: 12px 30px;
-      border-radius: 40px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      letter-spacing: 0.5px;
+    .pill{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(233,196,106,.28);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+    .pill .counter{
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: .6px;
+      min-width: 58px;
+      text-align:center;
+      user-select: none;
+    }
+    .mini{
+      border-radius: 999px;
+      padding: 10px 12px;
+      border: 1.8px solid rgba(233,196,106,.8);
+      background: linear-gradient(135deg, rgba(233,196,106,.22) 0%, rgba(233,196,106,.10) 100%);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .5px;
       text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      transition: all .2s ease;
+      user-select: none;
     }
-    .nav-btn::before{
-      content:'';
-      position:absolute;
-      top:50%; left:50%;
-      width:0; height:0;
-      border-radius: 50%;
-      background: #e9c46a;
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease, height 0.4s ease;
-      z-index: -1;
-    }
-    .nav-btn:hover::before{ width: 300px; height: 300px; }
-    .nav-btn:hover{
+    .mini:hover{
+      transform: translateY(-1px);
       color: #0a3b5c;
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 8px 30px rgba(233, 196, 106, 0.4);
-      border-color: #f4d58d;
+      background: linear-gradient(135deg, rgba(233, 196, 106, 0.95) 0%, rgba(244, 213, 141, 0.95) 100%);
+      border-color: rgba(244,213,141,1);
     }
-    .nav-btn:disabled{ opacity: .35; cursor: not-allowed; transform: none; }
+    .mini:disabled{ opacity: .35; cursor: not-allowed; transform: none; }
 
-    .slide-counter{
-      color:#e9c46a;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 10px rgba(233, 196, 106, 0.3);
-      font-family: 'Montserrat', sans-serif;
-      min-width: 78px;
-      text-align: center;
+    /* Mobile safety: grids stack */
+    @media (max-width: 980px){
+      .stats-grid{ grid-template-columns: 1fr; }
+      .psychology-grid{ grid-template-columns: 1fr; }
+      .lighthouse-scene{ opacity: .88; }
     }
 
-    /* Small-screen: keep design scaled (no internal font overrides needed) */
-    @media (max-width: 1024px){
-      .section::after{ display:none; }
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
-
-  <style>@view-transition { navigation: auto; }</style>
 </head>
 
 <body>
-  <div class="page" id="page">
+  <!-- Top bar (UnionPoly-style landing header) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="b1">MTWTU LAW HUB</div>
+        <div class="b2">Instagram • Facebook • TikTok</div>
+      </div>
+      <div class="top-actions">
+        <button class="btn" id="btnMenu" type="button">Меню</button>
+        <button class="btn" id="btnTop" type="button">Вгору</button>
+      </div>
+    </div>
+  </header>
 
+  <!-- Drawer -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+      <h3 style="margin:0;">Навігація</h3>
+      <button class="btn" id="btnClose" type="button" style="padding:10px 14px;">Закрити</button>
+    </div>
+    <div class="navlist" id="navlist" style="margin-top:14px;"></div>
+  </aside>
+
+  <!-- Templates to avoid repeating the same конструкції -->
+  <template id="tpl-watermark">
+    <div class="logo-watermark" aria-hidden="true">
+      <span class="logo-watermark-main">MTWTU</span>
+      <span class="logo-watermark-sub">LAW HUB</span>
+    </div>
+  </template>
+
+  <template id="tpl-lighthouse">
+    <div class="lighthouse-scene" aria-hidden="true">
+      <div class="lighthouse">
+        <div class="lighthouse-base"></div>
+        <div class="lighthouse-tower">
+          <div class="lighthouse-stripe stripe-1"></div>
+          <div class="lighthouse-stripe stripe-2"></div>
+        </div>
+        <div class="lighthouse-window window-1"></div>
+        <div class="lighthouse-window window-2"></div>
+        <div class="lighthouse-window window-3"></div>
+        <div class="lighthouse-top-section"></div>
+        <div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div>
+        <div class="lighthouse-beam"></div>
+      </div>
+    </div>
+  </template>
+
+  <main id="page">
     <!-- SECTION 1 -->
-    <section class="section" id="s1" data-slide="1">
-      <div class="frame">
-        <div class="slide">
+    <section class="section hero" id="s1" data-slide="1" data-nav="MTWTU LAW HUB">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1" data-hero-bg="1">
           <div class="particles js-particles"></div>
           <div class="animated-lines js-lines"></div>
           <div class="orb orb-1"></div>
           <div class="orb orb-2"></div>
           <div class="orb orb-3"></div>
 
-          <div class="logo-watermark">
-            <span class="logo-watermark-main">MTWTU</span>
-            <span class="logo-watermark-sub">LAW HUB</span>
-          </div>
-
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower">
-                <div class="lighthouse-stripe stripe-1"></div>
-                <div class="lighthouse-stripe stripe-2"></div>
-              </div>
-              <div class="lighthouse-window window-1"></div>
-              <div class="lighthouse-window window-2"></div>
-              <div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div>
-              <div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div>
-              <div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
           <div class="cover-content">
             <div class="cover-logo" id="main-title">MTWTU LAW HUB</div>
             <div class="cover-subtitle" id="subtitle">Instagram • Facebook • TikTok</div>
             <div class="cover-tagline">Юридична допомога, підтримка членів ПРМТУ в умовах викликів</div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 2 -->
-    <section class="section" id="s2" data-slide="2">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s2" data-slide="2" data-nav="Хто ми">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header"><h1 class="slide-title">Хто ми</h1></div>
           <div class="content-section">
             <div class="highlight-box">
@@ -903,53 +911,33 @@
               <li>Зручна та комфортна комунікація</li>
             </ul>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 3 -->
-    <section class="section" id="s3" data-slide="3">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s3" data-slide="3" data-nav="Навіщо це пріоритетно">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header"><h1 class="slide-title">Навіщо це пріоритетно</h1></div>
-          <div class="content-section" style="justify-content:center; padding-top:40px;">
-            <div class="stats-grid" style="margin-top:30px; margin-bottom:0;">
+          <div class="content-section" style="justify-content:center;">
+            <div class="stats-grid" style="margin-top:18px; margin-bottom:0;">
               <div class="stat-card"><div class="platform-icon">⚖️</div><div class="stat-label">Підвищення правової культури членів ПРМТУ</div></div>
               <div class="stat-card"><div class="platform-icon">🌍</div><div class="stat-label">Доступ до правничої допомоги з будь-якої точки світу</div></div>
               <div class="stat-card"><div class="platform-icon">🎓</div><div class="stat-label">Репутаційна цілісність профспілки як сучасної структури</div></div>
             </div>
-            <div class="highlight-box" style="margin-top:35px; margin-bottom:20px;">
+            <div class="highlight-box" style="margin-top:18px;">
               <p class="content-text">Ми робимо юридичну допомогу доступною кожному члену ПРМТУ, незалежно від його місцезнаходження.</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 4 -->
-    <section class="section" id="s4" data-slide="4">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s4" data-slide="4" data-nav="Соцмережі як інструмент впливу">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header"><h1 class="slide-title">Соцмережі як інструмент впливу</h1></div>
           <div class="content-section">
             <p class="content-text">Соціальні мережі стали одним з основних каналів зв'язку з членами ПРМТУ по всьому світу</p>
@@ -961,27 +949,17 @@
               <li>Поширення актуальної та корисної інформації</li>
             </ul>
             <div class="highlight-box">
-              <p class="content-text">За останні 6 місяців ми досягли понад <strong style="color:#e9c46a;">3 000 000+ переглядів</strong> на всіх платформах</p>
+              <p class="content-text">За останні 6 місяців ми досягли понад <strong style="color:var(--gold);">3 000 000+ переглядів</strong> на всіх платформах</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 5 -->
-    <section class="section" id="s5" data-slide="5">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s5" data-slide="5" data-nav="Instagram">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header">
             <h1 class="slide-title">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:10px;">
@@ -1016,24 +994,14 @@
               <li>Direct-консультації: швидка відповідь у повідомленнях</li>
             </ul>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 6 -->
-    <section class="section" id="s6" data-slide="6">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s6" data-slide="6" data-nav="Facebook">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header">
             <h1 class="slide-title">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:10px;">
@@ -1059,24 +1027,14 @@
               <li>Messenger-консультації: можливість швидко поставити запитання юристам MTWTU LAW HUB</li>
             </ul>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 7 -->
-    <section class="section" id="s7" data-slide="7">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s7" data-slide="7" data-nav="TikTok">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header">
             <h1 class="slide-title">
               <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:10px;">
@@ -1102,28 +1060,18 @@
               <li>Збереження, поширення та коментарі, з яких часто починаються індивідуальні звернення</li>
             </ul>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 8 -->
-    <section class="section" id="s8" data-slide="8">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s8" data-slide="8" data-nav="Зворотній зв'язок">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header"><h1 class="slide-title">💙 Зворотній зв'язок</h1></div>
           <div class="content-section">
             <div class="highlight-box">
-              <p class="content-text" style="font-size: 32px; text-align: center;"><strong>15 000+</strong> відвідувань за останні 6 місяців</p>
+              <p class="content-text" style="font-size: clamp(16px, 2.2vw, 32px) !important; text-align: center;"><strong>15 000+</strong> відвідувань за останні 6 місяців</p>
             </div>
             <div class="psychology-grid">
               <div class="psychology-card">
@@ -1143,63 +1091,43 @@
                 <p>"Наш юридичний фронт - найкращий! 🙌"</p>
               </div>
             </div>
-            <p class="content-text" style="text-align: center; margin-top: 20px;">Вплив на імідж ПРМТУ як <strong style="color:#e9c46a;">відкритої і сучасної</strong> організації</p>
+            <p class="content-text" style="text-align: center; margin-top: 14px;">Вплив на імідж ПРМТУ як <strong style="color:var(--gold);">відкритої і сучасної</strong> організації</p>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 9 -->
-    <section class="section" id="s9" data-slide="9">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s9" data-slide="9" data-nav="Чому важливо ділитись контентом">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header"><h1 class="slide-title">🧠 Чому важливо ділитись контентом</h1></div>
           <div class="content-section">
             <ul class="bullet-list">
-              <li>Люди довіряють інформації від знайомих — ймовірність прочитати <strong style="color:#e9c46a;">у 5 разів вища</strong></li>
+              <li>Люди довіряють інформації від знайомих — ймовірність прочитати <strong style="color:var(--gold);">у 5 разів вища</strong></li>
               <li>Публікації активістів підсилюють довіру до профспілки і мотивують інших ставати членами</li>
-              <li>Спільне поширення створює ефект "ланцюгової довіри" — одне відео доходить до <strong style="color:#e9c46a;">десятків тисяч</strong></li>
+              <li>Спільне поширення створює ефект "ланцюгової довіри" — одне відео доходить до <strong style="color:var(--gold);">десятків тисяч</strong></li>
               <li>Люди 40+ активніше реагують на знайомі обличчя і особисте поширення = найефективніший спосіб</li>
-              <li>У соцмережах профспілковий контент — це не реклама, а <strong style="color:#e9c46a;">взаємопідтримка</strong></li>
+              <li>У соцмережах профспілковий контент — це не реклама, а <strong style="color:var(--gold);">взаємопідтримка</strong></li>
             </ul>
             <div class="highlight-box">
-              <p class="content-text" style="font-size: 28px; text-align: center; font-weight: 600;">Кожен репост від активіста = +100-500 потенційних читачів</p>
+              <p class="content-text" style="font-size: clamp(14px, 2.0vw, 28px) !important; text-align: center; font-weight: 600;">Кожен репост від активіста = +100-500 потенційних читачів</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 10 -->
-    <section class="section" id="s10" data-slide="10">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s10" data-slide="10" data-nav="Наш вплив у цифрах">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header"><h1 class="slide-title">📊 Наш вплив у цифрах</h1></div>
 
           <div class="content-section">
-            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 20px 0; z-index:2; position:relative;">
+            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 14px 0;">
               <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size:60px; margin-bottom:12px; animation: bounce 2s ease-in-out infinite;">
+                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite;">
                   <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="24" height="24" rx="6" fill="url(#ig1)"/>
                     <defs>
@@ -1215,86 +1143,76 @@
                     <circle cx="16" cy="8" r="1" fill="white" />
                   </svg>
                 </div>
-                <div class="js-counter" style="font-size:42px; font-weight:900; color:#e9c46a; margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1600000" data-suffix="+">0</div>
-                <div style="font-size:20px; color: rgba(255,255,255,.8);">Instagram</div>
+                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1600000" data-suffix="+">0</div>
+                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">Instagram</div>
               </div>
 
               <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size:60px; margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.2s;">
+                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.2s;">
                   <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="12" cy="12" r="12" fill="#1877F2" />
                     <path d="M13.5 20.5V13H16L16.5 10H13.5V8.5C13.5 7.67 13.67 7 14.83 7H16.5V4.14C16.17 4.1 15.17 4 14 4C11.58 4 10 5.5 10 8.17V10H7.5V13H10V20.5H13.5Z" fill="white" />
                   </svg>
                 </div>
-                <div class="js-counter" style="font-size:42px; font-weight:900; color:#e9c46a; margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1400000" data-suffix="+">0</div>
-                <div style="font-size:20px; color: rgba(255,255,255,.8);">Facebook</div>
+                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="1400000" data-suffix="+">0</div>
+                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">Facebook</div>
               </div>
 
               <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size:60px; margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.4s;">
+                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.4s;">
                   <svg width="60" height="60" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#000000"/>
                     <path d="M34.3 8.7c-1.7-2.7-2.6-5.9-2.6-9.2h-7.4v32.7c0 3.6-2.9 6.5-6.5 6.5s-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5c.7 0 1.4.1 2 .3v-7.6c-.7-.1-1.3-.1-2-.1-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14V18.9c3 2.1 6.7 3.3 10.6 3.3v-7.4c-4-.1-7.5-2-10.1-4.8-.1-.1-.1-.2 0-.3z" fill="#EE1D52"/>
                     <path d="M34.3 9c2.6 2.8 6.1 4.7 10.1 4.8v7.4c-3.9 0-7.6-1.2-10.6-3.3v13.4c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c.7 0 1.3 0 2 .1v7.6c-.6-.2-1.3-.3-2-.3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V-.5h7.4c0 3.3.9 6.5 2.6 9.2 0 .1 0 .2 0 .3z" fill="#69C9D0"/>
                   </svg>
                 </div>
-                <div class="js-counter" style="font-size:42px; font-weight:900; color:#e9c46a; margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="32587" data-suffix="+">0</div>
-                <div style="font-size:20px; color: rgba(255,255,255,.8);">TikTok</div>
+                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="32587" data-suffix="+">0</div>
+                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">TikTok</div>
               </div>
 
               <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <div style="font-size:60px; margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.6s;">📈</div>
-                <div class="js-counter" style="font-size:42px; font-weight:900; color:#e9c46a; margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="3031000" data-suffix="+">0</div>
-                <div style="font-size:20px; color: rgba(255,255,255,.8);">Загалом</div>
+                <div style="font-size: clamp(30px, 5vw, 60px); margin-bottom:12px; animation: bounce 2s ease-in-out infinite 0.6s;">📈</div>
+                <div class="js-counter" style="font-size: clamp(22px, 4.2vw, 42px); font-weight:900; color:var(--gold); margin-bottom:8px; text-shadow: 0 0 20px rgba(233,196,106,.5);" data-target="3031000" data-suffix="+">0</div>
+                <div style="font-size: clamp(12px, 1.7vw, 20px); color: rgba(255,255,255,.8);">Загалом</div>
               </div>
             </div>
 
-            <div style="display:flex; justify-content:space-around; margin-top:30px; padding:25px; background: linear-gradient(135deg, rgba(233, 196, 106, 0.2) 0%, rgba(233, 196, 106, 0.1) 100%); border-radius:16px; border:2px solid rgba(233,196,106,.4); z-index:2; position:relative;">
-              <div style="text-align:center;">
-                <div style="font-size:46px; font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">582 000+</div>
-                <div style="font-size:22px; color: rgba(255,255,255,.9); margin-top:6px;">🌍 Охоплень</div>
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-around; gap: 12px; margin-top:18px; padding:18px; background: linear-gradient(135deg, rgba(233, 196, 106, 0.2) 0%, rgba(233, 196, 106, 0.1) 100%); border-radius:16px; border:2px solid rgba(233,196,106,.4);">
+              <div style="text-align:center; min-width: 220px;">
+                <div style="font-size: clamp(20px, 4.2vw, 46px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">582 000+</div>
+                <div style="font-size: clamp(12px, 2vw, 22px); color: rgba(255,255,255,.9); margin-top:6px;">🌍 Охоплень</div>
               </div>
-              <div style="width:2px; background: linear-gradient(180deg, transparent, #e9c46a, transparent);"></div>
-              <div style="text-align:center;">
-                <div style="font-size:46px; font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">10 000+</div>
-                <div style="font-size:22px; color: rgba(255,255,255,.9); margin-top:6px;">💬 Взаємодій</div>
+              <div style="width:2px; background: linear-gradient(180deg, transparent, var(--gold), transparent);"></div>
+              <div style="text-align:center; min-width: 220px;">
+                <div style="font-size: clamp(20px, 4.2vw, 46px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">10 000+</div>
+                <div style="font-size: clamp(12px, 2vw, 22px); color: rgba(255,255,255,.9); margin-top:6px;">💬 Взаємодій</div>
               </div>
-              <div style="width:2px; background: linear-gradient(180deg, transparent, #e9c46a, transparent);"></div>
-              <div style="text-align:center;">
-                <div style="font-size:46px; font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">15 000+</div>
-                <div style="font-size:22px; color: rgba(255,255,255,.9); margin-top:6px;">🔗 Відвідувань</div>
+              <div style="width:2px; background: linear-gradient(180deg, transparent, var(--gold), transparent);"></div>
+              <div style="text-align:center; min-width: 220px;">
+                <div style="font-size: clamp(20px, 4.2vw, 46px); font-weight:900; color:#fff; text-shadow: 0 0 20px rgba(233,196,106,.8);">15 000+</div>
+                <div style="font-size: clamp(12px, 2vw, 22px); color: rgba(255,255,255,.9); margin-top:6px;">🔗 Відвідувань</div>
               </div>
             </div>
 
-            <div style="text-align:center; margin-top:25px; z-index:2; position:relative;">
-              <p style="font-size:26px; color:#e9c46a; font-style:italic; text-shadow: 0 0 15px rgba(233,196,106,.4);">Ми створили потужну платформу підтримки для всіх членів ПРМТУ</p>
+            <div style="text-align:center; margin-top:16px;">
+              <p style="font-size: clamp(14px, 2vw, 26px); color:var(--gold); font-style:italic; text-shadow: 0 0 15px rgba(233,196,106,.4); margin:0;">Ми створили потужну платформу підтримки для всіх членів ПРМТУ</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 11 -->
-    <section class="section" id="s11" data-slide="11">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s11" data-slide="11" data-nav="Шлях до нового члена ПРМТУ">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header">
             <h1 class="slide-title">🎯 Шлях до нового члена ПРМТУ</h1>
-            <p class="slide-subtitle" style="font-size:36px;">Психологія прийняття рішення: від випадкового перегляду до вступу</p>
+            <p class="slide-subtitle" style="font-size: clamp(14px, 2.2vw, 36px) !important;">Психологія прийняття рішення: від випадкового перегляду до вступу</p>
           </div>
 
           <div class="content-section" style="padding-top:5px;">
-            <div style="display:flex; align-items:center; justify-content:center; margin: 20px 0 30px 0; position:relative; z-index:2;">
+            <div style="display:flex; align-items:center; justify-content:center; margin: 14px 0 18px 0;">
               <svg width="900" height="320" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 30px rgba(233, 196, 106, 0.3));">
                 <defs>
                   <linearGradient id="funnelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -1314,94 +1232,84 @@
               </svg>
             </div>
 
-            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 25px 0; z-index:2; position:relative;">
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;"
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0;">
+              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 18px; transition: all 0.3s ease;"
                    onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                 <div style="font-size:42px; text-align:center; margin-bottom:10px;">🧠</div>
-                <h3 style="color:#e9c46a; font-size:26px; margin-bottom:10px; font-weight:700; text-align:center;">Ефект «знайомості»</h3>
-                <p style="font-size:20px; line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
+                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.0vw, 26px); margin-bottom:10px; font-weight:700; text-align:center;">Ефект «знайомості»</h3>
+                <p style="font-size: clamp(14px, 1.7vw, 20px); line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;"
+              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 18px; transition: all 0.3s ease;"
                    onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                 <div style="font-size:42px; text-align:center; margin-bottom:10px;">💡</div>
-                <h3 style="color:#e9c46a; font-size:26px; margin-bottom:10px; font-weight:700; text-align:center;">Соціальний доказ</h3>
-                <p style="font-size:20px; line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
+                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.0vw, 26px); margin-bottom:10px; font-weight:700; text-align:center;">Соціальний доказ</h3>
+                <p style="font-size: clamp(14px, 1.7vw, 20px); line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 20px; transition: all 0.3s ease;"
+              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 14px; padding: 18px; transition: all 0.3s ease;"
                    onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                 <div style="font-size:42px; text-align:center; margin-bottom:10px;">⚡</div>
-                <h3 style="color:#e9c46a; font-size:26px; margin-bottom:10px; font-weight:700; text-align:center;">Тригер дії</h3>
-                <p style="font-size:20px; line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
+                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.0vw, 26px); margin-bottom:10px; font-weight:700; text-align:center;">Тригер дії</h3>
+                <p style="font-size: clamp(14px, 1.7vw, 20px); line-height:1.4; color: rgba(255,255,255,.9); margin:0; text-align:center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
               </div>
             </div>
 
-            <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.3) 0%, rgba(233, 196, 106, 0.15) 100%); border: 4px solid #e9c46a; border-radius: 16px; padding: 25px; margin-top: 25px; text-align:center; box-shadow: 0 0 40px rgba(233, 196, 106, 0.4); z-index:2; position:relative;">
-              <p style="font-size:32px; line-height:1.5; color:#e9c46a; margin:0 0 12px 0; font-weight:900;">Не кожен перегляд стає членством.<br>Але кожне нове членство починається з перегляду.</p>
-              <p style="font-size:24px; color: rgba(255,255,255,.95); margin:0; font-weight:600;">Соцмережі MTWTU LAW HUB — це не розвага.<br>Це <strong style="color:#e9c46a;">перший крок до членства</strong> для тисяч моряків та їхніх родин.</p>
+            <div style="background: linear-gradient(135deg, rgba(233, 196, 106, 0.3) 0%, rgba(233, 196, 106, 0.15) 100%); border: 4px solid #e9c46a; border-radius: 16px; padding: 18px; margin-top: 16px; text-align:center; box-shadow: 0 0 40px rgba(233, 196, 106, 0.4);">
+              <p style="font-size: clamp(18px, 2.6vw, 32px); line-height:1.35; color:#e9c46a; margin:0 0 10px 0; font-weight:900;">Не кожен перегляд стає членством.<br>Але кожне нове членство починається з перегляду.</p>
+              <p style="font-size: clamp(14px, 2.0vw, 24px); color: rgba(255,255,255,.95); margin:0; font-weight:600;">Соцмережі MTWTU LAW HUB — це не розвага.<br>Це <strong style="color:#e9c46a;">перший крок до членства</strong> для тисяч моряків та їхніх родин.</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 12 -->
-    <section class="section" id="s12" data-slide="12">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s12" data-slide="12" data-nav="Чим ви можете допомогти?">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header"><h1 class="slide-title">🤝 Чим ви можете допомогти?</h1></div>
 
           <div class="content-section">
-            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; z-index:2; position:relative;">
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 22px; transition: all 0.3s ease;"
+            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 14px 0;">
+              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
                    onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                 <div style="font-size:44px; margin-bottom:12px;">📢</div>
-                <h3 style="color:#e9c46a; font-size:32px; margin-bottom:12px; font-weight:700;">Амбасадор</h3>
-                <ul style="font-size:24px; line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0;">
+                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Амбасадор</h3>
+                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
                   <li style="margin-bottom:8px;">• Поділіться постом у сторіс/стрічці</li>
                   <li style="margin-bottom:8px;">• Залишіть 1-2 фрази від себе</li>
                   <li style="margin-bottom:8px;">• Відмітьте @mtwtu_law_hub</li>
                 </ul>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 22px; transition: all 0.3s ease;"
+              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
                    onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                 <div style="font-size:44px; margin-bottom:12px;">💪</div>
-                <h3 style="color:#e9c46a; font-size:32px; margin-bottom:12px; font-weight:700;">Підсилювач</h3>
-                <ul style="font-size:24px; line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0;">
+                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Підсилювач</h3>
+                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
                   <li style="margin-bottom:8px;">• Ставте лайк під відео/постами</li>
                   <li style="margin-bottom:8px;">• Залишайте короткий коментар</li>
                   <li style="margin-bottom:8px;">• Відповідайте на опитування</li>
                 </ul>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 22px; transition: all 0.3s ease;"
+              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
                    onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                 <div style="font-size:44px; margin-bottom:12px;">🧭</div>
-                <h3 style="color:#e9c46a; font-size:32px; margin-bottom:12px; font-weight:700;">Навігатор</h3>
-                <ul style="font-size:24px; line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0;">
+                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Навігатор</h3>
+                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
                   <li style="margin-bottom:8px;">• Надсилайте відео друзям</li>
                   <li style="margin-bottom:8px;">• Кидайте посилання у чати та ваші групи</li>
                   <li style="margin-bottom:8px;">• Зберігайте для швидкого доступу</li>
                 </ul>
               </div>
 
-              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 22px; transition: all 0.3s ease;"
+              <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.4) 0%, rgba(4, 28, 47, 0.6) 100%); border: 2px solid rgba(233, 196, 106, 0.4); border-radius: 16px; padding: 18px; transition: all 0.3s ease;"
                    onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                 <div style="font-size:44px; margin-bottom:12px;">💡</div>
-                <h3 style="color:#e9c46a; font-size:32px; margin-bottom:12px; font-weight:700;">Співвідкривач</h3>
-                <ul style="font-size:24px; line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0;">
+                <h3 style="color:#e9c46a; font-size: clamp(16px, 2.4vw, 32px); margin-bottom:12px; font-weight:700;">Співвідкривач</h3>
+                <ul style="font-size: clamp(14px, 1.9vw, 24px); line-height:1.6; color: rgba(255,255,255,.85); list-style:none; padding:0; margin:0;">
                   <li style="margin-bottom:8px;">• Пропонуйте теми для відео</li>
                   <li style="margin-bottom:8px;">• Пишіть у коментарях або Direct</li>
                   <li style="margin-bottom:8px;">• Розказуйте про реальні ситуації</li>
@@ -1409,31 +1317,21 @@
               </div>
             </div>
 
-            <div style="text-align:center; margin-top:20px; padding:20px; background: rgba(233, 196, 106, 0.1); border-radius: 12px; border: 2px solid rgba(233, 196, 106, 0.3); z-index:2; position:relative;">
-              <p style="font-size:26px; color:#e9c46a; font-weight:600; line-height:1.5; margin:0;">Кожен ваш лайк, репост чи коментар — це про ще одного члена ПРМТУ, який дізнався про свої права</p>
+            <div style="text-align:center; margin-top:10px; padding:16px; background: rgba(233, 196, 106, 0.1); border-radius: 12px; border: 2px solid rgba(233, 196, 106, 0.3);">
+              <p style="font-size: clamp(14px, 2.0vw, 26px); color:var(--gold); font-weight:600; line-height:1.45; margin:0;">Кожен ваш лайк, репост чи коментар — це про ще одного члена ПРМТУ, який дізнався про свої права</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- SECTION 13 -->
-    <section class="section" id="s13" data-slide="13">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
+    <section class="section" id="s13" data-slide="13" data-nav="Як Reels стає реальною допомогою">
+      <div class="wrap">
+        <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="slide-header">
-            <h1 class="slide-title" style="font-size:80px;">🌊 Як Reels стає реальною допомогою</h1>
-            <p class="slide-subtitle" style="font-size:40px;">На прикладі "Морсічсервіс"</p>
+            <h1 class="slide-title" style="font-size: clamp(28px, 4.5vw, 80px) !important;">🌊 Як Reels стає реальною допомогою</h1>
+            <p class="slide-subtitle" style="font-size: clamp(16px, 2.4vw, 40px) !important;">На прикладі "Морсічсервіс"</p>
           </div>
 
           <div class="content-section" style="padding-top:0;">
@@ -1460,7 +1358,7 @@
                 <div class="timeline-icon">📱</div>
                 <div class="timeline-content">
                   <div class="timeline-title">3️⃣ Створення Reels</div>
-                  <p class="timeline-description">Зняли короткий Reels із поясненням — переглянули <strong style="color:#e9c46a;">73 000+ людей</strong></p>
+                  <p class="timeline-description">Зняли короткий Reels із поясненням — переглянули <strong style="color:var(--gold);">73 000+ людей</strong></p>
                 </div>
               </div>
 
@@ -1468,293 +1366,238 @@
                 <div class="timeline-icon">💬</div>
                 <div class="timeline-content">
                   <div class="timeline-title">4️⃣ Відгук аудиторії</div>
-                  <p class="timeline-description">Інші члени ПРМТУ впізнали ситуацію, почали зберігати відео та звертатися за консультаціями</p>
+                  <p class="timeline-description">Інші члени ПРМТУ вп</p>
                 </div>
               </div>
 
-              <div class="timeline-step">
-                <div class="timeline-icon">⚓</div>
-                <div class="timeline-content">
-                  <div class="timeline-title">5️⃣ Результат</div>
-                  <p class="timeline-description">Один кейс → один Reels → десятки нових звернень → <strong style="color:#e9c46a;">зростання довіри та членства</strong></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="highlight-box" style="margin-top: 18px;">
-              <p class="content-text" style="font-size: 28px; margin:0;">
-                Короткий формат дає людям відчуття: «Є куди звернутися. Є кому допомогти». І це працює.
-              </p>
-            </div>
-
-            <div class="final-message" style="font-size: 34px; margin-top: 18px;">
-              Контент = довіра. Довіра = реальні звернення. Реальні звернення = сильніша профспілка.
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
-    <!-- SECTION 14 -->
-    <section class="section" id="s14" data-slide="14">
-      <div class="frame">
-        <div class="slide">
-          <div class="logo-watermark"><span class="logo-watermark-main">MTWTU</span><span class="logo-watermark-sub">LAW HUB</span></div>
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower"><div class="lighthouse-stripe stripe-1"></div><div class="lighthouse-stripe stripe-2"></div></div>
-              <div class="lighthouse-window window-1"></div><div class="lighthouse-window window-2"></div><div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div><div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div><div class="lighthouse-beam"></div>
-            </div>
-          </div>
+    <!-- SECTION 14 / 15: якщо у вас є текст слайдів 14–15 — просто вставте їх за аналогією з секціями вище -->
+  </main>
 
-          <div class="slide-header">
-            <h1 class="slide-title">📲 Де нас знайти</h1>
-            <p class="slide-subtitle">Скануйте QR та підписуйтесь</p>
-          </div>
-
-          <div class="content-section" style="justify-content:center; padding-top:0;">
-            <div class="qr-grid">
-              <div class="qr-card">
-                <div class="qr-code">
-                  <img src="qr-instagram.png" alt="QR Instagram">
-                </div>
-                <div class="qr-label">Instagram</div>
-              </div>
-
-              <div class="qr-card">
-                <div class="qr-code">
-                  <img src="qr-facebook.png" alt="QR Facebook">
-                </div>
-                <div class="qr-label">Facebook</div>
-              </div>
-
-              <div class="qr-card">
-                <div class="qr-code">
-                  <img src="qr-tiktok.png" alt="QR TikTok">
-                </div>
-                <div class="qr-label">TikTok</div>
-              </div>
-            </div>
-
-            <div class="highlight-box" style="margin-top: 20px;">
-              <p class="content-text" style="font-size: 30px; text-align:center; margin:0;">
-                Підписка = регулярний доступ до корисних юридичних роз’яснень та інструкцій
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 15 -->
-    <section class="section" id="s15" data-slide="15">
-      <div class="frame">
-        <div class="slide">
-          <div class="particles js-particles"></div>
-          <div class="animated-lines js-lines"></div>
-          <div class="orb orb-1"></div>
-          <div class="orb orb-2"></div>
-          <div class="orb orb-3"></div>
-
-          <div class="logo-watermark">
-            <span class="logo-watermark-main">MTWTU</span>
-            <span class="logo-watermark-sub">LAW HUB</span>
-          </div>
-
-          <div class="lighthouse-scene">
-            <div class="lighthouse">
-              <div class="lighthouse-base"></div>
-              <div class="lighthouse-tower">
-                <div class="lighthouse-stripe stripe-1"></div>
-                <div class="lighthouse-stripe stripe-2"></div>
-              </div>
-              <div class="lighthouse-window window-1"></div>
-              <div class="lighthouse-window window-2"></div>
-              <div class="lighthouse-window window-3"></div>
-              <div class="lighthouse-top-section"></div>
-              <div class="lighthouse-dome"><div class="lighthouse-light-source"></div></div>
-              <div class="lighthouse-beam"></div>
-            </div>
-          </div>
-
-          <div class="cover-content">
-            <div class="cover-logo" style="font-size: 96px;">Дякуємо!</div>
-            <div class="cover-subtitle" style="font-size: 54px;">MTWTU LAW HUB</div>
-            <div class="cover-tagline" style="font-size: 40px;">
-              Разом підсилюємо захист прав членів ПРМТУ
-            </div>
-
-            <div class="highlight-box" style="margin: 30px auto 0; max-width: 1200px;">
-              <p class="content-text" style="text-align:center; margin:0;">
-                Якщо ви бачите проблему — у нас є інструменти, практика та команда, щоб допомогти.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /page -->
-
-  <!-- Fixed Nav -->
-  <div class="nav-container" id="nav">
-    <button class="nav-btn" id="prevBtn" type="button">Назад</button>
-    <div class="slide-counter" id="slideCounter">1 / 15</div>
-    <button class="nav-btn" id="nextBtn" type="button">Далі</button>
+  <!-- Floating navigation -->
+  <div class="nav-float">
+    <div class="pill">
+      <button class="mini" id="btnPrev" type="button">Назад</button>
+      <div class="counter" id="counter">01/13</div>
+      <button class="mini" id="btnNext" type="button">Далі</button>
+    </div>
   </div>
 
   <script>
-    (function () {
-      const root = document.documentElement;
-      const sections = Array.from(document.querySelectorAll('.section'));
-      const total = sections.length;
+    (function(){
+      const page = document.getElementById('page');
+      const sections = Array.from(document.querySelectorAll('section.section'));
+      const counterEl = document.getElementById('counter');
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
 
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const slideCounter = document.getElementById('slideCounter');
+      // Inject watermark + lighthouse into slides that request them
+      const tplWatermark = document.getElementById('tpl-watermark');
+      const tplLighthouse = document.getElementById('tpl-lighthouse');
 
-      function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+      document.querySelectorAll('.slide').forEach(slide=>{
+        if (slide.dataset.watermark === "1" && tplWatermark){
+          slide.appendChild(tplWatermark.content.cloneNode(true));
+        }
+        if (slide.dataset.lighthouse === "1" && tplLighthouse){
+          slide.appendChild(tplLighthouse.content.cloneNode(true));
+        }
+      });
 
-      function setScale(){
-        const pad = window.innerWidth < 768 ? 10 : 16;
-        root.style.setProperty('--pad', pad + 'px');
+      // Build menu from sections (UnionPoly-like)
+      const overlay = document.getElementById('overlay');
+      const drawer = document.getElementById('drawer');
+      const navlist = document.getElementById('navlist');
+      const btnMenu = document.getElementById('btnMenu');
+      const btnClose = document.getElementById('btnClose');
+      const btnTop = document.getElementById('btnTop');
 
-        const availW = window.innerWidth - pad * 2;
-        const availH = window.innerHeight - pad * 2;
+      function openMenu(){
+        overlay.classList.add('open');
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden','false');
+      }
+      function closeMenu(){
+        overlay.classList.remove('open');
+        drawer.classList.remove('open');
+        drawer.setAttribute('aria-hidden','true');
+      }
 
-        const scaleW = availW / 1920;
-        const scaleH = availH / 1080;
-        const scale = clamp(Math.min(scaleW, scaleH), 0.2, 1);
+      btnMenu?.addEventListener('click', openMenu);
+      btnClose?.addEventListener('click', closeMenu);
+      overlay?.addEventListener('click', closeMenu);
+      btnTop?.addEventListener('click', ()=>window.scrollTo({top: 0, behavior:'smooth'}));
 
-        root.style.setProperty('--scale', scale.toFixed(4));
+      const navButtons = [];
+      sections.forEach((sec, idx)=>{
+        const title = sec.getAttribute('data-nav') || `Секція ${idx+1}`;
+        const b = document.createElement('div');
+        b.className = 'navitem';
+        b.textContent = `${String(idx+1).padStart(2,'0')}. ${title}`;
+        b.addEventListener('click', ()=>{
+          closeMenu();
+          sec.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+        navlist.appendChild(b);
+        navButtons.push(b);
+      });
+
+      // Particles + lines (only where containers exist)
+      function seedParticles(){
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.querySelectorAll('.js-particles').forEach(el=>{
+          el.innerHTML = '';
+          if (prefersReduced) return;
+          const count = 26;
+          for (let i=0;i<count;i++){
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random()*100 + '%';
+            p.style.top = Math.random()*100 + '%';
+            p.style.animationDelay = (Math.random()*20) + 's';
+            p.style.animationDuration = (16 + Math.random()*14) + 's';
+            p.style.opacity = (0.25 + Math.random()*0.55).toFixed(2);
+            p.style.transform = `scale(${(0.6 + Math.random()*1.2).toFixed(2)})`;
+            el.appendChild(p);
+          }
+        });
+
+        document.querySelectorAll('.js-lines').forEach(el=>{
+          el.innerHTML = '';
+          if (prefersReduced) return;
+          const lines = 7;
+          for (let i=0;i<lines;i++){
+            const ln = document.createElement('div');
+            ln.className = 'moving-line';
+            ln.style.top = (10 + i*12) + '%';
+            ln.style.animationDelay = (i * 0.6) + 's';
+            ln.style.opacity = (0.15 + i*0.05).toFixed(2);
+            el.appendChild(ln);
+          }
+        });
+      }
+      seedParticles();
+      window.addEventListener('resize', ()=>{ /* keep it light */ });
+
+      // Counters (IntersectionObserver)
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function animateCounter(el){
+        const target = Number(el.dataset.target || '0');
+        const suffix = el.dataset.suffix || '';
+        const duration = 1100;
+        const start = performance.now();
+        const from = 0;
+
+        function step(now){
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const val = Math.round(from + (target - from) * eased);
+          el.textContent = val.toLocaleString('uk-UA') + suffix;
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      const counterEls = Array.from(document.querySelectorAll('.js-counter'));
+      if (!prefersReduced && 'IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(entry=>{
+            if (entry.isIntersecting){
+              const el = entry.target;
+              if (!el.dataset.done){
+                el.dataset.done = '1';
+                animateCounter(el);
+              }
+            }
+          });
+        }, {threshold: 0.35});
+        counterEls.forEach(el=>io.observe(el));
+      } else {
+        // Reduced motion: set final values immediately
+        counterEls.forEach(el=>{
+          const target = Number(el.dataset.target || '0');
+          const suffix = el.dataset.suffix || '';
+          el.textContent = target.toLocaleString('uk-UA') + suffix;
+        });
+      }
+
+      // Active section tracking + bottom prev/next + menu highlight
+      function getActiveIndex(){
+        const y = window.scrollY + 120;
+        let idx = 0;
+        for (let i=0;i<sections.length;i++){
+          if (sections[i].offsetTop <= y) idx = i;
+        }
+        return idx;
+      }
+
+      function updateUI(){
+        const idx = getActiveIndex();
+        const total = sections.length;
+        counterEl.textContent = `${String(idx+1).padStart(2,'0')}/${String(total).padStart(2,'0')}`;
+        btnPrev.disabled = idx === 0;
+        btnNext.disabled = idx === total - 1;
+
+        navButtons.forEach((b,i)=>b.classList.toggle('active', i===idx));
       }
 
       function scrollToIndex(i){
-        const idx = clamp(i, 0, total - 1);
-        sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const idx = Math.max(0, Math.min(sections.length-1, i));
+        sections[idx].scrollIntoView({behavior:'smooth', block:'start'});
       }
 
-      // Click anywhere on slide => next slide
-      sections.forEach((sec, idx) => {
-        sec.addEventListener('click', (e) => {
-          // ignore clicks on buttons/links/inputs
-          const t = e.target;
-          if (t.closest && (t.closest('button') || t.closest('a') || t.closest('input') || t.closest('textarea'))) return;
-          if (idx < total - 1) scrollToIndex(idx + 1);
-        }, { passive: true });
-      });
+      btnPrev.addEventListener('click', ()=>scrollToIndex(getActiveIndex()-1));
+      btnNext.addEventListener('click', ()=>scrollToIndex(getActiveIndex()+1));
 
-      // Navigation buttons
-      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); scrollToIndex(currentIndex - 1); });
-      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); scrollToIndex(currentIndex + 1); });
+      window.addEventListener('scroll', ()=>{ updateUI(); }, {passive:true});
+      updateUI();
 
-      // Keyboard
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'PageDown') scrollToIndex(currentIndex + 1);
-        if (e.key === 'ArrowUp' || e.key === 'PageUp') scrollToIndex(currentIndex - 1);
-        if (e.key === 'Home') scrollToIndex(0);
-        if (e.key === 'End') scrollToIndex(total - 1);
-      });
-
-      // Particles
-      function buildParticles(container, count){
-        if (!container || container.dataset.built === '1') return;
-        container.dataset.built = '1';
-        for (let i = 0; i < count; i++){
-          const p = document.createElement('div');
-          p.className = 'particle';
-          p.style.left = (Math.random() * 100).toFixed(2) + '%';
-          p.style.animationDelay = (Math.random() * 20).toFixed(2) + 's';
-          p.style.animationDuration = (16 + Math.random() * 16).toFixed(2) + 's';
-          const s = 2 + Math.random() * 4;
-          p.style.width = s + 'px';
-          p.style.height = s + 'px';
-          container.appendChild(p);
-        }
-      }
-
-      // Lines
-      function buildLines(container, count){
-        if (!container || container.dataset.built === '1') return;
-        container.dataset.built = '1';
-        for (let i = 0; i < count; i++){
-          const l = document.createElement('div');
-          l.className = 'moving-line';
-          l.style.top = (5 + Math.random() * 90).toFixed(2) + '%';
-          l.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
-          l.style.animationDuration = (6 + Math.random() * 6).toFixed(2) + 's';
-          container.appendChild(l);
-        }
-      }
-
-      document.querySelectorAll('.js-particles').forEach(el => buildParticles(el, 40));
-      document.querySelectorAll('.js-lines').forEach(el => buildLines(el, 7));
-
-      // Counters (run once when visible)
-      function formatNumber(n){
-        try { return new Intl.NumberFormat('uk-UA').format(n); }
-        catch { return String(n); }
-      }
-
-      function animateCounter(el){
-        if (!el || el.dataset.done === '1') return;
-        el.dataset.done = '1';
-
-        const target = Number(el.getAttribute('data-target') || '0');
-        const suffix = el.getAttribute('data-suffix') || '';
-        const duration = 900;
-
-        const start = performance.now();
-        function tick(now){
-          const t = clamp((now - start) / duration, 0, 1);
-          const eased = 1 - Math.pow(1 - t, 3);
-          const val = Math.round(target * eased);
-          el.textContent = formatNumber(val) + suffix;
-          if (t < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }
-
-      const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) animateCounter(entry.target);
+      // Optional: click on empty space in a section -> go next (nice, but not intrusive)
+      sections.forEach((sec, i)=>{
+        sec.addEventListener('click', (e)=>{
+          const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+          // ignore clicks on buttons/links
+          if (['button','a','input','textarea','select'].includes(tag)) return;
+          // ignore selection inside text
+          if (window.getSelection && String(window.getSelection()).length > 0) return;
+          // only if user clicks the section background area, not inside interactive cards
+          const slide = sec.querySelector('.slide');
+          if (!slide) return;
+          if (slide.contains(e.target) && (e.target.closest('.stat-card,.navitem,.btn,.mini') || tag === 'svg')) return;
+          if (i < sections.length - 1) scrollToIndex(i+1);
         });
-      }, { threshold: 0.35 });
+      });
 
-      document.querySelectorAll('.js-counter').forEach(el => counterObserver.observe(el));
-
-      // Section observer => update nav state + counter
-      let currentIndex = 0;
-      function updateNav(){
-        slideCounter.textContent = (currentIndex + 1) + ' / ' + total;
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex === total - 1;
-      }
-
-      const sectionObserver = new IntersectionObserver((entries) => {
-        // pick the most visible section
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-        if (!visible) return;
-
-        const idx = sections.indexOf(visible.target);
-        if (idx !== -1){
-          currentIndex = idx;
-          updateNav();
+      // Mobile grid stacking for inline 4-col in section 10
+      function responsiveInlineGrids(){
+        const s10 = document.getElementById('s10');
+        if (!s10) return;
+        const w = window.innerWidth;
+        const grid = s10.querySelector('div[style*="grid-template-columns: repeat(4"]');
+        if (grid){
+          grid.style.gridTemplateColumns = (w < 980) ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
+          if (w < 520) grid.style.gridTemplateColumns = '1fr';
         }
-      }, { threshold: [0.55, 0.6, 0.7, 0.8] });
-
-      sections.forEach(sec => sectionObserver.observe(sec));
-
-      // Init
-      setScale();
-      updateNav();
-      window.addEventListener('resize', setScale);
+        const s12 = document.getElementById('s12');
+        if (s12){
+          const g = s12.querySelector('div[style*="grid-template-columns: repeat(2"]');
+          if (g) g.style.gridTemplateColumns = (w < 980) ? '1fr' : 'repeat(2, 1fr)';
+        }
+        const s11 = document.getElementById('s11');
+        if (s11){
+          const g3 = s11.querySelector('div[style*="grid-template-columns: repeat(3"]');
+          if (g3) g3.style.gridTemplateColumns = (w < 980) ? '1fr' : 'repeat(3, 1fr)';
+        }
+      }
+      responsiveInlineGrids();
+      window.addEventListener('resize', responsiveInlineGrids);
     })();
   </script>
 </body>
 </html>
-
