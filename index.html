@@ -22,7 +22,7 @@
       /* NEW sizing system (all sizes redefined) */
       --topbarH: clamp(56px, 7.5vh, 86px);
       --gutter: clamp(14px, 3.8vw, 72px);
-      --padY: clamp(20px, 5.6vh, 84px);
+      --padY: clamp(16px, 4.8vh, 74px);
       --cardPad: clamp(16px, 2.6vw, 40px);
       --radius: clamp(16px, 2.2vw, 26px);
       --radiusSm: clamp(12px, 1.6vw, 18px);
@@ -30,7 +30,7 @@
       --shadowA: 0 22px 70px rgba(0,0,0,.55);
       --shadowB: inset 0 0 0 1px rgba(255,255,255,.04);
 
-      --maxText: min(1180px, calc(100vw - (2 * var(--gutter))));
+      --maxText: min(1320px, calc(100vw - (2 * var(--gutter))));
 
       /* Typography (fully rescaled) */
       --fz-brand: clamp(14px, 1.2vw, 18px);
@@ -62,6 +62,7 @@
       color:#fff;
       overflow-x:hidden;
       scroll-behavior:smooth;
+      scroll-padding-top: calc(var(--topbarH) + 14px);
 
       /* Full-bleed background (approach change) */
       background:
@@ -569,7 +570,7 @@
     .content-section{ position:relative; z-index:3; }
     .content-text{
       font-size: var(--fz-text) !important;
-      line-height: 1.55;
+      line-height: 1.45;
       margin: 0 0 var(--space-1) 0;
       color: rgba(255,255,255,.9);
     }
@@ -696,7 +697,7 @@
     }
     .psychology-card p{
       font-size: clamp(13px, 1.35vw, 20px);
-      line-height: 1.5;
+      line-height: 1.42;
       color: rgba(255,255,255,.9);
       margin:0;
     }
@@ -737,7 +738,7 @@
     }
     .timeline-description{
       font-size: clamp(13px, 1.4vw, 20px);
-      line-height: 1.5;
+      line-height: 1.42;
       color: rgba(255,255,255,.9);
       margin: 0;
     }
@@ -838,7 +839,16 @@
       background: linear-gradient(135deg, rgba(233, 196, 106, 0.95) 0%, rgba(244, 213, 141, 0.95) 100%);
       border-color: rgba(244,213,141,1);
     }
-    .mini:disabled{ opacity:.35; cursor:not-allowed; transform:none; }
+    
+    .nav-mini{
+      padding: 7px 10px;
+      font-size: clamp(10px, 0.85vw, 11px);
+      opacity: .75;
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.14);
+    }
+    .nav-mini:hover{ opacity: .95; }
+.mini:disabled{ opacity:.35; cursor:not-allowed; transform:none; }
 
     /* Responsive stacks */
     @media (max-width: 980px){
@@ -849,7 +859,35 @@
     @media (prefers-reduced-motion: reduce){
       *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
     }
-  </style>
+  
+
+/* --- Deck (presentation) paging mode: fixed viewport + transform --- */
+html, body { height: 100%; overflow: hidden; }
+:root { --vh: 1vh; }
+
+#page{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: calc(var(--vh) * 100);
+  overflow: hidden;
+}
+
+#deck{
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition: transform 520ms cubic-bezier(.22,1,.36,1);
+}
+
+/* Each section becomes a full “slide” */
+section.section{
+  height: calc(var(--vh) * 100);
+  min-height: calc(var(--vh) * 100);
+}
+
+</style>
 </head>
 
 <body>
@@ -859,10 +897,6 @@
       <div class="brand">
         <div class="b1">MTWTU LAW HUB</div>
         <div class="b2">Instagram • Facebook • TikTok</div>
-      </div>
-      <div class="top-actions">
-        <button class="btn" id="btnMenu" type="button">Меню</button>
-        <button class="btn" id="btnTop" type="button">Вгору</button>
       </div>
     </div>
   </header>
@@ -905,7 +939,8 @@
 
   <main id="page">
     <!-- SECTION 1 -->
-    <section class="section hero" id="s1" data-slide="1" data-nav="MTWTU LAW HUB">
+        <div id="deck" class="deck">
+<section class="section hero" id="s1" data-slide="1" data-nav="MTWTU LAW HUB">
       <div class="wrap">
         <article class="slide" data-watermark="1" data-lighthouse="1">
           <div class="particles js-particles"></div>
@@ -1277,7 +1312,7 @@
                   <text x="450" y="85" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="20" font-family="Cormorant Garamond, serif">👀 Випадково побачили в стрічці</text>
                   <text x="450" y="135" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="700" font-family="Cormorant Garamond, serif">Сотні тисяч охоплень</text>
                   <text x="450" y="162" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="19" font-family="Cormorant Garamond, serif">❤️ Зацікавились, підписались, зберегли</text>
-                  <text x="450" y="210" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700" font-family="Cormorant Garamond, serif">Десятки тисяч звернень</text>
+                  <text x="450" y="210" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700" font-family="Cormorant Garamond, serif">Нові звернення</text>
                   <text x="450" y="235" text-anchor="middle" fill="rgba(255, 255, 255, 0.85)" font-size="18" font-family="Cormorant Garamond, serif">💬 Написали з проблемою, отримали допомогу</text>
                   <text x="450" y="275" text-anchor="middle" fill="#e9c46a" font-size="30" font-weight="900" font-family="Cormorant Garamond, serif">⚓ НОВІ ЧЛЕНИ ПРМТУ</text>
                 </svg>
@@ -1288,21 +1323,21 @@
                      onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                   <div style="font-size: clamp(34px, 4.4vw, 46px); text-align:center; margin-bottom: var(--space-1);">🧠</div>
                   <h3 style="color:#e9c46a; font-size: clamp(15px, 1.65vw, 24px); margin:0 0 var(--space-1) 0; font-weight:700; text-align:center;">Ефект «знайомості»</h3>
-                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height:1.5; color: rgba(255,255,255,.9); margin:0; text-align:center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
+                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height: 1.42; color: rgba(255,255,255,.9); margin:0; text-align:center;">Після 3-5 переглядів профспілка сприймається як «своя» і довірена</p>
                 </div>
 
                 <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
                      onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                   <div style="font-size: clamp(34px, 4.4vw, 46px); text-align:center; margin-bottom: var(--space-1);">💡</div>
                   <h3 style="color:#e9c46a; font-size: clamp(15px, 1.65vw, 24px); margin:0 0 var(--space-1) 0; font-weight:700; text-align:center;">Соціальний доказ</h3>
-                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height:1.5; color: rgba(255,255,255,.9); margin:0; text-align:center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
+                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height: 1.42; color: rgba(255,255,255,.9); margin:0; text-align:center;">Бачать коментарі з подяками — думають: «Якщо їм допомогли, то й мені допоможуть»</p>
                 </div>
 
                 <div style="background: linear-gradient(135deg, rgba(10, 59, 92, 0.5) 0%, rgba(4, 28, 47, 0.7) 100%); border: calc(var(--stroke) * 1.6) solid rgba(233, 196, 106, 0.4); border-radius: var(--radius); padding: var(--cardPad); transition: all 0.3s ease;"
                      onmouseover="this.style.borderColor='#e9c46a'; this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(233, 196, 106, 0.4)'; this.style.transform='translateY(0)'">
                   <div style="font-size: clamp(34px, 4.4vw, 46px); text-align:center; margin-bottom: var(--space-1);">⚡</div>
                   <h3 style="color:#e9c46a; font-size: clamp(15px, 1.65vw, 24px); margin:0 0 var(--space-1) 0; font-weight:700; text-align:center;">Тригер дії</h3>
-                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height:1.5; color: rgba(255,255,255,.9); margin:0; text-align:center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
+                  <p style="font-size: clamp(13px, 1.3vw, 18px); line-height: 1.42; color: rgba(255,255,255,.9); margin:0; text-align:center;">Виникла проблема → згадали відео → написали → вступили після вирішення</p>
                 </div>
               </div>
 
@@ -1667,13 +1702,87 @@
     </div>
   </div>
 </section>
+    </div><!-- /#deck -->
 
-  <!-- Floating navigation -->
+
+  
+  <section class="section" data-nav="Як отримати підтримку" data-slide="14" id="s14">
+    <div class="wrap">
+      <article class="slide" data-lighthouse="1" data-watermark="1">
+        <div class="panel-inner">
+          <div class="slide-header">
+            <h1 class="slide-title">Як отримати юридичну підтримку</h1>
+            <p class="slide-subtitle">Консультації та супровід доступні для членів ПРМТУ</p>
+          </div>
+
+          <div class="content-section">
+            <div class="stats-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+              <div class="stat-card">
+                <div class="stat-label">Крок 1</div>
+                <div class="stat-number" style="font-size: clamp(18px, 2.4vw, 26px);">Написати нам</div>
+                <div style="margin-top:10px; color: rgba(255,255,255,.82); font-size: clamp(12px, 1.2vw, 14px); line-height:1.45;">У соцмережах або в іншому зручному каналі звʼязку.</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-label">Крок 2</div>
+                <div class="stat-number" style="font-size: clamp(18px, 2.4vw, 26px);">Членство</div>
+                <div style="margin-top:10px; color: rgba(255,255,255,.82); font-size: clamp(12px, 1.2vw, 14px); line-height:1.45;">Підкажемо, як оформити або підтвердити членство в ПРМТУ.</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-label">Крок 3</div>
+                <div class="stat-number" style="font-size: clamp(18px, 2.4vw, 26px);">Рішення</div>
+                <div style="margin-top:10px; color: rgba(255,255,255,.82); font-size: clamp(12px, 1.2vw, 14px); line-height:1.45;">Дамо чіткий план дій та супровід по вашому запиту.</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-label">Ключове</div>
+                <div class="stat-number" style="font-size: clamp(18px, 2.4vw, 26px);">Швидко і по суті</div>
+                <div style="margin-top:10px; color: rgba(255,255,255,.82); font-size: clamp(12px, 1.2vw, 14px); line-height:1.45;">Фокус — на практичному результаті та захисті прав.</div>
+              </div>
+            </div>
+
+            <div class="stat-card" style="margin-top: var(--space-3); background: rgba(233,196,106,.08); border-color: rgba(233,196,106,.22);">
+              <div style="margin:0; color: rgba(255,255,255,.9); font-size: clamp(12px, 1.2vw, 14px); line-height:1.5;">
+                <strong>Важливо:</strong> допомога надається після підтвердження членства — це правило, яке робить підтримку системною та сталою.
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="section hero" data-nav="Фінал" data-slide="15" id="s15">
+    <div class="wrap">
+      <article class="slide" data-lighthouse="1" data-watermark="1">
+        <div class="panel-inner">
+          <div class="cover">
+            <div class="cover-content">
+              <div class="cover-logo">Дякуємо за увагу!</div>
+              <div class="cover-subtitle">MTWTU LAW HUB</div>
+              <p class="cover-tagline">Підписуйтесь, поширюйте, долучайтесь — і отримуйте підтримку вчасно.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="orbs" aria-hidden="true">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Floating navigation -->
   <div class="nav-float">
     <div class="pill">
-      <button class="mini" id="btnPrev" type="button">Назад</button>
+      <button class="mini nav-mini" id="btnPrev" type="button">Назад</button>
       <div class="counter" id="counter">01/13</div>
-      <button class="mini" id="btnNext" type="button">Далі</button>
+      <button class="mini nav-mini" id="btnNext" type="button">Далі</button>
     </div>
   </div>
 
@@ -1683,6 +1792,22 @@
       const counterEl = document.getElementById('counter');
       const btnPrev = document.getElementById('btnPrev');
       const btnNext = document.getElementById('btnNext');
+      const topbarEl = document.querySelector('.topbar');
+      let topbarH = 82;
+
+      function syncTopbarHeight(){
+        topbarH = Math.max(60, Math.ceil(topbarEl?.getBoundingClientRect().height || 82));
+        document.documentElement.style.setProperty('--topbarH', `${topbarH}px`);
+        return topbarH;
+      }
+      function getScrollOffset(){
+        // keep slides aligned under the fixed topbar
+        return topbarH + 14;
+      }
+      // initial + responsive recalculation (fonts / wrapping can change topbar height)
+      syncTopbarHeight();
+      window.addEventListener('resize', syncTopbarHeight, {passive:true});
+
 
       // Inject watermark + lighthouse
       const tplWatermark = document.getElementById('tpl-watermark');
@@ -1717,7 +1842,7 @@
       btnMenu?.addEventListener('click', openMenu);
       btnClose?.addEventListener('click', closeMenu);
       overlay?.addEventListener('click', closeMenu);
-      btnTop?.addEventListener('click', ()=>window.scrollTo({top: 0, behavior:'smooth'}));
+      btnTop?.addEventListener('click', ()=>goToIndex(0));
 
       const navButtons = [];
       sections.forEach((sec, idx)=>{
@@ -1727,7 +1852,7 @@
         b.textContent = `${String(idx+1).padStart(2,'0')}. ${title}`;
         b.addEventListener('click', ()=>{
           closeMenu();
-          sec.scrollIntoView({behavior:'smooth', block:'start'});
+          goToIndex(sections.indexOf(sec));
         });
         navlist.appendChild(b);
         navButtons.push(b);
@@ -1813,36 +1938,197 @@
 
       // Active tracking + prev/next + menu highlight
       function getActiveIndex(){
-        const y = window.scrollY + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbarH')) || 70) + 40;
-        let idx = 0;
-        for (let i=0;i<sections.length;i++){
-          if (sections[i].offsetTop <= y) idx = i;
+      // Probe line just below the fixed topbar (works even when the topbar wraps on small screens)
+      const probeY = getScrollOffset() + 1;
+
+      let bestIdx = 0;
+      let bestDist = Infinity;
+
+      for(let i=0; i<sections.length; i++){
+        const r = sections[i].getBoundingClientRect();
+
+        // Perfect hit: probe line intersects the section
+        if(r.top <= probeY && r.bottom > probeY){
+          return i;
         }
-        return idx;
+
+        // Otherwise choose the section whose top is closest to the probe line
+        const d = Math.abs(r.top - probeY);
+        if(d < bestDist){
+          bestDist = d;
+          bestIdx = i;
+        }
       }
+      return bestIdx;
+    }
 
       function updateUI(){
-        const idx = getActiveIndex();
-        const total = sections.length;
-        counterEl.textContent = `${String(idx+1).padStart(2,'0')}/${String(total).padStart(2,'0')}`;
-        btnPrev.disabled = idx === 0;
-        btnNext.disabled = idx === total - 1;
-        navButtons.forEach((b,i)=>b.classList.toggle('active', i===idx));
-      }
+      // Keep CSS offset in sync with the real topbar height (fonts/wrapping can change it)
+      syncTopbarHeight();
 
-      function scrollToIndex(i){
-        const idx = Math.max(0, Math.min(sections.length-1, i));
-        sections[idx].scrollIntoView({behavior:'smooth', block:'start'});
-      }
+      const idx = getActiveIndex();
+      counterEl.textContent = `${idx+1} / ${sections.length}`;
 
-      btnPrev.addEventListener('click', ()=>scrollToIndex(getActiveIndex()-1));
-      btnNext.addEventListener('click', ()=>scrollToIndex(getActiveIndex()+1));
+      navButtons.forEach((b,i)=> b.classList.toggle('active', i===idx));
+      if(btnPrev) btnPrev.disabled = idx === 0;
+      if(btnNext) btnNext.disabled = idx === sections.length-1;
 
-      window.addEventListener('scroll', ()=>{ updateUI(); }, {passive:true});
-      updateUI();
+      // progress
+      const frac = (idx)/(sections.length-1);
+      progress.style.width = `${Math.max(0, Math.min(1, frac))*100}%`;
+    }
 
-      // Responsive inline grids (kept logic; sizes already rewritten)
-      function responsiveInlineGrids(){
+      
+  // ---- Slide navigation (deck mode; no window scrolling) ----
+  const pageEl = document.getElementById('page');
+  const deckEl = document.getElementById('deck') || pageEl;
+
+  let activeIndex = 0;
+  let navLock = false;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  function setVhVar(){
+    // Use JS-calculated viewport height to avoid mobile address bar jumps
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+
+  function applyTransform(idx, instant = false){
+    if (!deckEl) return;
+    const y = idx * window.innerHeight;
+    if (instant) deckEl.style.transition = 'none';
+    deckEl.style.transform = `translate3d(0, -${y}px, 0)`;
+    if (instant){
+      // force style flush, then restore CSS transition
+      deckEl.getBoundingClientRect();
+      deckEl.style.transition = '';
+    }
+  }
+
+  function setHash(){
+    const id = sections[activeIndex]?.id;
+    if (!id) return;
+    history.replaceState(null, '', `#${id}`);
+  }
+
+  function updateUI(){
+    const total = Math.max(1, sections.length);
+
+    if (counterEl){
+      const a = String(activeIndex + 1).padStart(2, '0');
+      const b = String(total).padStart(2, '0');
+      counterEl.textContent = `${a}/${b}`;
+    }
+
+    if (btnPrev) btnPrev.disabled = activeIndex <= 0;
+    if (btnNext) btnNext.disabled = activeIndex >= total - 1;
+
+    if (progressEl){
+      const pct = (total <= 1) ? 0 : (activeIndex / (total - 1)) * 100;
+      progressEl.style.setProperty('--p', `${pct}%`);
+      progressEl.setAttribute('aria-valuenow', String(Math.round(pct)));
+    }
+
+    if (Array.isArray(navButtons)){
+      navButtons.forEach((btn) => {
+        const target = btn.getAttribute('data-target');
+        const idx = sections.findIndex((s) => s.id === target);
+        btn.classList.toggle('active', idx === activeIndex);
+      });
+    }
+  }
+
+  function goToIndex(idx, opts = {}){
+    const { instant = false } = opts;
+    const max = Math.max(0, sections.length - 1);
+    const next = clamp(idx, 0, max);
+    if (next === activeIndex && !instant) return;
+
+    activeIndex = next;
+    applyTransform(activeIndex, instant);
+    updateUI();
+    setHash();
+  }
+
+  if (btnPrev) btnPrev.addEventListener('click', () => goToIndex(activeIndex - 1));
+  if (btnNext) btnNext.addEventListener('click', () => goToIndex(activeIndex + 1));
+  if (btnTop)  btnTop.addEventListener('click',  () => goToIndex(0));
+
+  let wheelTimer = null;
+  window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) return;
+    const dy = e.deltaY;
+    if (Math.abs(dy) < 12) return;
+
+    e.preventDefault();
+    if (navLock) return;
+    navLock = true;
+
+    goToIndex(activeIndex + (dy > 0 ? 1 : -1));
+
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => { navLock = false; }, 650);
+  }, { passive: false });
+
+  let touchY = null;
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length) touchY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (touchY == null) return;
+    const endY = (e.changedTouches && e.changedTouches.length) ? e.changedTouches[0].clientY : null;
+    const delta = (endY == null) ? 0 : (touchY - endY);
+    touchY = null;
+
+    if (Math.abs(delta) < 50) return;
+    goToIndex(activeIndex + (delta > 0 ? 1 : -1));
+  }, { passive: true });
+
+  window.addEventListener('keydown', (e) => {
+    const el = document.activeElement;
+    const tag = (el?.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || el?.isContentEditable) return;
+
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowRight' || e.key === ' '){
+      e.preventDefault();
+      goToIndex(activeIndex + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'ArrowLeft'){
+      e.preventDefault();
+      goToIndex(activeIndex - 1);
+    } else if (e.key === 'Home'){
+      e.preventDefault();
+      goToIndex(0);
+    } else if (e.key === 'End'){
+      e.preventDefault();
+      goToIndex(sections.length - 1);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    setVhVar();
+    applyTransform(activeIndex, true);
+  });
+
+  window.addEventListener('hashchange', () => {
+    const id = (location.hash || '').replace('#', '').trim();
+    if (!id) return;
+    const idx = sections.findIndex((s) => s.id === id);
+    if (idx >= 0) goToIndex(idx);
+  });
+
+  setVhVar();
+  const initialId = (location.hash || '').replace('#', '').trim();
+  const initialIdx = initialId ? sections.findIndex((s) => s.id === initialId) : -1;
+  activeIndex = (initialIdx >= 0) ? initialIdx : 0;
+  applyTransform(activeIndex, true);
+  updateUI();
+  setHash();
+
+
+
+  function responsiveInlineGrids(){
         const w = window.innerWidth;
 
         const s10 = document.getElementById('s10');
